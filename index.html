@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Bienvenido a Paipa!</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilo personalizado para usar la fuente Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Pequeña animación para las tarjetas al pasar el mouse */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Contenedor Principal -->
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl">
+
+        <!-- Encabezado -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-cyan-700">¡Bienvenido a Paipa!</h1>
+            <p class="text-lg text-gray-600 mt-2">Hemos preparado esta guía para que disfrutes tu estadía al máximo.</p>
+        </header>
+
+        <!-- Sección de WiFi -->
+        <section id="wifi" class="mb-10 bg-white p-6 rounded-2xl shadow-md border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.555a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071a10 10 0 0114.142 0M1.394 8.394a15 15 0 0121.212 0"/></svg>
+                Conexión WiFi
+            </h2>
+            <div class="space-y-3">
+                <p><strong>Red:</strong> <span class="text-gray-700">ANDRESULT</span></p>
+                <div class="flex items-center gap-4">
+                    <p><strong>Contraseña:</strong> <span id="wifi-password" class="text-gray-700">Andres97*</span></p>
+                    <button onclick="copyPassword()" class="bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 transition-colors text-sm">
+                        Copiar
+                    </button>
+                </div>
+            </div>
+            <div id="copy-message" class="text-green-600 mt-3 text-sm font-medium" style="display: none;">
+                ¡Contraseña copiada!
+            </div>
+        </section>
+
+        <!-- Sección de Atractivos Turísticos -->
+        <section id="atracciones">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Atractivos Turísticos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Tarjeta de Atracción -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 card-hover">
+                    <img src="https://placehold.co/600x400/34d399/ffffff?text=Parque+Termal" alt="Imagen del Parque Termal Paipa" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">1. Parque Termal Paipa</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Ideal para relajarte en aguas termales con propiedades curativas. Ofrece piscinas, spa y centro de hidroterapia.</p>
+                        <a href="https://www.parquetermalpaipa.com/" target="_blank" class="inline-block bg-emerald-500 text-white px-5 py-2 rounded-lg hover:bg-emerald-600 transition-colors">Ver Más</a>
+                    </div>
+                </div>
+                <!-- Tarjeta de Atracción -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 card-hover">
+                    <img src="https://placehold.co/600x400/60a5fa/ffffff?text=Lago+Sochagota" alt="Imagen del Lago Sochagota" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">2. Lago Sochagota</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Perfecto para deportes acuáticos, caminatas y disfrutar de la fauna y flora local.</p>
+                        <a href="https://situr.boyaca.gov.co/atractivo-turistico/lago-sochagota/" target="_blank" class="inline-block bg-blue-500 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition-colors">Ver Más</a>
+                    </div>
+                </div>
+                <!-- Tarjeta de Atracción -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 card-hover">
+                    <img src="https://placehold.co/600x400/f59e0b/ffffff?text=Pantano+de+Vargas" alt="Imagen del Pantano de Vargas" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">3. Pantano de Vargas</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Sitio histórico donde se libró una batalla clave por la independencia de Colombia.</p>
+                        <a href="https://situr.boyaca.gov.co/atractivo-turistico/pantano-de-vargas/" target="_blank" class="inline-block bg-amber-500 text-white px-5 py-2 rounded-lg hover:bg-amber-600 transition-colors">Ver Más</a>
+                    </div>
+                </div>
+                <!-- Tarjeta de Atracción -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 card-hover">
+                    <img src="https://placehold.co/600x400/a78bfa/ffffff?text=Hacienda+del+Salitre" alt="Imagen de la Hacienda del Salitre" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">4. Hacienda del Salitre</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Hacienda colonial que ofrece una experiencia cultural con arquitectura histórica y hermosos jardines.</p>
+                        <a href="https://hotelhaciendaelsalitre.com/" target="_blank" class="inline-block bg-violet-500 text-white px-5 py-2 rounded-lg hover:bg-violet-600 transition-colors">Ver Más</a>
+                    </div>
+                </div>
+                <!-- Tarjeta de Atracción -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 card-hover">
+                    <img src="https://placehold.co/600x400/22d3ee/ffffff?text=Laguna+de+Tota" alt="Imagen de la Laguna de Tota" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">5. Laguna de Tota</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Una de las lagunas más grandes de Colombia, ideal para paseos en bote y paisajes impresionantes.</p>
+                        <a href="https://www.tripadvisor.es/Attraction_Review-g3347755-d8037097-Reviews-Lago_Tota-Tota_Boyaca_Department.html" target="_blank" class="inline-block bg-cyan-500 text-white px-5 py-2 rounded-lg hover:bg-cyan-600 transition-colors">Ver Más</a>
+                    </div>
+                </div>
+                <!-- Tarjeta de Atracción -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 card-hover">
+                    <img src="https://placehold.co/600x400/f472b6/ffffff?text=Pueblito+Boyacense" alt="Imagen del Pueblito Boyacense" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">6. Pueblito Boyacense</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Recrea la arquitectura típica de Boyacá, perfecto para una caminata tranquila y tomar fotos.</p>
+                        <a href="https://colombia.travel/es/paipa/anda-por-el-pueblito-boyacense" target="_blank" class="inline-block bg-pink-500 text-white px-5 py-2 rounded-lg hover:bg-pink-600 transition-colors">Ver Más</a>
+                    </div>
+                </div>
+                <!-- Tarjeta de Atracción -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 card-hover">
+                    <img src="https://placehold.co/600x400/84cc16/ffffff?text=Parque+Atisbe" alt="Imagen del Parque Agroecoturístico Atisbe" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">7. Parque Agroecoturístico Atisbe</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Combina naturaleza y agricultura, ofreciendo actividades como senderismo y observación de flora y fauna.</p>
+                        <a href="https://posadasrurales.co/experiencias-rurales/368-pasadia-parque-agro-ecoturistico-atisbe-paipa-boyaca.html" target="_blank" class="inline-block bg-lime-500 text-white px-5 py-2 rounded-lg hover:bg-lime-600 transition-colors">Ver Más</a>
+                    </div>
+                </div>
+                <!-- Tarjeta de Atracción -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 card-hover">
+                    <img src="https://placehold.co/600x400/f97316/ffffff?text=Parque+Manoa" alt="Imagen del Parque Manoa" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">8. Parque Manoa</h3>
+                        <p class="text-gray-600 mb-4 text-sm">Parque ecológico y temático, ideal para disfrutar en familia, con senderos y zonas de picnic.</p>
+                        <a href="https://manoaparque.com/" target="_blank" class="inline-block bg-orange-500 text-white px-5 py-2 rounded-lg hover:bg-orange-600 transition-colors">Ver Más</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Restaurantes -->
+        <section id="restaurantes" class="mt-12">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Recomendaciones Gastronómicas</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Tarjeta de Restaurante -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="font-bold text-xl mb-2">Club Náutico</h3>
+                    <p class="text-gray-600 mb-3 text-sm">Excelente comida con una vista privilegiada al Lago Sochagota. Ideal para una comida especial.</p>
+                    <p class="text-sm font-medium text-cyan-700">📞 Contacto: (608) 7850888</p>
+                </div>
+                <!-- Tarjeta de Restaurante -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="font-bold text-xl mb-2">El Balcón de las Garzas</h3>
+                    <p class="text-gray-600 mb-3 text-sm">Famoso por su ambiente acogedor y platos típicos de la región. ¡Muy recomendado!</p>
+                    <p class="text-sm font-medium text-cyan-700">📞 Contacto: 310 2522271</p>
+                </div>
+                 <!-- Tarjeta de Restaurante -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="font-bold text-xl mb-2">Solomillo y Costilla</h3>
+                    <p class="text-gray-600 mb-3 text-sm">Si buscas una excelente parrilla, este es el lugar. Carnes de alta calidad y buen servicio.</p>
+                    <p class="text-sm font-medium text-cyan-700">📞 Contacto: 318 8274390</p>
+                </div>
+                 <!-- Tarjeta de Restaurante -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="font-bold text-xl mb-2">Restaurante Las Tres Portas</h3>
+                    <p class="text-gray-600 mb-3 text-sm">Ofrece una variada carta de comida típica boyacense en un ambiente tradicional y familiar.</p>
+                    <p class="text-sm font-medium text-cyan-700">📞 Contacto: 311 2073868</p>
+                </div>
+                <!-- Tarjeta de Restaurante NUEVA -->
+                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="font-bold text-xl mb-2">El Corral Paipa (Comidas Rápidas)</h3>
+                    <p class="text-gray-600 mb-3 text-sm">Excelente opción para hamburguesas y comidas rápidas. ¡Perfecto para algo rápido y delicioso!</p>
+                    <a href="https://g.co/kgs/vajtXvt" target="_blank" class="text-sm font-medium text-cyan-700 hover:underline">📍 Ver en Google Maps</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Contactos -->
+        <section id="contactos" class="mt-12 bg-white p-6 rounded-2xl shadow-md border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Números de Contacto y Emergencia</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-blue-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v4a1 1 0 102 0V7z" clip-rule="evenodd" /></svg><strong>Policía:</strong><span class="ml-2 text-gray-700">123</span></div>
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-red-500" viewBox="0 0 20 20" fill="currentColor"><path d="M10 3.5a1.5 1.5 0 011.5 1.5v2.879a1.5 1.5 0 01-.44 1.06L5.94 14.56a1.5 1.5 0 01-2.12 0l-.71-.71a1.5 1.5 0 010-2.12l5.66-5.66A1.5 1.5 0 0110 3.5zm4.24 5.24a1.5 1.5 0 010 2.12l-5.66 5.66a1.5 1.5 0 01-2.12 0l-.71-.71a1.5 1.5 0 010-2.12l5.66-5.66a1.5 1.5 0 012.12 0z" /></svg><strong>Bomberos:</strong><span class="ml-2 text-gray-700">119</span></div>
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-green-500" viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h4a1 1 0 100-2H7z" clip-rule="evenodd" /></svg><strong>Hospital Regional:</strong><span class="ml-2 text-gray-700">87850110</span></div>
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-yellow-500" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.518.759a1.126 1.126 0 00-.54 1.06l.74 4.435a1 1 0 01.986.836H4a1 1 0 01-1-1V3zM14 3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V3z" /></svg><strong>Taxis Paipa:</strong><span class="ml-2 text-gray-700">318 2600223</span></div>
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-yellow-500" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.518.759a1.126 1.126 0 00-.54 1.06l.74 4.435a1 1 0 01.986.836H4a1 1 0 01-1-1V3zM14 3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V3z" /></svg><strong>Paradero Taxis:</strong><span class="ml-2 text-gray-700">318 5555550</span></div>
+                <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-slate-500" fill="currentColor" viewBox="0 0 20 20"><path d="M15.5 9.983a1 1 0 00-1.413-1.413L12 10.586V7a1 1 0 10-2 0v3.586l-2.087-2.016a1 1 0 10-1.413 1.413l3.499 3.386a1 1 0 001.414 0l3.5-3.386zM5.5 16a.5.5 0 01-.5-.5V10a1 1 0 10-2 0v5.5a2.5 2.5 0 002.5 2.5h9a2.5 2.5 0 002.5-2.5V10a1 1 0 10-2 0v5.5a.5.5 0 01-.5.5h-9zM3 5.5a2.5 2.5 0 015 0V6a1 1 0 102 0V5.5a4.5 4.5 0 10-9 0V6a1 1 0 102 0V5.5z"></path></svg><strong>Domicilios (Moto):</strong><span class="ml-2 text-gray-700">320 2735176</span></div>
+                <div class="flex items-center col-span-1 sm:col-span-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-indigo-500" viewBox="0 0 20 20" fill="currentColor"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" /></svg><strong>Droguerías:</strong><span class="ml-2 text-gray-700">Colsubsidio (312 4037128) - Farmacenter (321 5709887)</span></div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 pt-8 border-t border-gray-200">
+            <p class="text-gray-600">Si necesitas más información o recomendaciones, ¡no dudes en escribirnos!</p>
+            <p class="text-lg font-semibold text-cyan-700 mt-2">¡Que disfrutes de Paipa!</p>
+        </footer>
+
+    </div>
+
+    <!-- Script para copiar la contraseña -->
+    <script>
+        function copyPassword() {
+            // Obtener el texto de la contraseña
+            const passwordText = document.getElementById('wifi-password').innerText;
+            
+            // Crear un elemento de texto temporal para copiar
+            const tempInput = document.createElement('textarea');
+            tempInput.value = passwordText;
+            document.body.appendChild(tempInput);
+            
+            // Seleccionar y copiar el texto
+            tempInput.select();
+            document.execCommand('copy');
+            
+            // Eliminar el elemento temporal
+            document.body.removeChild(tempInput);
+
+            // Mostrar mensaje de confirmación
+            const message = document.getElementById('copy-message');
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 2000); // Ocultar el mensaje después de 2 segundos
+        }
+    </script>
+
+</body>
+</html>
