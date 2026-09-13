@@ -1,0 +1,327 @@
+---
+import Base from '../layouts/Base.astro';
+import TarjetaTema from '../components/TarjetaTema.astro';
+import CapturaCorreo from '../components/CapturaCorreo.astro';
+import DemoIncrustada from '../components/DemoIncrustada.astro';
+import { presentaciones } from '../data/presentaciones';
+import { sitio, precios } from '../config';
+
+const destacado = presentaciones[0];
+const enPortada = presentaciones.slice(0, 6);
+
+const formatos = [
+  {
+    clave: 'HTML',
+    titulo: 'La presentación interactiva',
+    texto:
+      'Un solo archivo que se abre en cualquier navegador. Calculadoras que funcionan, casos que se despliegan, autoevaluación al final. Sin internet en el aula, sin instalar nada, sin que se rompa el formato en el PC prestado.',
+  },
+  {
+    clave: 'PPTX',
+    titulo: 'El PowerPoint editable',
+    texto:
+      'La misma estructura y el mismo diseño, en el formato que maneja el técnico del auditorio. Métele el logo de tu hospital, quita las secciones que no van y añade tu caso.',
+  },
+  {
+    clave: 'PDF',
+    titulo: 'El handout de dos páginas',
+    texto:
+      'El algoritmo y las referencias en una hoja para repartir en la sesión. Es lo que la gente se lleva y lo que hace que se acuerden de quién presentó.',
+  },
+];
+
+const diferencias = [
+  {
+    titulo: 'Con fecha de vigencia visible',
+    texto:
+      'Cada revisión dice en qué guía se basa y cuándo se actualizó por última vez. Cuando la evidencia cambia, la revisión cambia — y tú te enteras.',
+  },
+  {
+    titulo: 'Figuras de elaboración propia',
+    texto:
+      'Ni una captura borrosa de un PDF ajeno. Todos los gráficos se reconstruyen desde los datos originales y se cita la fuente, tabla por tabla.',
+  },
+  {
+    titulo: 'Escrita por alguien que pasa consulta',
+    texto:
+      'Editada por un médico, no por una agencia de contenidos. Las controversias abiertas se presentan como controversias, no se esconden.',
+  },
+  {
+    titulo: 'Pensada para adaptarla, no para copiarla',
+    texto:
+      'Trae una sección de personalización y espacio para tu caso. Tú pones el criterio clínico y la discusión; nosotros, la síntesis de la evidencia y el diseño.',
+  },
+];
+
+const faq = [
+  {
+    p: '¿Puedo editarla y presentarla como mía?',
+    r: 'Puedes adaptarla libremente para tu sesión, tu servicio o tu clase: para eso se entrega el PowerPoint editable. Lo que pedimos es que mantengas la diapositiva de créditos y que la discusión clínica la pongas tú — es tu exposición, no la nuestra.',
+  },
+  {
+    p: '¿Funciona sin internet?',
+    r: 'Sí. La presentación es un único archivo HTML autocontenido. Se descarga, se abre en cualquier navegador y funciona aunque el auditorio no tenga red.',
+  },
+  {
+    p: '¿Qué pasa cuando cambia la guía?',
+    r: 'La revisión se actualiza y sube de versión. Si la compraste suelta, te avisamos por correo del cambio; si estás suscrito, la versión nueva ya está ahí sin pagar de más.',
+  },
+  {
+    p: '¿Cómo pago desde Colombia?',
+    r: 'Con PSE, tarjeta, billeteras digitales o en cuotas, a través de Hotmart. No necesitas tarjeta internacional.',
+  },
+  {
+    p: '¿Sirve para mi rotación si no es medicina interna?',
+    r: 'El catálogo arranca por lo que más se presenta en interna, urgencias y cuidado crítico, que es donde está la mayoría de internos y residentes. Si tu tema no está, escríbenos: la lista de producción se ordena por lo que más nos piden.',
+  },
+];
+
+const datosEstructurados = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: sitio.nombre,
+  url: sitio.url,
+  description: sitio.descripcion,
+  inLanguage: 'es',
+  publisher: { '@type': 'Person', name: sitio.autor },
+};
+---
+
+<Base
+  titulo={`${sitio.nombre} · ${sitio.lema}`}
+  descripcion={sitio.descripcion}
+  ruta="/"
+  datosEstructurados={datosEstructurados}
+>
+  <section class="hero">
+    <div class="contenedor hero-inner">
+      <span class="eyebrow">Revisiones de tema para internos y residentes</span>
+      <h1>La evidencia ya está sintetizada.<br />Lo que falta es tu criterio.</h1>
+      <p class="entrada">
+        Tienes la sesión el jueves y cuarenta horas de guardia entre medias. Aquí
+        está la revisión completa del tema —con la guía vigente, las cifras
+        verificadas y las figuras hechas de cero— en tres formatos: interactiva
+        para impresionar, editable para adaptarla y en PDF para repartirla.
+      </p>
+      <div class="hero-acciones">
+        <a href="/gratis" class="boton boton--primario">Empieza con una gratis</a>
+        <a href="/catalogo" class="boton boton--secundario">Ver el catálogo</a>
+      </div>
+      <dl class="hero-meta">
+        <div><dt>Formatos por tema</dt><dd class="mono">3</dd></div>
+        <div><dt>Secciones por revisión</dt><dd class="mono">12–15</dd></div>
+        <div><dt>Temas nuevos al mes</dt><dd class="mono">4</dd></div>
+        <div><dt>Desde</dt><dd class="mono">{precios.temaSuelto.cop} COP</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="demo" aria-labelledby="titulo-demo">
+    <div class="contenedor">
+      <div class="demo-cabeza">
+        <div>
+          <span class="eyebrow">Demo en vivo · no es una captura</span>
+          <h2 id="titulo-demo">{destacado.titulo}: pruébala aquí mismo</h2>
+        </div>
+        <a href={destacado.demo} target="_blank" rel="noopener" class="boton boton--secundario">
+          Abrirla a pantalla completa
+        </a>
+      </div>
+      <p class="demo-nota">
+        Navega por las secciones, mete un valor en el interpretador de NT-proBNP y
+        mira cómo cambia la interpretación. Esto es exactamente lo que recibes.
+      </p>
+      <DemoIncrustada
+        src={destacado.demo!}
+        titulo={destacado.titulo}
+        version={destacado.version}
+        actualizado={destacado.actualizado}
+      />
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="seccion-cabeza">
+        <span class="eyebrow">Qué recibes</span>
+        <h2>Tres piezas por tema, no un archivo suelto</h2>
+        <p>
+          Porque la presentación que impresiona y la presentación que puedes
+          adaptar a las nueve de la noche no siempre son la misma.
+        </p>
+      </div>
+      <div class="formatos">
+        {
+          formatos.map((f) => (
+            <article class="formato">
+              <span class="formato-clave mono">{f.clave}</span>
+              <h3>{f.titulo}</h3>
+              <p>{f.texto}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--panel">
+    <div class="contenedor">
+      <div class="seccion-cabeza">
+        <span class="eyebrow">La diferencia</span>
+        <h2>Por qué no es otro PowerPoint reciclado</h2>
+        <p>
+          Lo que circula por los grupos de residentes suele ser de hace ocho años,
+          sin fuentes y con capturas ilegibles. El listón está bajo a propósito.
+        </p>
+      </div>
+      <ul class="difs">
+        {
+          diferencias.map((d) => (
+            <li>
+              <h3>{d.titulo}</h3>
+              <p>{d.texto}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="seccion-cabeza">
+        <span class="eyebrow">Catálogo</span>
+        <h2>Los temas que de verdad te toca presentar</h2>
+        <p>
+          El orden de producción lo marca la rotación obligatoria, no nuestras
+          preferencias. Interna, urgencias y cuidado crítico primero.
+        </p>
+      </div>
+      <div class="rejilla">
+        {enPortada.map((tema) => <TarjetaTema tema={tema} />)}
+      </div>
+      <p class="ver-todo"><a href="/catalogo">Ver el catálogo completo y lo que viene →</a></p>
+    </div>
+  </section>
+
+  <div class="contenedor bloque-captura">
+    <CapturaCorreo origen="portada" />
+  </div>
+
+  <section class="seccion">
+    <div class="contenedor faq-inner">
+      <div class="seccion-cabeza">
+        <span class="eyebrow">Dudas razonables</span>
+        <h2>Lo que todo el mundo pregunta antes de comprar</h2>
+      </div>
+      <div class="faq">
+        {
+          faq.map((item) => (
+            <details>
+              <summary>{item.p}</summary>
+              <p>{item.r}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------- hero ---------- */
+  .hero { border-bottom: 1px solid var(--line); padding-block: 64px 56px; }
+  .hero-inner { display: flex; flex-direction: column; gap: 18px; }
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 58px);
+    letter-spacing: -0.018em;
+    max-width: 17ch;
+  }
+  .entrada { font-size: clamp(17px, 2.1vw, 19.5px); color: var(--text-2); max-width: 58ch; }
+  .hero-acciones { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 18px 26px;
+    margin: 24px 0 0;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+  .hero-meta div { display: flex; flex-direction: column; gap: 3px; }
+  .hero-meta dt {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .hero-meta dd { margin: 0; font-size: 19px; font-weight: 600; color: var(--text); }
+
+  /* ---------- demo ---------- */
+  .demo { padding-block: 52px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .demo-cabeza {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .demo-cabeza h2 { font-size: clamp(23px, 3.3vw, 31px); margin-top: 7px; }
+  .demo-nota { font-size: 15px; color: var(--text-2); max-width: 62ch; margin-top: 10px; }
+
+
+  /* ---------- formatos ---------- */
+  .formatos { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .formato { background: var(--bg); padding: 24px 22px; display: flex; flex-direction: column; gap: 9px; }
+  .formato-clave {
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    color: var(--crimson);
+    font-weight: 500;
+  }
+  .formato h3 { font-size: 20px; }
+  .formato p { font-size: 15px; color: var(--text-2); }
+
+  /* ---------- diferencias ---------- */
+  .difs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
+    gap: 26px 40px;
+  }
+  .difs li { display: flex; flex-direction: column; gap: 7px; padding-left: 16px; border-left: 2px solid var(--crimson); }
+  .difs h3 { font-size: 18.5px; }
+  .difs p { font-size: 15px; color: var(--text-2); }
+
+  /* ---------- catálogo ---------- */
+  .rejilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(292px, 1fr)); gap: 16px; }
+  .ver-todo { margin-top: 24px; font-size: 15.5px; }
+  .ver-todo a { font-weight: 600; text-decoration: none; }
+  .ver-todo a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .bloque-captura { margin-block: 16px; }
+
+  /* ---------- faq ---------- */
+  .faq-inner { max-width: 760px; }
+  .faq { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    cursor: pointer;
+    padding: 16px 0;
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; color: var(--crimson); font-family: var(--mono); font-size: 19px; flex: none; }
+  .faq details[open] summary::after { content: "−"; }
+  .faq details p { padding-bottom: 18px; font-size: 15.4px; color: var(--text-2); max-width: 64ch; }
+</style>

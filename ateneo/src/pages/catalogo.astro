@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import TarjetaTema from '../components/TarjetaTema.astro';
+import CapturaCorreo from '../components/CapturaCorreo.astro';
+import { publicadas, enProduccion, presentaciones } from '../data/presentaciones';
+import { sitio } from '../config';
+
+const especialidades = [...new Set(presentaciones.map((p) => p.especialidad))];
+
+const datosEstructurados = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `Catálogo de revisiones de tema · ${sitio.nombre}`,
+  description:
+    'Revisiones de tema médicas interactivas, con la guía vigente y en tres formatos: HTML interactivo, PowerPoint editable y handout en PDF.',
+  inLanguage: 'es',
+};
+---
+
+<Base
+  titulo="Catálogo de revisiones de tema"
+  descripcion="Todas las revisiones de tema disponibles y las que están en producción. Medicina interna, urgencias, cuidado crítico e infectología tropical."
+  ruta="/catalogo"
+  datosEstructurados={datosEstructurados}
+>
+  <section class="cabeza">
+    <div class="contenedor">
+      <span class="eyebrow">Catálogo</span>
+      <h1>Lo que hay listo y lo que viene</h1>
+      <p class="entrada">
+        El orden de producción lo marca la rotación obligatoria: lo que de verdad
+        te toca presentar en interna, urgencias y cuidado crítico. Si tu tema no
+        está, escríbenos — la lista se reordena con lo que más nos piden.
+      </p>
+      <ul class="especialidades">
+        {especialidades.map((e) => <li class="kicker">{e}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="seccion-cabeza">
+        <h2>Disponibles ahora</h2>
+        <p>Cada una incluye el HTML interactivo, el PowerPoint editable y el handout en PDF.</p>
+      </div>
+      <div class="rejilla">
+        {publicadas.map((tema) => <TarjetaTema tema={tema} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--panel">
+    <div class="contenedor">
+      <div class="seccion-cabeza">
+        <h2>En producción</h2>
+        <p>
+          Cuatro temas nuevos al mes. Déjanos tu correo y te avisamos el día que
+          salga el tuyo — sin esperar a tropezártelo en el catálogo.
+        </p>
+      </div>
+      <div class="rejilla">
+        {enProduccion.map((tema) => <TarjetaTema tema={tema} />)}
+      </div>
+    </div>
+  </section>
+
+  <div class="contenedor bloque-captura">
+    <CapturaCorreo
+      origen="catalogo"
+      titulo="Te aviso cuando salga el tema que necesitas"
+      texto="Y de paso te llevas la revisión completa de insuficiencia cardiaca, gratis, para que veas el nivel antes de pagar nada."
+    />
+  </div>
+</Base>
+
+<style>
+  .cabeza { padding-block: 52px 40px; border-bottom: 1px solid var(--line); }
+  .cabeza h1 { font-size: clamp(30px, 5vw, 46px); margin-top: 10px; letter-spacing: -0.015em; }
+  .entrada { font-size: 17.5px; color: var(--text-2); max-width: 60ch; margin-top: 14px; }
+  .especialidades {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+    list-style: none;
+    padding: 0;
+    margin: 22px 0 0;
+  }
+  .especialidades li {
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 5px 10px;
+    border-radius: 2px;
+  }
+  .rejilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(292px, 1fr)); gap: 16px; }
+  .bloque-captura { margin-block: 56px 0; }
+</style>

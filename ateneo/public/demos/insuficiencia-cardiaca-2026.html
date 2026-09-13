@@ -1,0 +1,1351 @@
+<title>Insuficiencia Cardiaca 2026</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ink:#0E1A22;
+  --bg:#FFFFFF;
+  --surface:#FFFFFF;
+  --panel:#F0F4F6;
+  --panel-2:#E7EEF1;
+  --line:#D9E2E7;
+  --line-soft:#E8EEF1;
+  --text:#15242D;
+  --text-2:#3D5462;
+  --muted:#637986;
+  --crimson:#A31832;
+  --crimson-soft:#FBEDF0;
+  --crimson-line:#EDD2D9;
+  --teal:#00909F;
+  --teal-soft:#E6F4F5;
+  --teal-line:#C6E4E7;
+  --amber:#B4690E;
+  --amber-soft:#FBF0E2;
+  --amber-line:#EDDCC3;
+  --on-accent:#FFFFFF;
+  --rail-bg:#0E1A22;
+  --rail-text:#D5E1E8;
+  --rail-muted:#7C93A1;
+  --rail-line:#22333E;
+  --focus:#00909F;
+  --shadow:0 1px 2px rgba(14,26,34,.05), 0 8px 24px -14px rgba(14,26,34,.24);
+  --grid-line:rgba(163,24,50,.10);
+  --serif:"Spectral", Georgia, "Times New Roman", serif;
+  --sans:"IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D161C;
+    --surface:#131F27;
+    --panel:#182631;
+    --panel-2:#1F2F3B;
+    --line:#263A47;
+    --line-soft:#1E2E39;
+    --text:#E3EDF2;
+    --text-2:#B4C6D0;
+    --muted:#8CA2AF;
+    --crimson:#E4657C;
+    --crimson-soft:#2A1720;
+    --crimson-line:#43242E;
+    --teal:#19A2AE;
+    --teal-soft:#0F2429;
+    --teal-line:#1C3940;
+    --amber:#C1862B;
+    --amber-soft:#251C10;
+    --amber-line:#3B2D18;
+    --on-accent:#0D161C;
+    --rail-bg:#0A1218;
+    --rail-text:#CFDDE5;
+    --rail-muted:#748C99;
+    --rail-line:#1C2B35;
+    --focus:#19A2AE;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -16px rgba(0,0,0,.75);
+    --grid-line:rgba(228,101,124,.12);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D161C; --surface:#131F27; --panel:#182631; --panel-2:#1F2F3B;
+  --line:#263A47; --line-soft:#1E2E39; --text:#E3EDF2; --text-2:#B4C6D0; --muted:#8CA2AF;
+  --crimson:#E4657C; --crimson-soft:#2A1720; --crimson-line:#43242E;
+  --teal:#19A2AE; --teal-soft:#0F2429; --teal-line:#1C3940;
+  --amber:#C1862B; --amber-soft:#251C10; --amber-line:#3B2D18;
+  --on-accent:#0D161C; --rail-bg:#0A1218; --rail-text:#CFDDE5; --rail-muted:#748C99; --rail-line:#1C2B35;
+  --focus:#19A2AE;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -16px rgba(0,0,0,.75);
+  --grid-line:rgba(228,101,124,.12);
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--text); font-family:var(--sans); font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0; font-family:var(--serif); font-weight:600; text-wrap:balance; line-height:1.15}
+p{margin:0}
+button{font:inherit; color:inherit; background:none; border:none; cursor:pointer}
+input,select{font:inherit; color:inherit}
+a{color:var(--teal)}
+:focus-visible{outline:2px solid var(--focus); outline-offset:2px; border-radius:3px}
+.mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
+
+/* ---------- shell ---------- */
+.app{display:grid; grid-template-columns:270px minmax(0,1fr); min-height:100vh}
+.rail{background:var(--rail-bg); color:var(--rail-text); display:flex; flex-direction:column; position:sticky; top:0; height:100vh; overflow:hidden}
+.rail-head{padding:22px 20px 16px; border-bottom:1px solid var(--rail-line)}
+.rail-eyebrow{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--crimson); font-weight:500}
+.rail-title{font-family:var(--serif); font-size:21px; color:#fff; margin-top:7px; line-height:1.15}
+.rail-sub{font-size:12px; color:var(--rail-muted); margin-top:6px; line-height:1.4}
+.rail-nav{flex:1; overflow-y:auto; padding:10px 10px 14px}
+.nav-item{display:grid; grid-template-columns:26px 1fr; gap:9px; align-items:baseline; width:100%; text-align:left; padding:7px 10px; border-radius:6px; color:var(--rail-text); font-size:13.5px; line-height:1.3}
+.nav-item:hover{background:rgba(255,255,255,.05)}
+.nav-item[aria-current="true"]{background:var(--crimson); color:#fff}
+.nav-item[aria-current="true"] .nav-n{color:rgba(255,255,255,.85)}
+.nav-n{font-family:var(--mono); font-size:11px; color:var(--rail-muted)}
+.nav-sep{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--rail-muted); padding:14px 10px 6px}
+.rail-foot{padding:12px 20px 16px; border-top:1px solid var(--rail-line); font-size:11.5px; color:var(--rail-muted); display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+.mini-btn{border:1px solid var(--rail-line); border-radius:999px; padding:4px 10px; font-size:11.5px; color:var(--rail-text)}
+.mini-btn:hover{background:rgba(255,255,255,.06)}
+
+.stage{display:flex; flex-direction:column; min-width:0}
+.stage-inner{flex:1; padding:34px 40px 26px; max-width:1120px; width:100%; margin:0 auto}
+.bar{position:sticky; bottom:0; background:var(--bg); border-top:1px solid var(--line); padding:9px 40px; display:flex; align-items:center; gap:14px; z-index:5}
+.progress{flex:1; height:3px; background:var(--line); border-radius:2px; overflow:hidden}
+.progress-fill{height:100%; background:var(--crimson); transition:width .28s ease}
+.step-btn{border:1px solid var(--line); border-radius:7px; padding:6px 13px; font-size:13.5px; font-weight:500; background:var(--surface)}
+.step-btn:hover:not(:disabled){border-color:var(--teal); color:var(--teal)}
+.step-btn:disabled{opacity:.38; cursor:default}
+.bar-count{font-family:var(--mono); font-size:12.5px; color:var(--muted)}
+.railtoggle{display:none}
+
+/* ---------- section chrome ---------- */
+.section{animation:fade .3s ease}
+@keyframes fade{from{opacity:.35}to{opacity:1}}
+.eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--crimson); font-weight:500}
+.s-title{font-size:clamp(26px,3.1vw,38px); margin-top:9px; letter-spacing:-.01em}
+.s-lede{margin-top:12px; color:var(--text-2); font-size:16.5px; max-width:66ch; line-height:1.55}
+.cite{margin-top:26px; padding-top:12px; border-top:1px solid var(--line-soft); font-size:12px; color:var(--muted); line-height:1.5}
+.grid{display:grid; gap:16px; margin-top:24px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.split{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:20px; margin-top:24px}
+@media (max-width:900px){.g2,.g3,.g4,.split{grid-template-columns:minmax(0,1fr)}}
+
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:16px 18px}
+.card.tint{background:var(--panel); border-color:var(--line-soft)}
+.card h3{font-family:var(--sans); font-size:15px; font-weight:600; letter-spacing:.005em}
+.card p{font-size:13.8px; color:var(--text-2); line-height:1.52; margin-top:7px}
+.pearl{margin-top:10px; font-size:12.6px; color:var(--teal); font-style:italic; line-height:1.45}
+.k{color:var(--text); font-weight:600}
+
+.stat{display:flex; flex-direction:column; gap:3px}
+.stat-n{font-family:var(--serif); font-size:34px; font-weight:700; color:var(--crimson); line-height:1; font-variant-numeric:tabular-nums}
+.stat-l{font-size:12.8px; color:var(--text-2); line-height:1.45}
+
+.chips{display:flex; gap:7px; flex-wrap:wrap}
+.chip{border:1px solid var(--line); border-radius:999px; padding:5px 13px; font-size:13px; background:var(--surface); color:var(--text-2)}
+.chip:hover{border-color:var(--teal)}
+.chip[aria-pressed="true"],.chip.on{background:var(--ink); color:#fff; border-color:var(--ink)}
+:root[data-theme="dark"] .chip[aria-pressed="true"],:root[data-theme="dark"] .chip.on{background:var(--teal); color:var(--on-accent); border-color:var(--teal)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip[aria-pressed="true"],:root:not([data-theme="light"]) .chip.on{background:var(--teal); color:var(--on-accent); border-color:var(--teal)}}
+
+.tag{display:inline-flex; align-items:center; gap:5px; font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; padding:3px 9px; border-radius:999px; font-weight:500}
+.tag.pos{background:var(--teal-soft); color:var(--teal); border:1px solid var(--teal-line)}
+.tag.neu{background:var(--amber-soft); color:var(--amber); border:1px solid var(--amber-line)}
+.tag.cur{background:var(--crimson-soft); color:var(--crimson); border:1px solid var(--crimson-line)}
+
+.tt{position:fixed; pointer-events:none; background:var(--ink); color:#fff; font-size:12.2px; line-height:1.4; padding:7px 10px; border-radius:6px; opacity:0; transition:opacity .12s; z-index:40; max-width:230px}
+:root[data-theme="dark"] .tt{background:#04090C; border:1px solid var(--line)}
+.tt.on{opacity:1}
+.tt b{font-family:var(--mono); font-weight:600}
+
+table.data{width:100%; border-collapse:collapse; font-size:13px; margin-top:12px}
+table.data th{text-align:left; font-family:var(--mono); font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); font-weight:500; padding:6px 10px; border-bottom:1px solid var(--line)}
+table.data td{padding:7px 10px; border-bottom:1px solid var(--line-soft); color:var(--text-2)}
+table.data td.num{font-family:var(--mono); font-variant-numeric:tabular-nums; color:var(--text)}
+.scroll-x{overflow-x:auto}
+
+/* ---------- hero ---------- */
+.hero{position:relative; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--rail-bg); color:#fff; padding:44px 40px 0}
+.hero-grid{position:absolute; inset:0; background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px); background-size:22px 22px; opacity:.75}
+.hero-in{position:relative}
+.hero h1{font-size:clamp(34px,4.6vw,56px); color:#fff; letter-spacing:-.02em}
+.hero .sub{font-family:var(--serif); font-size:clamp(17px,2vw,24px); color:#B9CBD6; margin-top:10px; max-width:42ch; line-height:1.3}
+.hero-meta{display:flex; gap:10px; flex-wrap:wrap; margin-top:22px}
+.hero-meta span{font-size:12.5px; border:1px solid var(--rail-line); border-radius:999px; padding:4px 12px; color:#CFDDE5}
+.hero-by{margin-top:24px; font-size:13.5px; color:#9BB0BD; line-height:1.55}
+.hero-by b{color:#fff; font-weight:600}
+.hero-ecg{display:block; width:100%; height:96px; margin-top:18px}
+.ecg-path{fill:none; stroke:var(--crimson); stroke-width:2.2; stroke-linejoin:round; stroke-linecap:round}
+@media (prefers-reduced-motion:no-preference){
+  .ecg-path{stroke-dasharray:2600; stroke-dashoffset:2600; animation:trace 4.2s ease-out forwards}
+}
+@keyframes trace{to{stroke-dashoffset:0}}
+
+/* ---------- interactive bits ---------- */
+.tool{background:var(--panel); border:1px solid var(--line-soft); border-radius:11px; padding:18px}
+.tool-h{display:flex; align-items:center; gap:9px; margin-bottom:14px}
+.tool-h h3{font-family:var(--sans); font-size:14px; font-weight:600}
+.tool-h .badge{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); border:1px solid var(--teal-line); background:var(--teal-soft); border-radius:999px; padding:2px 8px}
+.field{display:flex; flex-direction:column; gap:5px}
+.field label{font-size:12px; color:var(--muted); font-weight:500}
+.field input[type=number],.field select{background:var(--surface); border:1px solid var(--line); border-radius:7px; padding:8px 10px; font-size:14px; width:100%}
+.row{display:flex; gap:12px; flex-wrap:wrap}
+.row>*{flex:1 1 130px}
+.check{display:flex; align-items:center; gap:8px; font-size:13.4px; color:var(--text-2); cursor:pointer}
+.check input{accent-color:var(--teal); width:15px; height:15px}
+
+input[type=range]{-webkit-appearance:none; appearance:none; width:100%; background:transparent; margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:6px; border-radius:3px; background:var(--line)}
+input[type=range]::-moz-range-track{height:6px; border-radius:3px; background:var(--line)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:20px; height:20px; border-radius:50%; background:var(--crimson); border:3px solid var(--surface); box-shadow:0 0 0 1px var(--crimson); margin-top:-7px}
+input[type=range]::-moz-range-thumb{width:20px; height:20px; border-radius:50%; background:var(--crimson); border:3px solid var(--surface); box-shadow:0 0 0 1px var(--crimson)}
+
+.verdict{margin-top:14px; border-radius:9px; padding:13px 15px; border:1px solid var(--line); background:var(--surface)}
+.verdict.ok{border-color:var(--teal-line); background:var(--teal-soft)}
+.verdict.warn{border-color:var(--amber-line); background:var(--amber-soft)}
+.verdict.hi{border-color:var(--crimson-line); background:var(--crimson-soft)}
+.verdict-t{font-weight:600; font-size:14.5px; display:flex; align-items:center; gap:8px}
+.verdict.ok .verdict-t{color:var(--teal)}
+.verdict.warn .verdict-t{color:var(--amber)}
+.verdict.hi .verdict-t{color:var(--crimson)}
+.verdict p{font-size:13.2px; color:var(--text-2); margin-top:6px; line-height:1.5}
+
+.band{position:relative; height:44px; border-radius:7px; overflow:hidden; display:flex; border:1px solid var(--line)}
+.band div{display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:500; color:var(--text-2)}
+.band-lab{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px}
+.marker{position:absolute; top:-6px; bottom:-6px; width:2px; background:var(--crimson); z-index:2}
+.marker::after{content:""; position:absolute; top:-5px; left:-4px; width:10px; height:10px; border-radius:50%; background:var(--crimson)}
+
+.acc{border:1px solid var(--line); border-radius:10px; overflow:hidden; background:var(--surface)}
+.acc+.acc{margin-top:9px}
+.acc-h{width:100%; display:flex; align-items:center; gap:11px; padding:13px 16px; text-align:left; font-weight:600; font-size:14.5px}
+.acc-h:hover{background:var(--panel)}
+.acc-h .idx{font-family:var(--mono); font-size:11px; color:var(--muted)}
+.acc-h .car{margin-left:auto; color:var(--muted); transition:transform .2s; font-size:13px}
+.acc[open-state="1"] .acc-h .car{transform:rotate(180deg)}
+.acc-b{padding:0 16px 15px 43px; font-size:13.6px; color:var(--text-2); line-height:1.55}
+.acc-b p+p{margin-top:8px}
+
+.tabs{display:flex; gap:4px; border-bottom:1px solid var(--line); flex-wrap:wrap}
+.tab{padding:9px 15px; font-size:14px; color:var(--muted); border-bottom:2px solid transparent; margin-bottom:-1px}
+.tab[aria-selected="true"]{color:var(--crimson); border-bottom-color:var(--crimson); font-weight:600}
+
+.quad{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.quad button{border:1px solid var(--line); border-radius:10px; padding:15px; text-align:left; background:var(--surface); transition:border-color .15s}
+.quad button:hover{border-color:var(--teal)}
+.quad button[aria-pressed="true"]{border-color:var(--crimson); background:var(--crimson-soft)}
+.quad .qn{font-weight:600; font-size:14.5px}
+.quad .qs{font-family:var(--mono); font-size:11px; color:var(--muted); margin-top:4px; text-transform:uppercase; letter-spacing:.06em}
+
+.tree-step{border:1px solid var(--line); border-radius:10px; padding:15px 16px; background:var(--surface)}
+.tree-q{font-weight:600; font-size:14.6px}
+.tree-opts{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+.tree-opt{border:1px solid var(--line); background:var(--panel); border-radius:8px; padding:8px 13px; font-size:13.4px; text-align:left}
+.tree-opt:hover{border-color:var(--crimson); color:var(--crimson)}
+.trail{display:flex; flex-direction:column; gap:7px; margin-top:12px}
+.trail-i{display:grid; grid-template-columns:20px 1fr; gap:9px; font-size:13px; color:var(--text-2); align-items:start}
+.trail-i .n{font-family:var(--mono); font-size:10.5px; color:var(--on-accent); background:var(--teal); border-radius:50%; width:19px; height:19px; display:flex; align-items:center; justify-content:center}
+
+.ck{display:flex; gap:11px; align-items:flex-start; padding:11px 13px; border:1px solid var(--line); border-radius:9px; background:var(--surface); cursor:pointer; transition:border-color .15s}
+.ck:hover{border-color:var(--teal)}
+.ck input{margin-top:2px; accent-color:var(--teal); width:16px; height:16px; flex:none}
+.ck span{font-size:13.8px; line-height:1.5; color:var(--text-2)}
+.ck input:checked+span{color:var(--muted); text-decoration:line-through; text-decoration-color:var(--line)}
+.meter{display:flex; align-items:center; gap:11px; margin-top:14px; font-size:13px; color:var(--muted)}
+.meter-track{flex:1; height:6px; background:var(--line); border-radius:3px; overflow:hidden}
+.meter-fill{height:100%; background:var(--teal); width:0; transition:width .3s ease}
+
+.q-card{border:1px solid var(--line); border-radius:11px; padding:18px; background:var(--surface)}
+.q-opt{display:block; width:100%; text-align:left; border:1px solid var(--line); border-radius:8px; padding:11px 14px; font-size:14px; margin-top:8px; background:var(--panel)}
+.q-opt:hover:not(:disabled){border-color:var(--teal)}
+.q-opt.right{border-color:var(--teal); background:var(--teal-soft); color:var(--teal); font-weight:600}
+.q-opt.wrong{border-color:var(--crimson); background:var(--crimson-soft); color:var(--crimson)}
+.q-opt:disabled{cursor:default}
+.q-exp{margin-top:12px; font-size:13.4px; color:var(--text-2); border-left:2px solid var(--teal); padding-left:12px; line-height:1.55}
+
+.search{width:100%; background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:10px 13px; font-size:14px}
+.ref{display:grid; grid-template-columns:26px 1fr; gap:10px; padding:10px 0; border-bottom:1px solid var(--line-soft); font-size:13.4px; color:var(--text-2); line-height:1.5}
+.ref .rn{font-family:var(--mono); font-size:11.5px; color:var(--crimson); font-weight:600}
+
+.pillbtn{border:1px solid var(--line); border-radius:10px; padding:14px; background:var(--surface); text-align:left; width:100%; transition:.15s}
+.pillbtn[aria-pressed="true"]{border-color:var(--teal); background:var(--teal-soft)}
+.pillbtn .pn{font-family:var(--mono); font-size:11px; color:var(--muted)}
+.pillbtn .pt{font-weight:600; font-size:14.5px; margin-top:5px}
+.pillbtn .pd{font-size:12.6px; color:var(--text-2); margin-top:6px; line-height:1.45}
+.pillbtn[aria-pressed="true"] .pn{color:var(--teal)}
+
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  .rail{position:fixed; z-index:30; width:270px; transform:translateX(-100%); transition:transform .22s ease}
+  .rail.open{transform:none}
+  .railtoggle{display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line); border-radius:8px; padding:6px 12px; font-size:13.5px; background:var(--surface)}
+  .stage-inner{padding:22px 18px}
+  .bar{padding:9px 18px; gap:10px}
+  .hero{padding:30px 22px 0}
+  .quad{grid-template-columns:1fr}
+}
+</style>
+
+<div class="app">
+  <aside class="rail" id="rail">
+    <div class="rail-head">
+      <div class="rail-eyebrow">Actualización 2026</div>
+      <div class="rail-title">Insuficiencia cardiaca</div>
+      <div class="rail-sub">Guías ESC 2026 · 2.ª Definición Universal · Ensayos 2024-2026</div>
+    </div>
+    <nav class="rail-nav" id="nav" aria-label="Índice de la presentación"></nav>
+    <div class="rail-foot">
+      <button class="mini-btn" id="themeBtn" type="button">Tema</button>
+      <button class="mini-btn" id="fsBtn" type="button">Pantalla completa</button>
+      <span style="width:100%">← → para navegar</span>
+    </div>
+  </aside>
+
+  <main class="stage">
+    <div class="stage-inner" id="stage">
+
+      <!-- 1 · PORTADA -->
+      <section class="section" id="s1">
+        <div class="hero">
+          <div class="hero-grid" aria-hidden="true"></div>
+          <div class="hero-in">
+            <div class="rail-eyebrow" style="color:var(--crimson)">Actualización 2026</div>
+            <h1>Insuficiencia cardiaca</h1>
+            <p class="sub">De la nueva definición universal a la terapia fundamental</p>
+            <div class="hero-meta">
+              <span>Guías ESC 2026</span><span>2.ª Definición Universal</span><span>Ensayos 2024-2026</span>
+            </div>
+            <p class="hero-by">Material de formación médica continuada · Revisión de evidencia 2024-2026<br>Sesión para cardiología, medicina interna y residentes</p>
+          </div>
+          <svg class="hero-ecg" id="ecg" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><polyline class="ecg-path" id="ecgPath" points=""></polyline></svg>
+        </div>
+        <div class="grid g3" style="margin-top:20px">
+          <div class="card tint"><h3>15 secciones</h3><p>De la epidemiología a las controversias de 2026, con las citas de cada afirmación al pie.</p></div>
+          <div class="card tint"><h3>7 herramientas</h3><p>Calculadora de NT-proBNP, clasificador por FEVI, árbol de descongestión, perfiles hemodinámicos y más.</p></div>
+          <div class="card tint"><h3>Autoevaluación</h3><p>Seis preguntas de caso al final para comprobar los mensajes clave con el auditorio.</p></div>
+        </div>
+        <p class="cite">Versión interactiva de la presentación. Navega con las flechas del teclado, con los botones inferiores o desde el índice lateral.</p>
+      </section>
+
+      <!-- 2 · CARGA -->
+      <section class="section" id="s2" hidden>
+        <div class="eyebrow">Epidemiología</div>
+        <h2 class="s-title">La carga de la enfermedad</h2>
+        <p class="s-lede">Una de cada cuatro personas desarrollará insuficiencia cardiaca, y la curva demográfica todavía no ha llegado a su punto más alto.</p>
+
+        <div class="split">
+          <div>
+            <div class="grid g2" style="margin-top:0">
+              <div class="card"><div class="stat"><span class="stat-n" data-count="55,5 M">55,5 M</span><span class="stat-l">casos prevalentes en el mundo (2021); +118 % en números absolutos desde 1990</span></div></div>
+              <div class="card"><div class="stat"><span class="stat-n" data-count="24 %">24 %</span><span class="stat-l">riesgo a lo largo de la vida: 1 de cada 4 adultos desarrollará IC</span></div></div>
+              <div class="card"><div class="stat"><span class="stat-n" data-count="1,3 M">1,3 M</span><span class="stat-l">personas en España; 6,8 % de los mayores de 45 años</span></div></div>
+              <div class="card"><div class="stat"><span class="stat-n" data-count="&lt; 25 %">&lt; 25 %</span><span class="stat-l">de los pacientes elegibles reciben la cuádruple terapia</span></div></div>
+            </div>
+            <div class="card tint" style="margin-top:16px">
+              <h3>Impacto asistencial</h3>
+              <p><span class="k">1.ª causa de hospitalización</span> en mayores de 65 años en España (más de 100.000 ingresos al año). <span class="k">45 %</span> de las muertes cardiovasculares en EE. UU. (425.147 muertes, 2022). Supervivencia a 5 años cercana al 50 %: peor que la de muchos cánceres.</p>
+            </div>
+          </div>
+
+          <div class="tool">
+            <div class="tool-h"><h3>Proyección a 2050 · EE. UU.</h3><span class="badge">Interactivo</span></div>
+            <div class="chips" role="group" aria-label="Magnitud representada">
+              <button class="chip on" data-view="ppl" type="button" aria-pressed="true">Personas</button>
+              <button class="chip" data-view="cost" type="button" aria-pressed="false">Coste directo</button>
+              <button class="chip" data-view="table" type="button" aria-pressed="false">Tabla</button>
+            </div>
+            <div id="burdenChart" style="margin-top:14px"></div>
+            <p style="font-size:12.4px; color:var(--muted); margin-top:12px; line-height:1.5" id="burdenNote"></p>
+          </div>
+        </div>
+        <p class="cite">GBD 1990-2021, Eur Heart J Qual Care Clin Outcomes 2025;11:1144 · HF STATS 2025, J Card Fail · Sociedad Española de Cardiología / Fundación Española del Corazón.</p>
+      </section>
+
+      <!-- 3 · CLASIFICACIÓN -->
+      <section class="section" id="s3" hidden>
+        <div class="eyebrow">Definición y clasificación</div>
+        <h2 class="s-title">Qué cambia en 2026: dos fenotipos</h2>
+        <p class="s-lede">La ESC 2026 elimina la fracción de eyección ligeramente reducida. Mueve el control deslizante para ver cómo se reclasifica el mismo paciente.</p>
+
+        <div class="tool" style="margin-top:22px">
+          <div class="tool-h"><h3>Clasificador por FEVI</h3><span class="badge">Interactivo</span></div>
+          <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:6px">
+            <span class="mono" id="efVal" style="font-size:30px; font-weight:600; color:var(--crimson)">45 %</span>
+            <label for="efSlider" style="font-size:12.5px; color:var(--muted)">Fracción de eyección del ventrículo izquierdo</label>
+          </div>
+          <input type="range" id="efSlider" min="10" max="70" value="45" step="1" aria-describedby="efOut">
+          <div style="display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--muted); margin-top:5px"><span>10 %</span><span>40 %</span><span>50 %</span><span>70 %</span></div>
+
+          <div class="grid g2" style="margin-top:20px">
+            <div>
+              <div class="band-lab">ESC 2021 — tres categorías</div>
+              <div class="band" id="band2021">
+                <div style="flex:30; background:var(--crimson-soft)">IC-FEr</div>
+                <div style="flex:9; background:var(--amber-soft)">IC-FEmr</div>
+                <div style="flex:21; background:var(--teal-soft)">IC-FEp</div>
+                <div class="marker" id="mk1" style="left:58%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="band-lab">ESC 2026 — dos fenotipos</div>
+              <div class="band" id="band2026">
+                <div style="flex:39; background:var(--crimson-soft)">IC-FEr &lt; 50 %</div>
+                <div style="flex:21; background:var(--teal-soft)">IC-FEp ≥ 50 %</div>
+                <div class="marker" id="mk2" style="left:58%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="verdict" id="efOut" aria-live="polite"></div>
+        </div>
+
+        <div class="grid g2">
+          <div class="card">
+            <h3>Lo que dice la ESC 2026</h3>
+            <p><span class="k">IC-FEr:</span> FEVI &lt; 50 %, absorbiendo la antigua FEmr. <span class="k">IC-FEp:</span> FEVI ≥ 50 %. El racional es que comparten fisiopatología y respuesta al tratamiento. «Aguda» pasa a llamarse <span class="k">«descompensada»</span>, y la GDMT se reordena en terapia fundamental (FMT), adicional (AMT) e intervencionista (GDIT).</p>
+          </div>
+          <div class="card">
+            <h3>Lo que dice la 2.ª Definición Universal</h3>
+            <p>IC = síntomas o signos + alteración estructural o funcional + péptidos natriuréticos elevados o congestión objetivada. Mantiene <span class="k">tres categorías</span> (reducida, preservada y mejorada), sustituye el binomio isquémica/no isquémica por una taxonomía de 12 etiologías y describe la trayectoria como mejoría, remisión o recuperación.</p>
+          </div>
+        </div>
+
+        <div class="grid g4">
+          <div class="card tint"><h3>Estadio A · En riesgo</h3><p>HTA, diabetes, obesidad, cardiotóxicos, historia familiar. Sin alteración estructural.</p><p class="pearl">Controlar el riesgo cardiovascular.</p></div>
+          <div class="card" style="border-color:var(--teal-line); background:var(--teal-soft)"><h3>Estadio B · Pre-IC</h3><p>Alteración estructural o funcional, o péptidos elevados, sin síntomas.</p><p class="pearl">Ventana clave: tratar la causa y frenar la progresión.</p></div>
+          <div class="card tint"><h3>Estadio C · Sintomática</h3><p>Síntomas actuales o previos con alteración estructural.</p><p class="pearl">FMT completa y reevaluación a los 3 meses.</p></div>
+          <div class="card tint"><h3>Estadio D · Avanzada</h3><p>Síntomas refractarios pese a FMT óptima a dosis máximas toleradas.</p><p class="pearl">Derivar y compartir la decisión.</p></div>
+        </div>
+        <p class="cite">2026 ESC Guidelines for the management of heart failure, Eur Heart J 2026 (doi:10.1093/eurheartj/ehag100) · AHA/ACC/ESC/WHF. Second Universal Definition of Heart Failure, 2026.</p>
+      </section>
+
+      <!-- 4 · DIAGNÓSTICO -->
+      <section class="section" id="s4" hidden>
+        <div class="eyebrow">Diagnóstico</div>
+        <h2 class="s-title">Péptidos natriuréticos y ecocardiografía</h2>
+        <p class="s-lede">El valor de exclusión de los péptidos es alto; el de confirmación depende de la edad, del peso y del ritmo. Prueba un caso.</p>
+
+        <div class="split">
+          <div class="tool">
+            <div class="tool-h"><h3>Interpretador de NT-proBNP</h3><span class="badge">Interactivo</span></div>
+            <div class="row">
+              <div class="field">
+                <label for="npScenario">Escenario</label>
+                <select id="npScenario"><option value="amb">Ambulatorio (inicio no agudo)</option><option value="urg">Urgencias (inicio agudo)</option></select>
+              </div>
+              <div class="field"><label for="npAge">Edad (años)</label><input type="number" id="npAge" value="72" min="18" max="105"></div>
+              <div class="field"><label for="npVal">NT-proBNP (pg/mL)</label><input type="number" id="npVal" value="850" min="0" max="35000" step="10"></div>
+            </div>
+            <div class="row" style="margin-top:12px">
+              <label class="check"><input type="checkbox" id="npObese"> Obesidad (IMC ≥ 35)</label>
+              <label class="check"><input type="checkbox" id="npAf"> Fibrilación auricular</label>
+              <label class="check"><input type="checkbox" id="npCkd"> FGe &lt; 60 mL/min</label>
+            </div>
+            <div class="verdict" id="npOut" aria-live="polite"></div>
+            <p style="font-size:11.8px; color:var(--muted); margin-top:11px; line-height:1.5">Herramienta docente basada en los umbrales de la guía; no sustituye al juicio clínico ni a la ecocardiografía.</p>
+          </div>
+
+          <div>
+            <div class="card"><h3>1 · Sospecha clínica</h3><p>Disnea, ortopnea, fatiga y edemas junto a factores de riesgo. Un ECG estrictamente normal hace la IC muy improbable (VPN &gt; 98 %).</p></div>
+            <div class="card" style="margin-top:12px"><h3>2 · Péptidos natriuréticos</h3><p>Prueba de exclusión con alto valor predictivo negativo. Umbrales ambulatorios: NT-proBNP &lt; 125 pg/mL o BNP &lt; 35 pg/mL. En urgencias: NT-proBNP &lt; 300 pg/mL.</p></div>
+            <div class="card" style="margin-top:12px"><h3>3 · Ecocardiografía y etiología</h3><p>FEVI, estructura, función diastólica y valvulopatía; después, fenotipado etiológico dirigido.</p></div>
+            <div class="card tint" style="margin-top:12px"><h3>Emergente</h3><p>La definición universal 2026 destaca el <span class="k">ECG con inteligencia artificial</span> como herramienta prometedora de detección precoz de disfunción ventricular, pendiente de validación en poblaciones diversas.</p></div>
+          </div>
+        </div>
+        <p class="cite">ESC 2026 Heart Failure Guidelines · Second Universal Definition of Heart Failure 2026 · Umbrales agudos por edad: estudio ICON, Eur Heart J 2006.</p>
+      </section>
+
+      <!-- 5 · IMAGEN -->
+      <section class="section" id="s5" hidden>
+        <div class="eyebrow">Imagen y etiología</div>
+        <h2 class="s-title">Etiología dirigida = tratamiento dirigido</h2>
+        <p class="s-lede">Selecciona una técnica para ver qué aporta, cuándo pedirla y qué no debe pasarse por alto.</p>
+        <div class="split" style="grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)">
+          <div class="chips" id="imgList" style="flex-direction:column; align-items:stretch; gap:8px"></div>
+          <div class="tool" id="imgDetail" aria-live="polite"></div>
+        </div>
+        <p class="cite">ESC 2026 Heart Failure Guidelines (protocolos reforzados de detección de amiloidosis cardiaca) · Second Universal Definition of Heart Failure 2026 (taxonomía etiológica).</p>
+      </section>
+
+      <!-- 6 · PILARES -->
+      <section class="section" id="s6" hidden>
+        <div class="eyebrow">IC-FEr (FEVI &lt; 50 %)</div>
+        <h2 class="s-title">Terapia médica fundamental</h2>
+        <p class="s-lede">Cuatro pilares, un solo paquete. Actívalos para ver qué le falta a tu paciente y qué se gana cuando están los cuatro.</p>
+        <div class="grid g4" id="pillars" style="margin-top:22px"></div>
+        <div class="tool" style="margin-top:16px">
+          <div class="meter"><span class="mono" id="pillarCount">0 / 4</span><span class="meter-track"><span class="meter-fill" id="pillarFill"></span></span><span id="pillarLabel">pilares activos</span></div>
+          <div class="verdict" id="pillarOut" style="margin-top:14px" aria-live="polite"></div>
+        </div>
+        <div class="card tint" style="margin-top:16px">
+          <h3>Nomenclatura ESC 2026</h3>
+          <p><span class="k">FMT</span> (terapia médica fundamental, Clase I) · <span class="k">AMT</span> (terapia adicional, Clase IIa/IIb o para subgrupos) · <span class="k">GDIT</span> (terapia intervencionista guiada por guías). «FMT óptima» significa la máxima dosis tolerada de los cuatro pilares, y es el requisito previo para indicar dispositivos y para hablar de IC avanzada.</p>
+        </div>
+        <p class="cite">ESC 2026 Heart Failure Guidelines (Clase I) · Vaduganathan M, et al. Lancet 2020;396:121-8 (beneficio estimado del tratamiento integral).</p>
+      </section>
+
+      <!-- 7 · IMPLEMENTACIÓN -->
+      <section class="section" id="s7" hidden>
+        <div class="eyebrow">Implementación</div>
+        <h2 class="s-title">Rápido y simultáneo</h2>
+        <p class="s-lede">La secuencia ya no es una escalera. Recorre el calendario de titulación y marca lo que ya has hecho.</p>
+        <div class="tabs" id="tlTabs" role="tablist" aria-label="Calendario de titulación" style="margin-top:22px"></div>
+        <div class="tool" id="tlPanel" style="border-radius:0 0 11px 11px; border-top:none" aria-live="polite"></div>
+        <div class="split">
+          <div class="card tint">
+            <h3>La evidencia de ir deprisa</h3>
+            <p><span class="k">STRONG-HF:</span> la titulación intensiva tras el ingreso (100 % de dosis a las 2 semanas y 4 visitas en 2 meses) redujo un 34 % la muerte o el reingreso a 180 días (RR 0,66; IC 95 % 0,50-0,86).</p>
+            <p style="margin-top:9px"><span class="k">Umbral de seguridad:</span> tolerar un descenso del FGe ≤ 30 % y K⁺ ≤ 5,5 mmol/L. La hipotensión asintomática no es contraindicación.</p>
+          </div>
+          <div class="card">
+            <h3>La brecha es de implementación</h3>
+            <p>Menos de <span class="k">1 de cada 4</span> pacientes elegibles recibe los cuatro pilares. <span class="k">EMAIL-HF (ESC 2026):</span> una invitación digital poblacional duplicó el inicio de iSGLT2 (18,6 % frente a 8,2 %), sin efecto sobre eventos duros: identificar al paciente no basta si no se le titula.</p>
+          </div>
+        </div>
+        <p class="cite">Mebazaa A, et al. STRONG-HF. Lancet 2022;400:1938-52 · EMAIL-HF, presentado en el Congreso ESC 2026 · HF STATS 2025, J Card Fail.</p>
+      </section>
+
+      <!-- 8 · CONGESTIÓN -->
+      <section class="section" id="s8" hidden>
+        <div class="eyebrow">Congestión</div>
+        <h2 class="s-title">Descongestión paso a paso</h2>
+        <p class="s-lede">Dosis, medición de la respuesta y bloqueo secuencial. Sigue el árbol con un paciente real.</p>
+        <div class="split">
+          <div>
+            <div class="tree-step" id="treeStep" aria-live="polite"></div>
+            <div class="trail" id="treeTrail"></div>
+            <button class="step-btn" id="treeReset" type="button" style="margin-top:14px">Reiniciar el árbol</button>
+          </div>
+          <div>
+            <div class="card tint">
+              <h3>Bloqueo secuencial de la nefrona</h3>
+              <p><span class="k">Acetazolamida 500 mg IV/24 h</span> — ADVOR: mayor descongestión exitosa a los 3 días (RR 1,46; IC 95 % 1,17-1,82) y menor estancia.</p>
+              <p style="margin-top:8px"><span class="k">Tiazidas</span> (hidroclorotiazida, metolazona) — CLOROTIC: más diuresis y pérdida de peso, con más deterioro renal transitorio.</p>
+              <p style="margin-top:8px"><span class="k">iSGLT2</span> — inicio intrahospitalario seguro y con mejor diuresis (DICTATE-AHF, EMPULSE); recomendado por la ESC 2026.</p>
+              <p style="margin-top:8px"><span class="k">Ultrafiltración</span> — rescate en resistencia diurética verdadera o síndrome cardiorrenal grave (UF-CARE, HFA 2026); nunca de primera línea.</p>
+            </div>
+            <div class="card" style="margin-top:14px; border-color:var(--crimson-line); background:var(--crimson-soft)">
+              <h3>Antes del alta</h3>
+              <p>La congestión residual es el principal predictor de reingreso. Comprobar exploración, líneas B en ecografía pulmonar, vena cava inferior y tendencia del NT-proBNP. Torasemida y furosemida son equivalentes en mortalidad (TRANSFORM-HF).</p>
+            </div>
+          </div>
+        </div>
+        <p class="cite">Mullens W, et al. ADVOR. N Engl J Med 2022;387:1185-95 · Trullàs JC, et al. CLOROTIC. Eur Heart J 2023;44:411-21 · TRANSFORM-HF, JAMA 2023 · UF-CARE, Heart Failure 2026 (HFA-ESC).</p>
+      </section>
+
+      <!-- 9 · HFpEF -->
+      <section class="section" id="s9" hidden>
+        <div class="eyebrow">IC-FEp (FEVI ≥ 50 %) y el final de la FEmr</div>
+        <h2 class="s-title">De «no hay tratamiento» a cuatro decisiones</h2>
+        <p class="s-lede">Cinco ensayos definen hoy el tratamiento por encima de una FEVI del 40 %. Pasa el cursor por cada estimación.</p>
+        <div class="tool" style="margin-top:22px">
+          <div class="tool-h"><h3>Objetivo primario compuesto · razón de riesgos (IC 95 %)</h3><span class="badge">Interactivo</span></div>
+          <div class="chips" style="margin-bottom:6px">
+            <button class="chip on" id="fpChart" type="button" aria-pressed="true">Gráfico</button>
+            <button class="chip" id="fpTable" type="button" aria-pressed="false">Tabla</button>
+          </div>
+          <div id="forestWrap" class="scroll-x"></div>
+          <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:10px; font-size:12.4px; color:var(--muted)">
+            <span><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--teal);margin-right:6px"></span>Favorece al tratamiento</span>
+            <span><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--amber);margin-right:6px"></span>Sin diferencia significativa</span>
+          </div>
+        </div>
+        <div class="grid g2">
+          <div class="card" style="border-color:var(--crimson-line); background:var(--crimson-soft)">
+            <h3>La controversia abierta: ¿todos los ARM son iguales?</h3>
+            <p><span class="k">SPIRIT-HF (ACC 2026):</span> espironolactona en FEVI ≥ 40 % (n = 730), sin beneficio (12,7 frente a 10,8 eventos por 100 pacientes-año; RR 1,18; IC 95 % 0,72-1,92) y con más hospitalizaciones totales, hipotensión, hiperpotasemia y eventos renales. Más de la mitad suspendió el fármaco durante la pandemia.</p>
+            <p style="margin-top:9px"><span class="k">Lectura:</span> por encima del 40 % la evidencia sólida es hoy la del ARM no esteroideo. TOPCAT ya había dejado la duda.</p>
+          </div>
+          <div class="card">
+            <h3>Tratar el fenotipo, no solo la FEVI</h3>
+            <p><span class="k">Cardiometabólico:</span> obesidad, diabetes y apnea del sueño → iSGLT2, arGLP-1 o tirzepatida y ejercicio.</p>
+            <p style="margin-top:7px"><span class="k">Hipertensivo o rígido:</span> control estricto de la TA, natriuresis y control de la frecuencia.</p>
+            <p style="margin-top:7px"><span class="k">Fibrilación auricular:</span> a menudo es el motor de los síntomas; considerar control del ritmo.</p>
+            <p style="margin-top:7px"><span class="k">Infiltrativo:</span> descartar amiloidosis ATTR en todo mayor de 65 años con hipertrofia e IC-FEp.</p>
+          </div>
+        </div>
+        <p class="cite">Solomon SD, et al. FINEARTS-HF. N Engl J Med 2024;391:1475-85 · Kosiborod MN, et al. STEP-HFpEF. N Engl J Med 2023;389:1069-84 · Packer M, et al. SUMMIT. N Engl J Med 2025;392:427-37 · SPIRIT-HF, ACC.26 2026 · EMPEROR-Preserved 2021 · DELIVER 2022.</p>
+      </section>
+
+      <!-- 10 · COMORBILIDADES -->
+      <section class="section" id="s10" hidden>
+        <div class="eyebrow">Comorbilidades</div>
+        <h2 class="s-title">El pronóstico se decide fuera del corazón</h2>
+        <p class="s-lede">Seis frentes que cambian la evolución más que cualquier ajuste de dosis. Despliega el que tengas delante.</p>
+        <div id="comorb" style="margin-top:22px"></div>
+        <p class="cite">ESC 2026 Heart Failure Guidelines · FAIR-HF2 DZHK05, JAMA 2025 · AFFIRM-AHF, Lancet 2020 · IRONMAN, Lancet 2022 · CASTLE-HTx, N Engl J Med 2023.</p>
+      </section>
+
+      <!-- 11 · DISPOSITIVOS -->
+      <section class="section" id="s11" hidden>
+        <div class="eyebrow">Terapia intervencionista (GDIT)</div>
+        <h2 class="s-title">Dispositivos y terapias avanzadas</h2>
+        <p class="s-lede">Todo lo que viene después de la FMT óptima, nunca antes.</p>
+        <div class="tabs" id="devTabs" role="tablist" aria-label="Terapias intervencionistas" style="margin-top:22px"></div>
+        <div class="tool" id="devPanel" style="border-radius:0 0 11px 11px; border-top:none" aria-live="polite"></div>
+        <div class="grid g2">
+          <div class="card tint"><h3>Monitorización remota</h3><p>La monitorización hemodinámica de la presión pulmonar (CardioMEMS; MONITOR-HF) reduce hospitalizaciones y mejora la calidad de vida en pacientes seleccionados con ingresos repetidos. Las consultas de enfermería de IC siguen siendo la intervención organizativa con mejor relación coste-beneficio.</p></div>
+          <div class="card tint"><h3>Ejercicio, educación y autocuidado</h3><p>La ESC 2026 refuerza el entrenamiento físico estructurado tanto en fase estable como tras la descompensación, y dedica un capítulo al autocuidado, la educación del paciente y la decisión compartida, con versiones de la guía dirigidas al propio paciente.</p></div>
+        </div>
+        <p class="cite">ESC 2026 Heart Failure Guidelines (recomendaciones reforzadas de M-TEER y asistencia de larga duración) · CONDUCT-AF, Heart Failure 2026 · COAPT (5 años) · DANISH, N Engl J Med 2016 · TRILUMINATE.</p>
+      </section>
+
+      <!-- 12 · DESCOMPENSADA -->
+      <section class="section" id="s12" hidden>
+        <div class="eyebrow">IC descompensada</div>
+        <h2 class="s-title">Perfil, desencadenante y descongestión</h2>
+        <p class="s-lede">Clasifica al paciente en el primer minuto: perfusión y congestión. Pulsa un cuadrante.</p>
+        <div class="split">
+          <div>
+            <div class="quad" id="quad"></div>
+            <div class="card" style="margin-top:14px">
+              <h3>Buscar siempre el desencadenante</h3>
+              <p>Síndrome coronario agudo · crisis hipertensiva · arritmia · causa mecánica · tromboembolia pulmonar · infección · incumplimiento o fármacos (AINE, corticoides, antagonistas del calcio no dihidropiridínicos).</p>
+            </div>
+          </div>
+          <div>
+            <div class="tool" id="quadDetail" aria-live="polite"></div>
+            <div class="card" style="margin-top:14px; background:var(--rail-bg); border-color:var(--rail-line); color:#DCE7ED">
+              <h3 style="color:#fff">Shock cardiogénico</h3>
+              <p style="color:#B4C6D0">Estadificar con la escala SCAI y activar el equipo de shock. <span style="color:#fff; font-weight:600">DanGer Shock:</span> la bomba microaxial en el shock por infarto redujo la mortalidad a 180 días (45,8 % frente a 58,5 %) a costa de más complicaciones vasculares, renales y hemorrágicas.</p>
+            </div>
+          </div>
+        </div>
+        <p class="cite">ESC 2026 Heart Failure Guidelines (nueva terminología «descompensada»; inicio intrahospitalario de iSGLT2) · Møller JE, et al. DanGer Shock. N Engl J Med 2024;390:1382-93.</p>
+      </section>
+
+      <!-- 13 · NOVEDADES -->
+      <section class="section" id="s13" hidden>
+        <div class="eyebrow">Novedades 2025-2026</div>
+        <h2 class="s-title">Lo que ha cambiado y lo que sigue en discusión</h2>
+        <p class="s-lede">Filtra por resultado para ver qué entra en la práctica y qué todavía no.</p>
+        <div class="chips" id="trialFilter" style="margin-top:20px" role="group" aria-label="Filtrar ensayos"></div>
+        <div class="grid g3" id="trials"></div>
+        <p class="cite">VICTOR, Lancet 2025 · Bavendiek U, et al. DIGIT-HF. N Engl J Med 2025;393:1155-65 · SPIRIT-HF, ACC.26 · CARDIO-TTRansform y ACACIA-HCM, Congreso ESC 2026 · FAIR-HF2, JAMA 2025.</p>
+      </section>
+
+      <!-- 14 · TAKE HOME -->
+      <section class="section" id="s14" hidden>
+        <div class="eyebrow">Para llevar a casa</div>
+        <h2 class="s-title">Ocho mensajes para el lunes en consulta</h2>
+        <p class="s-lede">Marca los que ya aplicas de forma sistemática. Tu selección se guarda en este navegador.</p>
+        <div class="meter" style="margin-top:20px"><span class="mono" id="thCount">0 / 8</span><span class="meter-track"><span class="meter-fill" id="thFill"></span></span><span>ya incorporados</span></div>
+        <div class="grid g2" id="takehome" style="margin-top:16px"></div>
+        <p class="cite">Síntesis de las Guías ESC 2026, la 2.ª Definición Universal de IC y los ensayos citados en cada sección.</p>
+      </section>
+
+      <!-- 15 · REFERENCIAS -->
+      <section class="section" id="s15" hidden>
+        <div class="eyebrow">Referencias</div>
+        <h2 class="s-title">Fuentes y lecturas recomendadas</h2>
+        <p class="s-lede">Busca por ensayo, revista o año.</p>
+        <input class="search" id="refSearch" type="search" placeholder="Buscar: FINEARTS, NEJM, 2026…" style="margin-top:20px" aria-label="Buscar en las referencias">
+        <div id="refs" style="margin-top:8px"></div>
+        <p class="cite">Los ensayos presentados en congresos de 2026 se identifican como comunicaciones y sus cifras pueden variar en la publicación definitiva.</p>
+      </section>
+
+      <!-- 16 · QUIZ -->
+      <section class="section" id="s16" hidden>
+        <div class="eyebrow">Autoevaluación</div>
+        <h2 class="s-title">Seis casos, seis decisiones</h2>
+        <p class="s-lede">Una pregunta por bloque. La respuesta se explica al elegir.</p>
+        <div style="margin-top:22px" id="quiz"></div>
+        <div class="verdict" id="quizScore" style="display:none" aria-live="polite"></div>
+        <button class="step-btn" id="quizReset" type="button" style="margin-top:14px">Reiniciar la autoevaluación</button>
+        <p class="cite">Las respuestas correctas se derivan directamente de las secciones anteriores y de sus fuentes.</p>
+      </section>
+
+    </div>
+
+    <div class="bar">
+      <button class="railtoggle" id="railToggle" type="button" aria-expanded="false">☰ Índice</button>
+      <button class="step-btn" id="prev" type="button">← Anterior</button>
+      <button class="step-btn" id="next" type="button">Siguiente →</button>
+      <span class="progress"><span class="progress-fill" id="pfill"></span></span>
+      <span class="bar-count" id="bcount">01 / 16</span>
+    </div>
+  </main>
+</div>
+<div class="tt" id="tt" role="status"></div>
+
+<script>
+(function(){
+"use strict";
+var $ = function(s,r){return (r||document).querySelector(s);};
+var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+var esc = function(s){return String(s).replace(/[&<>"]/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];});};
+var store = {
+  get:function(k,d){try{var v=localStorage.getItem(k);return v===null?d:JSON.parse(v);}catch(e){return d;}},
+  set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+};
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------------- navigation ---------------- */
+var NAV = [
+  {n:'01', t:'Portada'},{n:'02', t:'Carga de enfermedad'},{n:'03', t:'Definición y clasificación'},
+  {n:'04', t:'Diagnóstico y biomarcadores'},{n:'05', t:'Imagen y etiología'},{n:'06', t:'IC-FEr: pilares'},
+  {n:'07', t:'Implementación rápida'},{n:'08', t:'Diuréticos y congestión'},{n:'09', t:'IC-FEp'},
+  {n:'10', t:'Comorbilidades clave'},{n:'11', t:'Dispositivos y avanzadas'},{n:'12', t:'IC descompensada'},
+  {n:'13', t:'Novedades 2025-2026'},{n:'14', t:'Para llevar a casa'},{n:'15', t:'Referencias'},
+  {n:'16', t:'Autoevaluación', sep:'Complemento'}
+];
+var nav = $('#nav'), cur = 0;
+NAV.forEach(function(item,i){
+  if(item.sep){var s=document.createElement('div'); s.className='nav-sep'; s.textContent=item.sep; nav.appendChild(s);}
+  var b = document.createElement('button');
+  b.type='button'; b.className='nav-item'; b.setAttribute('aria-current', i===0?'true':'false');
+  b.innerHTML = '<span class="nav-n">'+item.n+'</span><span>'+esc(item.t)+'</span>';
+  b.addEventListener('click', function(){ go(i); $('#rail').classList.remove('open'); });
+  nav.appendChild(b);
+});
+var navBtns = $$('.nav-item', nav);
+
+function go(i){
+  i = Math.max(0, Math.min(NAV.length-1, i));
+  $$('.section').forEach(function(s,k){ s.hidden = (k!==i); });
+  navBtns.forEach(function(b,k){ b.setAttribute('aria-current', k===i?'true':'false'); });
+  cur = i;
+  $('#pfill').style.width = ((i+1)/NAV.length*100)+'%';
+  $('#bcount').textContent = NAV[i].n + ' / ' + NAV[NAV.length-1].n;
+  $('#prev').disabled = i===0; $('#next').disabled = i===NAV.length-1;
+  var stage = $('.stage'); if(stage) stage.scrollTop = 0;
+  window.scrollTo(0,0);
+  if(location.hash !== '#s'+(i+1)) history.replaceState(null,'','#s'+(i+1));
+  if(i===1) drawBurden();
+  if(i===8) drawForest();
+}
+$('#prev').addEventListener('click', function(){go(cur-1);});
+$('#next').addEventListener('click', function(){go(cur+1);});
+$('#railToggle').addEventListener('click', function(){
+  var r=$('#rail'), open=r.classList.toggle('open');
+  this.setAttribute('aria-expanded', open?'true':'false');
+});
+document.addEventListener('keydown', function(e){
+  var t=e.target.tagName;
+  if(t==='INPUT'||t==='SELECT'||t==='TEXTAREA') return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'){go(cur+1);}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(cur-1);}
+  else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(NAV.length-1);}
+});
+
+/* theme + fullscreen */
+var themeBtn = $('#themeBtn');
+var savedTheme = store.get('ic26-theme', null);
+if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+themeBtn.addEventListener('click', function(){
+  var el=document.documentElement, now=el.getAttribute('data-theme');
+  var isDark = now ? now==='dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  var next = isDark ? 'light' : 'dark';
+  el.setAttribute('data-theme', next); store.set('ic26-theme', next);
+  drawBurden(); drawForest();
+});
+$('#fsBtn').addEventListener('click', function(){
+  if(document.fullscreenElement){ document.exitFullscreen(); }
+  else if(document.documentElement.requestFullscreen){ document.documentElement.requestFullscreen(); }
+});
+
+/* tooltip */
+var tt = $('#tt');
+function showTip(html, x, y){ tt.innerHTML=html; tt.classList.add('on');
+  var r=tt.getBoundingClientRect();
+  tt.style.left = Math.min(window.innerWidth-r.width-10, Math.max(8, x+14))+'px';
+  tt.style.top = Math.max(8, y-r.height-12)+'px';
+}
+function hideTip(){ tt.classList.remove('on'); }
+
+/* ---------------- 1 · ECG ---------------- */
+(function(){
+  var pts=[], W=1200, H=100, beats=6, bw=W/beats, y0=H*0.62, amp=H*0.42;
+  var f=[[0,0],[.14,0],[.18,.16],[.22,0],[.30,0],[.33,-.18],[.37,1],[.41,-.34],[.45,0],[.58,0],[.66,.30],[.74,0],[1,0]];
+  for(var i=0;i<beats;i++){ for(var j=0;j<f.length;j++){ pts.push(((i*bw)+f[j][0]*bw).toFixed(1)+','+(y0-f[j][1]*amp).toFixed(1)); } }
+  var p=$('#ecgPath'); if(p) p.setAttribute('points', pts.join(' '));
+})();
+
+/* ---------------- 2 · burden chart ---------------- */
+var burdenView='ppl';
+var BURDEN = {
+  ppl:{unit:'millones de adultos', max:13, rows:[{l:'2020', v:6.7},{l:'2050 (proyección)', v:11.4}],
+       note:'Prevalencia de insuficiencia cardiaca en adultos en EE. UU. La proyección de HF STATS 2025 supone un aumento del 70 % en tres décadas.'},
+  cost:{unit:'miles de millones de dólares', max:900, rows:[{l:'2020', v:32},{l:'2050 (proyección)', lo:142, hi:858}],
+       note:'Coste directo anual. La horquilla de 2050 refleja los escenarios de proyección: incluso el más conservador multiplica por cuatro el gasto actual.'}
+};
+$$('#burdenChart').length;
+$$('.chip[data-view]').forEach(function(b){
+  b.addEventListener('click', function(){
+    $$('.chip[data-view]').forEach(function(x){x.classList.remove('on'); x.setAttribute('aria-pressed','false');});
+    b.classList.add('on'); b.setAttribute('aria-pressed','true');
+    burdenView = b.getAttribute('data-view'); drawBurden();
+  });
+});
+function drawBurden(){
+  var host=$('#burdenChart'); if(!host) return;
+  if(burdenView==='table'){
+    host.innerHTML = '<div class="scroll-x"><table class="data"><thead><tr><th>Año</th><th>Personas (millones)</th><th>Coste directo (miles de millones $)</th></tr></thead><tbody>'+
+      '<tr><td>2020</td><td class="num">6,7</td><td class="num">32</td></tr>'+
+      '<tr><td>2050 (proyección)</td><td class="num">11,4</td><td class="num">142 – 858</td></tr></tbody></table></div>';
+    $('#burdenNote').textContent='Fuente: HF STATS 2025 (Heart Failure Society of America).';
+    return;
+  }
+  var d=BURDEN[burdenView], W=420, H=230, padL=8, padB=44, padT=26, plotH=H-padB-padT;
+  var css=getComputedStyle(document.documentElement);
+  var crim=css.getPropertyValue('--crimson').trim(), teal=css.getPropertyValue('--teal').trim();
+  var txt=css.getPropertyValue('--text').trim(), mut=css.getPropertyValue('--muted').trim();
+  var bw=96, gap=(W-2*padL-2*bw)/3;
+  var svg='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block" role="img" aria-label="Gráfico de barras">';
+  d.rows.forEach(function(r,i){
+    var x = padL+gap+i*(bw+gap);
+    if(r.v!=null){
+      var h = r.v/d.max*plotH, y = padT+plotH-h;
+      svg+='<rect class="bar-hit" data-l="'+esc(r.l)+'" data-v="'+r.v+'" x="'+x+'" y="'+y+'" width="'+bw+'" height="'+h+'" rx="4" fill="'+(i===0?teal:crim)+'"></rect>';
+      svg+='<text x="'+(x+bw/2)+'" y="'+(y-9)+'" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="600" fill="'+txt+'">'+String(r.v).replace('.',',')+'</text>';
+    } else {
+      var hHi=r.hi/d.max*plotH, hLo=r.lo/d.max*plotH, yHi=padT+plotH-hHi, yLo=padT+plotH-hLo;
+      svg+='<rect x="'+x+'" y="'+yHi+'" width="'+bw+'" height="'+(hHi-hLo)+'" rx="4" fill="'+crim+'" opacity="0.28"></rect>';
+      svg+='<rect class="bar-hit" data-l="'+esc(r.l)+'" data-v="'+r.lo+' – '+r.hi+'" x="'+x+'" y="'+yLo+'" width="'+bw+'" height="'+hLo+'" rx="4" fill="'+crim+'"></rect>';
+      svg+='<text x="'+(x+bw/2)+'" y="'+(yHi-9)+'" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="600" fill="'+txt+'">'+r.lo+'–'+r.hi+'</text>';
+    }
+    var words=r.l.split(' ');
+    svg+='<text x="'+(x+bw/2)+'" y="'+(padT+plotH+20)+'" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="'+mut+'">'+esc(words[0])+'</text>';
+    if(words[1]) svg+='<text x="'+(x+bw/2)+'" y="'+(padT+plotH+35)+'" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="'+mut+'">'+esc(words.slice(1).join(' '))+'</text>';
+  });
+  svg+='<line x1="'+padL+'" y1="'+(padT+plotH)+'" x2="'+(W-padL)+'" y2="'+(padT+plotH)+'" stroke="'+mut+'" stroke-opacity="0.35" stroke-width="1"></line>';
+  svg+='</svg>';
+  host.innerHTML=svg;
+  $('#burdenNote').textContent = d.note;
+  $$('.bar-hit', host).forEach(function(el){
+    el.style.cursor='crosshair';
+    el.addEventListener('mousemove', function(e){ showTip('<b>'+el.getAttribute('data-v')+'</b> '+d.unit+'<br>'+el.getAttribute('data-l'), e.clientX, e.clientY); });
+    el.addEventListener('mouseleave', hideTip);
+  });
+}
+/* count-up */
+(function(){
+  if(reduce) return;
+  var done=false;
+  var obs = function(){
+    if(done) return; done=true;
+    $$('#s2 .stat-n').forEach(function(el){
+      var final = el.textContent, m = final.match(/[\d,]+/);
+      if(!m) return;
+      var target = parseFloat(m[0].replace(',','.')), steps=22, i=0;
+      var t = setInterval(function(){
+        i++; var v = target*i/steps;
+        el.textContent = final.replace(m[0], (target%1?v.toFixed(1):Math.round(v)).toString().replace('.',','));
+        if(i>=steps){ clearInterval(t); el.textContent = final; }
+      }, 26);
+    });
+  };
+  $$('.nav-item')[1].addEventListener('click', function(){ setTimeout(obs, 60); });
+})();
+
+/* ---------------- 3 · EF slider ---------------- */
+(function(){
+  var sl=$('#efSlider'), out=$('#efOut'), val=$('#efVal'), mk1=$('#mk1'), mk2=$('#mk2');
+  if(!sl) return;
+  function upd(){
+    var v=+sl.value;
+    val.textContent = v+' %';
+    var pct = (v-10)/60*100;
+    mk1.style.left = pct+'%'; mk2.style.left = pct+'%';
+    var old = v<=40 ? 'IC-FEr' : (v<50 ? 'IC-FEmr' : 'IC-FEp');
+    var neo = v<50 ? 'IC-FEr' : 'IC-FEp';
+    var cls, title, body;
+    if(v<50){
+      cls = 'hi';
+      title = 'ESC 2026: IC-FEr (FEVI < 50 %)';
+      body = v<=40
+        ? 'Sin cambios respecto a 2021: los cuatro pilares de la terapia médica fundamental con recomendación de Clase I, y reevaluación de la FEVI a los 3 meses para valorar dispositivos.'
+        : 'Aquí está el cambio: con una FEVI del '+v+' % este paciente era IC-FEmr en 2021 y ahora es IC-FEr. Recibe la misma terapia fundamental de Clase I que un paciente con FEVI del 30 %.';
+    } else {
+      cls = 'ok';
+      title = 'ESC 2026: IC-FEp (FEVI ≥ 50 %)';
+      body = 'iSGLT2 y ARM con Clase I. Si hay obesidad, semaglutida o tirzepatida (Clase IIa). Descartar amiloidosis ATTR si hay hipertrofia y el paciente supera los 65 años.';
+    }
+    out.className = 'verdict '+cls;
+    out.innerHTML = '<div class="verdict-t">'+title+'</div><p><span class="k">ESC 2021:</span> '+old+' → <span class="k">ESC 2026:</span> '+neo+'. '+body+'</p>';
+  }
+  sl.addEventListener('input', upd); upd();
+})();
+
+/* ---------------- 4 · NT-proBNP ---------------- */
+(function(){
+  var els = ['npScenario','npAge','npVal','npObese','npAf','npCkd'].map(function(id){return $('#'+id);});
+  var out = $('#npOut'); if(!out) return;
+  function upd(){
+    var sc=els[0].value, age=+els[1].value||70, v=+els[2].value||0;
+    var obese=els[3].checked, af=els[4].checked, ckd=els[5].checked;
+    var factor = obese ? 0.5 : 1;
+    var ruleOut = (sc==='amb' ? 125 : 300) * factor;
+    var ruleIn = sc==='amb' ? 125*factor : (age<50 ? 450 : age<=75 ? 900 : 1800) * factor;
+    var cls, title, body;
+    if(v < ruleOut){
+      cls='ok'; title='IC poco probable';
+      body='Por debajo de '+Math.round(ruleOut)+' pg/mL el valor predictivo negativo es alto: busca otra causa de la disnea antes de pedir la ecocardiografía.';
+    } else if(v < ruleIn){
+      cls='warn'; title='Zona gris';
+      body='Entre '+Math.round(ruleOut)+' y '+Math.round(ruleIn)+' pg/mL la IC no queda ni descartada ni confirmada. Ecocardiografía y valoración clínica; en IC-FEp, aplicar H₂FPEF o HFA-PEFF.';
+    } else {
+      cls='hi'; title='Alta probabilidad de IC';
+      body='Por encima de '+Math.round(ruleIn)+' pg/mL para esta edad, la probabilidad es alta. Ecocardiografía e inicio del tratamiento sin esperar a completar el estudio etiológico.';
+    }
+    var mods=[];
+    if(obese) mods.push('obesidad: umbrales reducidos a la mitad, porque el péptido está falsamente bajo');
+    if(af) mods.push('fibrilación auricular: valores basalmente más altos, menor especificidad');
+    if(ckd) mods.push('enfermedad renal: aclaramiento reducido, valores más altos a igual congestión');
+    out.className='verdict '+cls;
+    out.innerHTML = '<div class="verdict-t">'+title+'</div><p>'+body+'</p>'+
+      (mods.length ? '<p style="margin-top:8px"><span class="k">Modificadores aplicados:</span> '+mods.join(' · ')+'.</p>' : '');
+  }
+  els.forEach(function(e){ e.addEventListener('input', upd); e.addEventListener('change', upd); });
+  upd();
+})();
+
+/* ---------------- 5 · imaging ---------------- */
+var IMG = [
+  {t:'Ecocardiografía', d:'Primera línea en todos los casos: FEVI por Simpson biplano o 3D, strain longitudinal global, función diastólica (E/e′, volumen auricular izquierdo indexado, velocidad de regurgitación tricuspídea), valvulopatía y presión sistólica pulmonar.', p:'Repetirla a los 3-6 meses de FMT óptima antes de decidir dispositivos.'},
+  {t:'RM cardiaca', d:'Caracterización tisular con realce tardío de gadolinio, mapeo T1/T2 y volumen extracelular. Es la técnica que distingue miocarditis, miocardiopatía dilatada, formas infiltrativas y fibrosis con patrón no isquémico.', p:'Indicada ante etiología incierta o sospecha de patrón infiltrativo o inflamatorio.'},
+  {t:'Amiloidosis ATTR', d:'Señales de alerta: hipertrofia con bajo voltaje en el ECG, apical sparing en el strain, túnel carpiano bilateral, estenosis del canal lumbar, intolerancia a la FMT con TA baja. Gammagrafía con DPD o PYP (Perugini 2-3) y descartar cadenas ligeras.', p:'Gammagrafía positiva con cadenas ligeras normales: diagnóstico sin necesidad de biopsia.'},
+  {t:'Cardiopatía isquémica', d:'La causa más frecuente en el mundo. TC coronaria o coronariografía según la probabilidad pretest y la candidatura a revascularización; estudio de viabilidad cuando se plantea revascularizar.', p:'La revascularización no beneficia a todos los pacientes (STICH): valorar viabilidad.'},
+  {t:'Estudio genético', d:'Miocardiopatía dilatada o arritmogénica, agregación familiar, bloqueo auriculoventricular precoz o muerte súbita en la familia: panel dirigido y cribado en familiares de primer grado.', p:'Un diagnóstico genético cambia el seguimiento de toda la familia, no solo del paciente.'},
+  {t:'Otras causas tratables', d:'Valvular, hipertensiva, tóxica (antraciclinas, trastuzumab, alcohol, cocaína), inflamatoria, taquimiocardiopatía, periparto, tirotoxicosis, hemocromatosis, sarcoidosis.', p:'Preguntar siempre por quimioterapia previa, alcohol y otros tóxicos.'}
+];
+(function(){
+  var list=$('#imgList'), det=$('#imgDetail'); if(!list) return;
+  IMG.forEach(function(o,i){
+    var b=document.createElement('button');
+    b.type='button'; b.className='chip'+(i===0?' on':''); b.style.textAlign='left'; b.style.padding='11px 15px';
+    b.textContent=o.t; b.setAttribute('aria-pressed', i===0?'true':'false');
+    b.addEventListener('click', function(){
+      $$('button', list).forEach(function(x){x.classList.remove('on'); x.setAttribute('aria-pressed','false');});
+      b.classList.add('on'); b.setAttribute('aria-pressed','true'); render(i);
+    });
+    list.appendChild(b);
+  });
+  function render(i){
+    var o=IMG[i];
+    det.innerHTML='<div class="tool-h"><h3>'+esc(o.t)+'</h3></div><p style="font-size:14.2px; color:var(--text-2); line-height:1.6">'+esc(o.d)+'</p>'+
+      '<div class="verdict ok" style="margin-top:14px"><div class="verdict-t">Perla clínica</div><p>'+esc(o.p)+'</p></div>';
+  }
+  render(0);
+})();
+
+/* ---------------- 6 · pillars ---------------- */
+var PILLARS=[
+  {n:'Pilar 1', t:'ARNI / IECA / ARA-II', ax:'Eje neurohormonal', d:'Sacubitrilo-valsartán 97/103 mg cada 12 h de elección; IECA o ARA-II si no es posible. TAS ≥ 100 mmHg para iniciar.', e:'PARADIGM-HF: HR 0,80 frente a enalapril.'},
+  {n:'Pilar 2', t:'Betabloqueante', ax:'Eje adrenérgico', d:'Bisoprolol 10 mg, carvedilol 25 mg/12 h, metoprolol succinato 200 mg o nebivolol. Iniciar en euvolemia.', e:'Metaanálisis: 34 % menos mortalidad en ritmo sinusal; beneficio incierto en fibrilación auricular.'},
+  {n:'Pilar 3', t:'ARM', ax:'Eje mineralocorticoide', d:'Espironolactona o eplerenona 25-50 mg. Finerenona con evidencia por encima de FEVI 40 %. Control de K⁺ y FGe.', e:'RALES: 30 % menos mortalidad. EMPHASIS-HF: HR 0,63.'},
+  {n:'Pilar 4', t:'iSGLT2', ax:'Eje metabólico-renal', d:'Dapagliflozina o empagliflozina 10 mg al día. Dosis única, sin titulación, con o sin diabetes.', e:'DAPA-HF y EMPEROR-Reduced: 25 % menos del compuesto.'}
+];
+(function(){
+  var host=$('#pillars'); if(!host) return;
+  var on=[false,false,false,false];
+  PILLARS.forEach(function(p,i){
+    var b=document.createElement('button');
+    b.type='button'; b.className='pillbtn'; b.setAttribute('aria-pressed','false');
+    b.innerHTML='<div class="pn">'+p.n+' · '+esc(p.ax)+'</div><div class="pt">'+esc(p.t)+'</div><div class="pd">'+esc(p.d)+'</div><div class="pearl" style="font-size:12px">'+esc(p.e)+'</div>';
+    b.addEventListener('click', function(){
+      on[i]=!on[i]; b.setAttribute('aria-pressed', on[i]?'true':'false'); upd();
+    });
+    host.appendChild(b);
+  });
+  function upd(){
+    var c=on.filter(Boolean).length;
+    $('#pillarCount').textContent=c+' / 4';
+    $('#pillarFill').style.width=(c/4*100)+'%';
+    var out=$('#pillarOut');
+    if(c===4){
+      out.className='verdict ok';
+      out.innerHTML='<div class="verdict-t">Terapia fundamental completa</div><p>Frente a IECA/ARA-II más betabloqueante, el tratamiento integral se asocia a un <span class="k">62 % menos</span> de muerte cardiovascular u hospitalización por IC (HR 0,38; IC 95 % 0,30-0,47) y a una mortalidad total con HR 0,53. En un paciente de 55 años, la estimación es de <span class="k">6,3 años más de vida</span> y 8,3 años más libres de eventos.</p>';
+    } else if(c===0){
+      out.className='verdict warn';
+      out.innerHTML='<div class="verdict-t">Sin terapia fundamental</div><p>Activa los pilares que ya tiene tu paciente. El objetivo no es llegar a dosis plenas de uno antes de empezar el siguiente, sino tener los cuatro iniciados en 2-4 semanas.</p>';
+    } else {
+      out.className='verdict hi';
+      out.innerHTML='<div class="verdict-t">Faltan '+(4-c)+' de 4 pilares</div><p>Cada pilar añade beneficio independiente y precoz. Las dosis bajas simultáneas superan a la escalada secuencial: no esperes a la dosis objetivo de uno para añadir el siguiente.</p>';
+    }
+  }
+  upd();
+})();
+
+/* ---------------- 7 · timeline ---------------- */
+var TL=[
+  {k:'Día 0-7', t:'Iniciar los cuatro', items:['Iniciar los cuatro pilares a dosis bajas, de forma simultánea','iSGLT2 y ARM antes del alta hospitalaria','ARNI de novo si la TA lo permite (TAS ≥ 100 mmHg)','Ajustar el diurético de asa a la menor dosis eficaz']},
+  {k:'Semana 2', t:'Primera titulación', items:['Duplicar la dosis de cada pilar tolerado','Analítica: K⁺, creatinina y NT-proBNP','Revisar TA, frecuencia cardiaca y volemia','Reforzar educación en autocuidado y peso diario']},
+  {k:'Semana 4-6', t:'Dosis objetivo', items:['Máxima dosis tolerada de cada pilar','Retirar o reducir el diurético de asa si hay euvolemia','Cribar ferropenia, apnea del sueño y depresión','Prescribir ejercicio estructurado o rehabilitación cardiaca']},
+  {k:'Mes 3', t:'Reevaluar', items:['Repetir FEVI y NT-proBNP','Valorar candidatura a DAI, TRC o estimulación del sistema de conducción','Considerar terapia adicional (digital, vericiguat en empeoramiento reciente)','Derivar a IC avanzada si persisten los síntomas pese a FMT óptima']}
+];
+(function(){
+  var tabs=$('#tlTabs'), panel=$('#tlPanel'); if(!tabs) return;
+  var saved = store.get('ic26-titration', {});
+  TL.forEach(function(s,i){
+    var b=document.createElement('button');
+    b.type='button'; b.className='tab'; b.setAttribute('role','tab'); b.setAttribute('aria-selected', i===0?'true':'false');
+    b.innerHTML='<span class="mono" style="font-size:11px; opacity:.75">'+s.k+'</span> &nbsp;'+esc(s.t);
+    b.addEventListener('click', function(){
+      $$('.tab', tabs).forEach(function(x){x.setAttribute('aria-selected','false');});
+      b.setAttribute('aria-selected','true'); render(i);
+    });
+    tabs.appendChild(b);
+  });
+  function render(i){
+    var s=TL[i];
+    panel.innerHTML='<div class="tool-h"><h3>'+esc(s.k)+' · '+esc(s.t)+'</h3><span class="badge">Lista de verificación</span></div><div class="grid g2" id="tlItems" style="margin-top:0"></div>';
+    var host=$('#tlItems');
+    s.items.forEach(function(it,j){
+      var key=i+'-'+j;
+      var l=document.createElement('label'); l.className='ck';
+      var checked = saved[key] ? ' checked' : '';
+      l.innerHTML='<input type="checkbox"'+checked+'><span>'+esc(it)+'</span>';
+      $('input',l).addEventListener('change', function(){ saved[key]=this.checked; store.set('ic26-titration', saved); });
+      host.appendChild(l);
+    });
+  }
+  render(0);
+})();
+
+/* ---------------- 8 · congestion tree ---------------- */
+var TREE={
+  start:{q:'Paciente ingresado por IC descompensada con congestión. ¿Tomaba diurético de asa en casa?',
+    opts:[{t:'Sí, furosemida oral', to:'dose1', log:'Dosis inicial: furosemida IV a 1-2,5 veces la dosis oral previa.'},
+          {t:'No, diurético naïve', to:'dose1', log:'Dosis inicial: furosemida 20-40 mg IV en bolo.'}]},
+  dose1:{q:'A las 2 horas de la primera dosis, ¿cuál es el sodio urinario?',
+    opts:[{t:'Na⁺ urinario ≥ 70 mmol/L', to:'good', log:'Na⁺ urinario ≥ 70 mmol/L: respuesta diurética adecuada.'},
+          {t:'Na⁺ urinario 50-70 mmol/L', to:'double', log:'Na⁺ urinario 50-70 mmol/L: respuesta limítrofe.'},
+          {t:'Na⁺ urinario < 50 mmol/L', to:'double', log:'Na⁺ urinario < 50 mmol/L: respuesta insuficiente.'}]},
+  good:{q:'Mantén la pauta y revalúa la diuresis a las 6 horas. ¿Diuresis superior a 100-150 mL/h?',
+    opts:[{t:'Sí, diuresis adecuada', to:'end_ok', log:'Diuresis > 100-150 mL/h: continuar y reevaluar cada 24 h.'},
+          {t:'No, diuresis insuficiente', to:'double', log:'Diuresis por debajo del objetivo pese al Na⁺ inicial.'}]},
+  double:{q:'Duplica la dosis del diurético de asa y vuelve a medir. ¿Ha mejorado la respuesta?',
+    opts:[{t:'Sí, ahora responde', to:'end_ok', log:'Duplicar la dosis del asa resolvió la respuesta insuficiente.'},
+          {t:'No, sigue sin responder', to:'seq', log:'Persiste la respuesta insuficiente tras duplicar la dosis.'}]},
+  seq:{q:'Resistencia diurética. Añade un segundo punto de bloqueo. ¿Cuál eliges primero?',
+    opts:[{t:'Acetazolamida 500 mg IV', to:'end_seq', log:'Acetazolamida 500 mg IV/24 h (ADVOR: RR 1,46 de descongestión exitosa).'},
+          {t:'Tiazida (hidroclorotiazida)', to:'end_seq', log:'Tiazida añadida al asa (CLOROTIC: más diuresis, más deterioro renal transitorio).'},
+          {t:'Añadir o mantener iSGLT2', to:'end_seq', log:'iSGLT2 intrahospitalario (DICTATE-AHF, EMPULSE), recomendado por la ESC 2026.'}]},
+  end_ok:{end:true, cls:'ok', t:'Descongestión en marcha',
+    b:'Continúa hasta la euvolemia, no hasta que el paciente «se encuentre mejor». Antes del alta: exploración, líneas B en ecografía pulmonar, vena cava inferior y tendencia del NT-proBNP; después, la menor dosis oral eficaz, los cuatro pilares iniciados y revisión en 1-2 semanas.'},
+  end_seq:{end:true, cls:'warn', t:'Bloqueo secuencial iniciado',
+    b:'Vigila K⁺, bicarbonato y función renal cada 24 h. Corrige la hipopotasemia y la alcalosis metabólica: limitan la diuresis y forman parte del tratamiento. Reserva la ultrafiltración para la resistencia diurética verdadera o el síndrome cardiorrenal grave (UF-CARE).'}
+};
+(function(){
+  var node='start', trail=[];
+  var step=$('#treeStep'), trailEl=$('#treeTrail'); if(!step) return;
+  function render(){
+    var n=TREE[node];
+    if(n.end){
+      step.innerHTML='<div class="verdict '+n.cls+'" style="margin:0"><div class="verdict-t">'+esc(n.t)+'</div><p>'+n.b+'</p></div>';
+    } else {
+      var h='<div class="tree-q">'+esc(n.q)+'</div><div class="tree-opts">';
+      n.opts.forEach(function(o,i){ h+='<button class="tree-opt" type="button" data-i="'+i+'">'+esc(o.t)+'</button>'; });
+      step.innerHTML=h+'</div>';
+      $$('.tree-opt', step).forEach(function(b){
+        b.addEventListener('click', function(){
+          var o=n.opts[+b.getAttribute('data-i')];
+          trail.push(o.log); node=o.to; render();
+        });
+      });
+    }
+    trailEl.innerHTML = trail.map(function(t,i){ return '<div class="trail-i"><span class="n">'+(i+1)+'</span><span>'+esc(t)+'</span></div>'; }).join('');
+  }
+  $('#treeReset').addEventListener('click', function(){ node='start'; trail=[]; render(); });
+  render();
+})();
+
+/* ---------------- 9 · forest plot ---------------- */
+var FOREST=[
+  {t:'EMPEROR-Preserved', d:'Empagliflozina', hr:0.79, lo:0.69, hi:0.90, pos:true, n:'Muerte CV u hospitalización por IC · FEVI > 40 %'},
+  {t:'DELIVER', d:'Dapagliflozina', hr:0.82, lo:0.73, hi:0.92, pos:true, n:'Empeoramiento de la IC o muerte CV · FEVI > 40 %'},
+  {t:'FINEARTS-HF', d:'Finerenona', hr:0.84, lo:0.74, hi:0.95, pos:true, n:'Eventos totales de IC y muerte CV · FEVI ≥ 40 %'},
+  {t:'SUMMIT', d:'Tirzepatida', hr:0.62, lo:0.41, hi:0.95, pos:true, n:'Muerte CV o empeoramiento de la IC · IC-FEp con obesidad'},
+  {t:'SPIRIT-HF', d:'Espironolactona', hr:1.18, lo:0.72, hi:1.92, pos:false, n:'Hospitalización por IC y muerte CV · FEVI ≥ 40 %'}
+];
+var forestMode='chart';
+(function(){
+  var c=$('#fpChart'), t=$('#fpTable'); if(!c) return;
+  c.addEventListener('click', function(){ forestMode='chart'; c.classList.add('on'); c.setAttribute('aria-pressed','true'); t.classList.remove('on'); t.setAttribute('aria-pressed','false'); drawForest(); });
+  t.addEventListener('click', function(){ forestMode='table'; t.classList.add('on'); t.setAttribute('aria-pressed','true'); c.classList.remove('on'); c.setAttribute('aria-pressed','false'); drawForest(); });
+})();
+function drawForest(){
+  var host=$('#forestWrap'); if(!host) return;
+  if(forestMode==='table'){
+    var rows=FOREST.map(function(f){
+      return '<tr><td><span class="k">'+esc(f.t)+'</span><br><span style="font-size:12px">'+esc(f.d)+'</span></td><td>'+esc(f.n)+'</td><td class="num">'+String(f.hr).replace('.',',')+' ('+String(f.lo).replace('.',',')+'–'+String(f.hi).replace('.',',')+')</td><td>'+(f.pos?'Favorable':'Sin diferencia')+'</td></tr>';
+    }).join('');
+    host.innerHTML='<table class="data"><thead><tr><th>Ensayo</th><th>Objetivo primario</th><th>HR / RR (IC 95 %)</th><th>Resultado</th></tr></thead><tbody>'+rows+'</tbody></table>';
+    return;
+  }
+  var css=getComputedStyle(document.documentElement);
+  var teal=css.getPropertyValue('--teal').trim(), amber=css.getPropertyValue('--amber').trim();
+  var txt=css.getPropertyValue('--text').trim(), mut=css.getPropertyValue('--muted').trim(), line=css.getPropertyValue('--line').trim();
+  var W=760, rowH=46, top=16, H=top+FOREST.length*rowH+52;
+  var x0=210, x1=596, lo=0.38, hi=2.2;
+  var X=function(v){ return x0 + (Math.log(v)-Math.log(lo))/(Math.log(hi)-Math.log(lo))*(x1-x0); };
+  var s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;min-width:640px;height:auto;display:block" role="img" aria-label="Diagrama de bosque de razones de riesgo">';
+  s+='<line x1="'+X(1)+'" y1="'+(top-4)+'" x2="'+X(1)+'" y2="'+(top+FOREST.length*rowH)+'" stroke="'+mut+'" stroke-opacity="0.5" stroke-dasharray="3 3" stroke-width="1"></line>';
+  [0.5,0.75,1,1.5,2].forEach(function(v){
+    s+='<text x="'+X(v)+'" y="'+(top+FOREST.length*rowH+20)+'" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="'+mut+'">'+String(v).replace('.',',')+'</text>';
+  });
+  s+='<text x="'+X(0.62)+'" y="'+(top+FOREST.length*rowH+40)+'" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="'+mut+'">← favorece al tratamiento</text>';
+  s+='<text x="'+X(1.6)+'" y="'+(top+FOREST.length*rowH+40)+'" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="'+mut+'">favorece al placebo →</text>';
+  FOREST.forEach(function(f,i){
+    var y=top+i*rowH+rowH/2, col=f.pos?teal:amber;
+    s+='<text x="0" y="'+(y-4)+'" font-family="IBM Plex Sans, sans-serif" font-size="13" font-weight="600" fill="'+txt+'">'+esc(f.t)+'</text>';
+    s+='<text x="0" y="'+(y+12)+'" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="'+mut+'">'+esc(f.d)+'</text>';
+    s+='<line x1="'+X(f.lo)+'" y1="'+y+'" x2="'+X(f.hi)+'" y2="'+y+'" stroke="'+col+'" stroke-width="2" stroke-linecap="round"></line>';
+    s+='<line x1="'+X(f.lo)+'" y1="'+(y-5)+'" x2="'+X(f.lo)+'" y2="'+(y+5)+'" stroke="'+col+'" stroke-width="2"></line>';
+    s+='<line x1="'+X(f.hi)+'" y1="'+(y-5)+'" x2="'+X(f.hi)+'" y2="'+(y+5)+'" stroke="'+col+'" stroke-width="2"></line>';
+    s+='<circle cx="'+X(f.hr)+'" cy="'+y+'" r="6.5" fill="'+col+'" stroke="'+line+'" stroke-width="2"></circle>';
+    s+='<text x="'+(x1+16)+'" y="'+(y+4)+'" font-family="IBM Plex Mono, monospace" font-size="12" fill="'+txt+'">'+String(f.hr).replace('.',',')+'</text>';
+    s+='<rect class="fp-hit" data-i="'+i+'" x="0" y="'+(y-rowH/2)+'" width="'+W+'" height="'+rowH+'" fill="transparent"></rect>';
+  });
+  s+='</svg>';
+  host.innerHTML=s;
+  $$('.fp-hit', host).forEach(function(el){
+    el.style.cursor='pointer';
+    el.addEventListener('mousemove', function(e){
+      var f=FOREST[+el.getAttribute('data-i')];
+      showTip('<b>'+esc(f.t)+'</b> · '+esc(f.d)+'<br>'+esc(f.n)+'<br><b>'+String(f.hr).replace('.',',')+'</b> (IC 95 % '+String(f.lo).replace('.',',')+'–'+String(f.hi).replace('.',',')+')', e.clientX, e.clientY);
+    });
+    el.addEventListener('mouseleave', hideTip);
+  });
+}
+
+/* ---------------- 10 · comorbidities ---------------- */
+var COMORB=[
+  {t:'Fibrilación auricular', b:['Control precoz del ritmo. La ablación en IC-FEr reduce mortalidad y hospitalizaciones (CASTLE-AF, CASTLE-HTx), incluso en enfermedad terminal.','Anticoagulación salvo contraindicación; evitar antiarrítmicos de clase I.','Descartar taquimiocardiopatía antes de asumir una miocardiopatía dilatada: la FEVI puede recuperarse por completo.']},
+  {t:'Enfermedad renal crónica', b:['iSGLT2 y finerenona son nefroprotectores y no deben suspenderse por un descenso inicial del FGe menor del 30 %.','Los quelantes de potasio permiten mantener el ARM en lugar de retirarlo.','Repetir K⁺ y creatinina 7-14 días después de cada cambio de dosis.']},
+  {t:'Ferropenia', b:['Cribar siempre: ferritina < 100 µg/L, o 100-299 µg/L con índice de saturación de transferrina < 20 %.','El hierro intravenoso mejora síntomas y capacidad funcional (AFFIRM-AHF, IRONMAN); FAIR-HF2 fue neutro en el objetivo primario, de modo que el beneficio es principalmente sintomático.','Reevaluar el estado férrico cada 6 meses y tras cada descompensación.']},
+  {t:'Diabetes y obesidad', b:['iSGLT2 en todos los casos, con o sin diabetes.','arGLP-1 o tirzepatida si el IMC es ≥ 30, sobre todo en IC-FEp.','Evitar glitazonas y saxagliptina: aumentan las hospitalizaciones por IC. Vigilar la pérdida de masa muscular en el paciente frágil.']},
+  {t:'Amiloidosis ATTR', b:['Estabilizadores (tafamidis, acoramidis) y silenciadores (vutrisiran, HELIOS-B) cambian el pronóstico si se diagnostica antes de la fase avanzada.','CARDIO-TTRansform (ESC 2026) fue neutro con eplontersen: silenciar no sustituye a estabilizar.','Sospechar ante intolerancia a la FMT con TA baja e hipertrofia ventricular.']},
+  {t:'Y además', b:['EPOC: los betabloqueantes cardioselectivos son seguros y no deben retirarse.','Apnea del sueño, anemia, depresión, fragilidad y polifarmacia: revisar en cada visita.','Repasar la lista de fármacos: AINE, corticoides y antiarrítmicos descompensan.']}
+];
+(function(){
+  var host=$('#comorb'); if(!host) return;
+  COMORB.forEach(function(c,i){
+    var d=document.createElement('div'); d.className='acc'; d.setAttribute('open-state', i===0?'1':'0');
+    d.innerHTML='<button class="acc-h" type="button" aria-expanded="'+(i===0)+'"><span class="idx">'+String(i+1).padStart(2,'0')+'</span>'+esc(c.t)+'<span class="car">▾</span></button>'+
+      '<div class="acc-b"'+(i===0?'':' hidden')+'>'+c.b.map(function(x){return '<p>'+esc(x)+'</p>';}).join('')+'</div>';
+    $('.acc-h',d).addEventListener('click', function(){
+      var open = d.getAttribute('open-state')==='1';
+      d.setAttribute('open-state', open?'0':'1');
+      this.setAttribute('aria-expanded', String(!open));
+      $('.acc-b',d).hidden = open;
+    });
+    host.appendChild(d);
+  });
+})();
+
+/* ---------------- 11 · devices ---------------- */
+var DEV=[
+  {k:'Terapias eléctricas', items:[
+    ['DAI','Prevención primaria si la FEVI es ≤ 35 % tras al menos 3 meses de FMT óptima en etiología isquémica. En la no isquémica, decisión individualizada tras DANISH.'],
+    ['TRC','Bloqueo de rama izquierda con QRS ≥ 130-150 ms y ritmo sinusal.'],
+    ['Estimulación del sistema de conducción','CONDUCT-AF: no inferior a la TRC biventricular en FEVI a 6 meses, con menor tiempo de procedimiento (62 frente a 82 minutos) y menos fluoroscopia (8 frente a 18 minutos).']]},
+  {k:'Intervencionismo valvular', items:[
+    ['M-TEER','Insuficiencia mitral secundaria grave sintomática pese a FMT óptima; recomendación reforzada en la ESC 2026, con el beneficio de COAPT mantenido a 5 años.'],
+    ['TEER tricuspídeo','Mejora síntomas y calidad de vida, con menos hospitalizaciones a 2 años (TRILUMINATE).'],
+    ['Clave','La decisión se toma en Heart Team y siempre después de optimizar el tratamiento médico.']]},
+  {k:'IC avanzada', items:[
+    ['Derivar pronto','Ingresos repetidos, intolerancia a la FMT, disfunción de órganos o dependencia de inotrópicos (perfil INTERMACS).'],
+    ['Asistencia de larga duración','Recomendación al alza en la ESC 2026, como puente al trasplante o como terapia de destino.'],
+    ['Trasplante y cuidados paliativos','Integrar el control de síntomas y la planificación anticipada desde el inicio, no en la última semana.']]}
+];
+(function(){
+  var tabs=$('#devTabs'), panel=$('#devPanel'); if(!tabs) return;
+  DEV.forEach(function(g,i){
+    var b=document.createElement('button');
+    b.type='button'; b.className='tab'; b.setAttribute('role','tab'); b.setAttribute('aria-selected', i===0?'true':'false'); b.textContent=g.k;
+    b.addEventListener('click', function(){
+      $$('.tab',tabs).forEach(function(x){x.setAttribute('aria-selected','false');});
+      b.setAttribute('aria-selected','true'); render(i);
+    });
+    tabs.appendChild(b);
+  });
+  function render(i){
+    panel.innerHTML='<div class="grid g3" style="margin-top:0">'+DEV[i].items.map(function(it){
+      return '<div class="card" style="background:var(--surface)"><h3>'+esc(it[0])+'</h3><p>'+esc(it[1])+'</p></div>';
+    }).join('')+'</div>';
+  }
+  render(0);
+})();
+
+/* ---------------- 12 · quadrants ---------------- */
+var QUAD=[
+  {n:'Caliente-húmedo', s:'~70 % de los casos', cls:'hi', t:'Congestión con perfusión conservada',
+   b:'Diurético de asa intravenoso en la primera hora, con vasodilatador si la TAS es alta. Oxígeno solo si la SpO₂ es menor del 90 %; ventilación no invasiva precoz si hay insuficiencia respiratoria o edema agudo. Es el perfil en el que más se gana iniciando o manteniendo la FMT durante el ingreso.'},
+  {n:'Frío-húmedo', s:'El más grave', cls:'hi', t:'Congestión con hipoperfusión',
+   b:'Inotrópico o vasopresor según la TA, diurético una vez restaurada la perfusión y valoración de soporte circulatorio mecánico. Estadificar el shock con la escala SCAI y activar el equipo de shock: es aquí donde se decide la supervivencia.'},
+  {n:'Caliente-seco', s:'Poco frecuente', cls:'ok', t:'Sin congestión ni hipoperfusión',
+   b:'Revisar el diagnóstico: la disnea puede no ser cardiaca. Es el momento de ajustar al alza el tratamiento oral y de reducir el diurético si el paciente está euvolémico.'},
+  {n:'Frío-seco', s:'Hipovolemia', cls:'warn', t:'Hipoperfusión sin congestión',
+   b:'Fluidos con cautela y retirada del exceso de diurético. Descartar hipovolemia por sobrediuresis, sangrado o sepsis antes de escalar a inotrópicos.'}
+];
+(function(){
+  var host=$('#quad'), det=$('#quadDetail'); if(!host) return;
+  QUAD.forEach(function(q,i){
+    var b=document.createElement('button');
+    b.type='button'; b.setAttribute('aria-pressed', i===0?'true':'false');
+    b.innerHTML='<div class="qn">'+esc(q.n)+'</div><div class="qs">'+esc(q.s)+'</div>';
+    b.addEventListener('click', function(){
+      $$('button',host).forEach(function(x){x.setAttribute('aria-pressed','false');});
+      b.setAttribute('aria-pressed','true'); render(i);
+    });
+    host.appendChild(b);
+  });
+  function render(i){
+    var q=QUAD[i];
+    det.innerHTML='<div class="tool-h"><h3>'+esc(q.n)+'</h3><span class="badge">'+esc(q.s)+'</span></div>'+
+      '<div class="verdict '+q.cls+'" style="margin-top:0"><div class="verdict-t">'+esc(q.t)+'</div><p>'+esc(q.b)+'</p></div>'+
+      '<p style="font-size:13px; color:var(--text-2); margin-top:13px; line-height:1.55"><span class="k">En todos los perfiles:</span> iniciar o mantener los cuatro pilares durante el ingreso. La ESC 2026 recomienda el inicio intrahospitalario del iSGLT2 y no suspender el betabloqueante salvo shock o bradicardia.</p>';
+  }
+  render(0);
+})();
+
+/* ---------------- 13 · trials ---------------- */
+var TRIALS=[
+  {k:'neu', tag:'Neutro', t:'VICTOR (2025)', d:'Vericiguat no alcanzó el objetivo primario en IC-FEr estable y bien tratada, aunque redujo la muerte cardiovascular.', p:'Su lugar sigue siendo el empeoramiento reciente (VICTORIA), no el paciente estable.'},
+  {k:'pos', tag:'Positivo', t:'DIGIT-HF (NEJM 2025)', d:'Digitoxina redujo la muerte por cualquier causa u hospitalización por IC (39,5 % frente a 44,1 %; HR 0,84) en IC-FEr avanzada.', p:'La ESC 2026 sube la recomendación de los digitálicos: opción en el sintomático pese a los cuatro pilares.'},
+  {k:'neu', tag:'Neutro', t:'SPIRIT-HF (ACC 2026)', d:'Espironolactona sin beneficio (RR 1,18; IC 95 % 0,72-1,92) y con más hospitalizaciones, hipotensión e hiperpotasemia en FEVI ≥ 40 %.', p:'Si se elige un ARM por encima del 40 %, la evidencia sólida es la de la finerenona.'},
+  {k:'neu', tag:'Neutro', t:'CARDIO-TTRansform (ESC 2026)', d:'Eplontersen redujo la transtiretina pero no los eventos cardiovasculares en la amiloidosis ATTR; el beneficio se limitó a quienes no recibían estabilizador.', p:'Silenciar no sustituye a estabilizar: el estabilizador sigue siendo la base.'},
+  {k:'pos', tag:'Positivo', t:'ACACIA-HCM (ESC 2026)', d:'Aficamten mejoró la calidad de vida (KCCQ +11,4 frente a +8,4) y el VO₂ pico en miocardiopatía hipertrófica no obstructiva.', p:'Primer fármaco con beneficio en la forma no obstructiva; caída reversible de la FEVI por debajo del 50 % en el 10,5 %.'},
+  {k:'cur', tag:'En curso', t:'Lo que viene', d:'Ziltivekimab en IC-FEp con inflamación (HERMES, ATHENA), terapia génica SERCA2a en IC-FEp (SRD-002) y ECG con inteligencia artificial.', p:'La inflamación y la obesidad se consolidan como las nuevas dianas de la IC-FEp.'}
+];
+(function(){
+  var f=$('#trialFilter'), host=$('#trials'); if(!f) return;
+  var filters=[['all','Todos'],['pos','Positivo'],['neu','Neutro'],['cur','En curso']];
+  filters.forEach(function(x,i){
+    var b=document.createElement('button');
+    b.type='button'; b.className='chip'+(i===0?' on':''); b.textContent=x[1]; b.setAttribute('aria-pressed', i===0?'true':'false');
+    b.addEventListener('click', function(){
+      $$('button',f).forEach(function(y){y.classList.remove('on'); y.setAttribute('aria-pressed','false');});
+      b.classList.add('on'); b.setAttribute('aria-pressed','true'); render(x[0]);
+    });
+    f.appendChild(b);
+  });
+  function render(k){
+    host.innerHTML = TRIALS.filter(function(t){return k==='all'||t.k===k;}).map(function(t){
+      return '<div class="card"><span class="tag '+t.k+'">'+esc(t.tag)+'</span><h3 style="margin-top:11px">'+esc(t.t)+'</h3><p>'+esc(t.d)+'</p><p class="pearl">'+esc(t.p)+'</p></div>';
+    }).join('');
+  }
+  render('all');
+})();
+
+/* ---------------- 14 · take-home ---------------- */
+var TAKE=[
+ 'Dos fenotipos: FEVI < 50 % y ≥ 50 %. Estadificar de la A a la D e intervenir ya en el estadio B (pre-IC).',
+ 'La terapia fundamental es un paquete, no una escalera: los cuatro pilares en 2-4 semanas, a dosis bajas y simultáneas.',
+ 'ARM en toda IC crónica (Clase I, ESC 2026); por encima de una FEVI del 40 %, la evidencia sólida es la de la finerenona.',
+ 'iSGLT2 en todo el espectro de FEVI y también durante el ingreso: sin titulación y con beneficio precoz.',
+ 'IC-FEp con obesidad: semaglutida o tirzepatida (Clase IIa). Tratar el fenotipo, no solo la fracción de eyección.',
+ 'Descongestión completa antes del alta, guiada por el sodio urinario y con bloqueo secuencial si hay resistencia.',
+ 'Reevaluar la FEVI a los 3 meses de FMT óptima: dispositivos, y derivación a IC avanzada antes de que sea tarde.',
+ 'La brecha ya no es de evidencia sino de implementación: menos de 1 de cada 4 pacientes recibe la cuádruple terapia.'
+];
+(function(){
+  var host=$('#takehome'); if(!host) return;
+  var saved=store.get('ic26-takehome', {});
+  TAKE.forEach(function(t,i){
+    var l=document.createElement('label'); l.className='ck';
+    l.innerHTML='<input type="checkbox"'+(saved[i]?' checked':'')+'><span><span class="mono" style="color:var(--crimson); font-size:11.5px; margin-right:7px">'+String(i+1).padStart(2,'0')+'</span>'+esc(t)+'</span>';
+    $('input',l).addEventListener('change', function(){ saved[i]=this.checked; store.set('ic26-takehome', saved); upd(); });
+    host.appendChild(l);
+  });
+  function upd(){
+    var c=Object.keys(saved).filter(function(k){return saved[k];}).length;
+    $('#thCount').textContent=c+' / 8'; $('#thFill').style.width=(c/8*100)+'%';
+  }
+  upd();
+})();
+
+/* ---------------- 15 · references ---------------- */
+var REFS=[
+ 'Task Force de la ESC. 2026 ESC Guidelines for the management of heart failure. Eur Heart J. 2026. doi:10.1093/eurheartj/ehag100',
+ 'AHA/ACC/ESC/WHF, con HFSA, HFA y JHFS. Second Universal Definition of Heart Failure. 2026.',
+ 'Heidenreich PA, et al. 2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure. Circulation. 2022;145:e895-e1032.',
+ 'HF STATS 2025: Heart Failure Epidemiology and Outcomes Statistics. J Card Fail. 2025.',
+ 'Carga global de la IC, 1990-2021, y proyecciones a 2050. Eur Heart J Qual Care Clin Outcomes. 2025;11:1144.',
+ 'Vaduganathan M, et al. Estimating lifetime benefits of comprehensive disease-modifying pharmacological therapies in HFrEF. Lancet. 2020;396:121-8.',
+ 'Mebazaa A, et al. Up-titration of guideline-directed medical therapy after acute HF (STRONG-HF). Lancet. 2022;400:1938-52.',
+ 'Mullens W, et al. Acetazolamide in acute decompensated heart failure with volume overload (ADVOR). N Engl J Med. 2022;387:1185-95.',
+ 'Trullàs JC, et al. Combining loop with thiazide diuretics for decompensated heart failure (CLOROTIC). Eur Heart J. 2023;44:411-21.',
+ 'Solomon SD, et al. Finerenone in heart failure with mildly reduced or preserved ejection fraction (FINEARTS-HF). N Engl J Med. 2024;391:1475-85.',
+ 'Kosiborod MN, et al. Semaglutide in patients with HFpEF and obesity (STEP-HFpEF). N Engl J Med. 2023;389:1069-84.',
+ 'Packer M, et al. Tirzepatide for HFpEF and obesity (SUMMIT). N Engl J Med. 2025;392:427-37.',
+ 'Bavendiek U, et al. Digitoxin in patients with heart failure and reduced ejection fraction (DIGIT-HF). N Engl J Med. 2025;393:1155-65.',
+ 'VICTOR Investigators. Vericiguat in chronic heart failure with reduced ejection fraction. Lancet. 2025.',
+ 'Møller JE, et al. Microaxial flow pump or standard care in infarct-related cardiogenic shock (DanGer Shock). N Engl J Med. 2024;390:1382-93.',
+ 'FAIR-HF2 DZHK05. Intravenous ferric carboxymaltose in heart failure with iron deficiency. JAMA. 2025.',
+ 'SPIRIT-HF (ACC.26, 2026), CARDIO-TTRansform y ACACIA-HCM (Congreso ESC 2026), EMAIL-HF (ESC 2026), CONDUCT-AF y UF-CARE (Heart Failure 2026): comunicaciones a congresos.'
+];
+(function(){
+  var host=$('#refs'), input=$('#refSearch'); if(!host) return;
+  function render(q){
+    q=(q||'').toLowerCase();
+    var out=REFS.map(function(r,i){return {r:r,i:i};}).filter(function(o){return o.r.toLowerCase().indexOf(q)>-1;});
+    host.innerHTML = out.length ? out.map(function(o){
+      return '<div class="ref"><span class="rn">'+String(o.i+1).padStart(2,'0')+'</span><span>'+esc(o.r)+'</span></div>';
+    }).join('') : '<p style="padding:16px 0; color:var(--muted); font-size:13.5px">Ningún resultado. Prueba con el nombre del ensayo o de la revista.</p>';
+  }
+  input.addEventListener('input', function(){ render(this.value); });
+  render('');
+})();
+
+/* ---------------- 16 · quiz ---------------- */
+var QUIZ=[
+ {q:'Mujer de 74 años con disnea de esfuerzo y FEVI del 45 % en el ecocardiograma. Según las guías ESC 2026, ¿cómo se clasifica?',
+  o:['IC con FEVI ligeramente reducida (IC-FEmr)','IC con FEVI reducida (IC-FEr)','IC con FEVI preservada (IC-FEp)','No cumple criterios de IC'],
+  a:1, e:'La ESC 2026 elimina la categoría intermedia: toda FEVI < 50 % es IC-FEr y recibe los cuatro pilares con recomendación de Clase I.'},
+ {q:'Varón de 60 años en consulta, sin descompensación, con disnea de meses de evolución. ¿Qué valor de NT-proBNP hace la IC poco probable?',
+  o:['Menos de 300 pg/mL','Menos de 125 pg/mL','Menos de 900 pg/mL','Menos de 450 pg/mL'],
+  a:1, e:'En el escenario ambulatorio el umbral de exclusión es NT-proBNP < 125 pg/mL (o BNP < 35). Los umbrales de 300, 450, 900 y 1.800 corresponden a la presentación aguda.'},
+ {q:'Paciente ingresado con congestión. Dos horas después de la primera dosis de furosemida IV, el sodio urinario es de 40 mmol/L. ¿Qué haces?',
+  o:['Esperar 24 horas y repetir la analítica','Duplicar la dosis del diurético de asa','Iniciar ultrafiltración','Retirar el betabloqueante'],
+  a:1, e:'Un sodio urinario por debajo de 50-70 mmol/L a las 2 horas indica respuesta insuficiente: se duplica la dosis del asa sin esperar. La ultrafiltración se reserva para la resistencia verdadera.'},
+ {q:'¿Qué antagonista del receptor mineralocorticoide tiene evidencia de reducción de eventos con FEVI ≥ 40 %?',
+  o:['Espironolactona','Eplerenona','Finerenona','Canrenona'],
+  a:2, e:'FINEARTS-HF demostró una reducción del 16 % de los eventos de IC y la muerte cardiovascular con finerenona. SPIRIT-HF (ACC 2026) fue neutro con espironolactona en esa misma población.'},
+ {q:'Mujer de 68 años, IMC 36, IC-FEp con FEVI del 58 %. ¿Qué recomendación introduce la ESC 2026 para este perfil?',
+  o:['Digoxina de forma sistemática','Semaglutida o tirzepatida (Clase IIa)','Ivabradina','Anticoagulación empírica'],
+  a:1, e:'Con obesidad e IC-FEp, la ESC 2026 recomienda semaglutida o tirzepatida con Clase IIa, sobre la base de STEP-HFpEF y SUMMIT.'},
+ {q:'¿Qué demostró CONDUCT-AF en pacientes sometidos a ablación del nodo auriculoventricular?',
+  o:['La TRC biventricular fue superior a la estimulación del sistema de conducción','La estimulación del sistema de conducción no fue inferior en FEVI a 6 meses','Ninguna estrategia mejoró la FEVI','La estimulación del sistema de conducción aumentó la mortalidad'],
+  a:1, e:'La estimulación de rama izquierda fue no inferior a la TRC biventricular en el cambio de FEVI a 6 meses, con menor tiempo de procedimiento y de fluoroscopia.'}
+];
+(function(){
+  var host=$('#quiz'), scoreEl=$('#quizScore'); if(!host) return;
+  var answered={};
+  function render(){
+    host.innerHTML = QUIZ.map(function(q,i){
+      var done = answered[i]!==undefined;
+      return '<div class="q-card" style="margin-bottom:14px"><div style="font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.1em">PREGUNTA '+String(i+1).padStart(2,'0')+'</div>'+
+        '<p style="font-weight:600; font-size:15px; margin-top:8px; line-height:1.45">'+esc(q.q)+'</p>'+
+        q.o.map(function(o,j){
+          var cls='';
+          if(done){ if(j===q.a) cls=' right'; else if(j===answered[i]) cls=' wrong'; }
+          return '<button class="q-opt'+cls+'" type="button" data-q="'+i+'" data-o="'+j+'"'+(done?' disabled':'')+'>'+esc(o)+'</button>';
+        }).join('')+
+        (done ? '<p class="q-exp">'+esc(q.e)+'</p>' : '')+'</div>';
+    }).join('');
+    $$('.q-opt', host).forEach(function(b){
+      b.addEventListener('click', function(){
+        answered[+b.getAttribute('data-q')] = +b.getAttribute('data-o');
+        render();
+      });
+    });
+    var keys=Object.keys(answered);
+    if(keys.length===QUIZ.length){
+      var right = keys.filter(function(k){return answered[k]===QUIZ[k].a;}).length;
+      scoreEl.style.display='block';
+      scoreEl.className='verdict '+(right>=5?'ok':right>=3?'warn':'hi');
+      scoreEl.innerHTML='<div class="verdict-t">'+right+' de 6 correctas</div><p>'+
+        (right>=5?'Dominas los cambios de 2026. Buen material para abrir el turno de preguntas del auditorio.'
+         :right>=3?'Vas bien. Repasa las secciones de clasificación por FEVI y de IC-FEp antes de presentar.'
+         :'Merece la pena repasar las secciones 3, 4, 6 y 9 antes de la sesión.')+'</p>';
+    } else { scoreEl.style.display='none'; }
+  }
+  $('#quizReset').addEventListener('click', function(){ answered={}; render(); });
+  render();
+})();
+
+/* ---------------- boot ---------------- */
+var h = (location.hash||'').match(/^#s(\d+)$/);
+go(h ? Math.min(NAV.length, Math.max(1, +h[1]))-1 : 0);
+})();
+</script>

@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import CapturaCorreo from '../components/CapturaCorreo.astro';
+import DemoIncrustada from '../components/DemoIncrustada.astro';
+import { porSlug } from '../data/presentaciones';
+import { sitio } from '../config';
+
+const tema = porSlug('insuficiencia-cardiaca-2026')!;
+---
+
+<Base
+  titulo="Llévate la revisión de insuficiencia cardiaca"
+  descripcion="La revisión completa de insuficiencia cardiaca 2026: 15 secciones, 7 herramientas interactivas y autoevaluación. Gratis a cambio de tu correo."
+  ruta="/gratis"
+>
+  <section class="oferta">
+    <div class="contenedor oferta-grid">
+      <div class="oferta-texto">
+        <span class="eyebrow">Sin coste · sin tarjeta</span>
+        <h1>Empieza por la de insuficiencia cardiaca</h1>
+        <p class="entrada">
+          Es la revisión completa, no una muestra recortada: las {tema.secciones}
+          secciones, las {tema.herramientas.length} herramientas y la
+          autoevaluación. Basada en {tema.baseEvidencia.join(' y ')}.
+        </p>
+        <p class="razon">
+          La regalo por una razón sencilla: es más fácil enseñarte el nivel que
+          describírtelo. Si te sirve para tu sesión, ya sabes qué esperar del resto
+          del catálogo.
+        </p>
+
+        <ul class="lista">
+          {tema.herramientas.map((h) => <li>{h}</li>)}
+        </ul>
+
+        <p class="compartir">
+          <strong>Y compártela.</strong> Si le sirve a alguien de tu grupo de
+          residentes, reenvíasela: para eso es un solo archivo que funciona sin
+          internet.
+        </p>
+      </div>
+
+      <div class="oferta-lateral">
+        <DemoIncrustada
+          src={tema.demo!}
+          titulo={tema.titulo}
+          version={tema.version}
+          actualizado={tema.actualizado}
+          alto={470}
+        />
+        <a href={tema.demo} target="_blank" rel="noopener" class="abrir">Abrirla a pantalla completa →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="contenedor bloque-captura">
+    <CapturaCorreo
+      origen="gratis"
+      titulo="¿A qué correo te la envío?"
+      texto="Te llega el archivo y, de ahí en adelante, un aviso cada vez que publico un tema nuevo. Cuatro al mes. Nada más."
+      etiquetaBoton="Enviármela"
+    />
+  </div>
+
+  <section class="seccion">
+    <div class="contenedor prosa">
+      <p>
+        <strong>¿Quién está detrás?</strong> {sitio.autor}. Edito cada revisión
+        yo mismo: elijo las fuentes, reconstruyo las figuras desde los datos
+        originales y marco qué sigue en discusión y qué ya está zanjado.
+      </p>
+      <p>
+        Material educativo para profesionales y estudiantes de ciencias de la
+        salud. No sustituye el juicio clínico ni los protocolos de tu institución.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .oferta { padding-block: 52px 44px; }
+  .oferta-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 1.05fr); gap: 44px; align-items: start; }
+  .oferta-texto { display: flex; flex-direction: column; gap: 14px; }
+  .oferta-texto h1 { font-size: clamp(30px, 4.8vw, 46px); letter-spacing: -0.015em; max-width: 15ch; }
+  .entrada { font-size: 17.6px; color: var(--text-2); max-width: 52ch; }
+  .razon { font-size: 15.6px; color: var(--text-2); max-width: 52ch; }
+
+  .lista { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-direction: column; gap: 7px; }
+  .lista li { font-size: 14.8px; color: var(--text); padding-left: 19px; position: relative; }
+  .lista li::before { content: "✓"; position: absolute; left: 0; color: var(--teal); font-weight: 600; }
+
+  .compartir { font-size: 15px; color: var(--text-2); border-left: 2px solid var(--crimson); padding-left: 14px; margin-top: 8px; max-width: 52ch; }
+  .compartir strong { color: var(--text); }
+
+  .oferta-lateral { display: flex; flex-direction: column; gap: 10px; }
+  .abrir { font-size: 14px; font-weight: 600; text-decoration: none; align-self: flex-start; }
+  .abrir:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .bloque-captura { margin-block: 8px; }
+
+  @media (max-width: 880px) {
+    .oferta-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>

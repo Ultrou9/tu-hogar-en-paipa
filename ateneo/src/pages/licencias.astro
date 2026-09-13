@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+import { sitio } from '../config';
+
+const asunto = encodeURIComponent('Licencia institucional para Ateneo');
+const cuerpo = encodeURIComponent(
+  `Institución:\nServicio o programa:\nNúmero aproximado de residentes o estudiantes:\nCiudad y país:\n\nCuéntanos qué necesitas:`,
+);
+const mailto = `mailto:${sitio.correoContacto}?subject=${asunto}&body=${cuerpo}`;
+
+const paraQuien = [
+  {
+    titulo: 'Programas de residencia',
+    texto:
+      'El jefe de residentes deja de reenviar PowerPoints de dudosa procedencia y el club de revista arranca con una base común, citada y con fecha.',
+  },
+  {
+    titulo: 'Servicios hospitalarios',
+    texto:
+      'La sesión clínica semanal deja de depender de quién tuvo tiempo de prepararla. El material está, actualizado, y cada quien pone encima su caso.',
+  },
+  {
+    titulo: 'Facultades de medicina',
+    texto:
+      'El docente arma su clase sobre una revisión ya estructurada y con las figuras hechas, en lugar de reciclar diapositivas de hace una década.',
+  },
+];
+
+const incluye = [
+  'Acceso al catálogo completo para todo el servicio, programa o cohorte',
+  'Los kits descargables de cada tema, con licencia de uso docente',
+  'Las actualizaciones de guía durante toda la vigencia',
+  'Dos temas a medida al año, elegidos por la institución',
+  'Un interlocutor único, sin gestionar altas una por una',
+];
+---
+
+<Base
+  titulo="Licencias para instituciones"
+  descripcion="Licencia anual del catálogo completo de revisiones de tema para programas de residencia, servicios hospitalarios y facultades de medicina."
+  ruta="/licencias"
+>
+  <section class="cabeza">
+    <div class="contenedor">
+      <span class="eyebrow">Para instituciones</span>
+      <h1>Una licencia para todo el servicio</h1>
+      <p class="entrada">
+        Si en tu programa presentan treinta residentes al año, comprar treinta
+        veces el mismo tema no tiene sentido. Una licencia anual cubre a todo el
+        grupo y le da a la sesión clínica una base común.
+      </p>
+      <a href={mailto} class="boton boton--primario">Pedir una propuesta</a>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="seccion-cabeza">
+        <h2>Para quién tiene sentido</h2>
+      </div>
+      <div class="tres">
+        {
+          paraQuien.map((p) => (
+            <article>
+              <h3>{p.titulo}</h3>
+              <p>{p.texto}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--panel">
+    <div class="contenedor dos">
+      <div>
+        <div class="seccion-cabeza">
+          <h2>Qué incluye</h2>
+          <p>
+            El precio se ajusta al tamaño del grupo y a la duración. Escríbenos
+            con los datos y te mandamos una propuesta concreta, sin reuniones.
+          </p>
+        </div>
+        <ul class="incluye">
+          {incluye.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+
+      <aside class="contacto">
+        <h3>Escríbenos</h3>
+        <p>
+          Cuantos más datos traigas —institución, servicio, número de personas—,
+          más concreta será la respuesta.
+        </p>
+        <a href={mailto} class="boton boton--primario boton--ancho">Redactar el correo</a>
+        <p class="directo">
+          O directamente a <a href={`mailto:${sitio.correoContacto}`}>{sitio.correoContacto}</a>
+        </p>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cabeza { padding-block: 52px 44px; border-bottom: 1px solid var(--line); }
+  .cabeza h1 { font-size: clamp(30px, 5vw, 46px); margin-top: 10px; letter-spacing: -0.015em; max-width: 16ch; }
+  .entrada { font-size: 17.4px; color: var(--text-2); max-width: 58ch; margin-block: 14px 22px; }
+
+  .tres { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .tres article { background: var(--bg); padding: 22px 20px; display: flex; flex-direction: column; gap: 8px; }
+  .tres h3 { font-size: 19px; }
+  .tres p { font-size: 15px; color: var(--text-2); }
+
+  .dos { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr); gap: 40px; align-items: start; }
+
+  .incluye { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .incluye li { font-size: 15.4px; color: var(--text-2); padding-left: 20px; position: relative; }
+  .incluye li::before { content: "✓"; position: absolute; left: 0; color: var(--teal); font-weight: 600; }
+
+  .contacto { border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); padding: 22px 20px; display: flex; flex-direction: column; gap: 11px; }
+  .contacto h3 { font-size: 20px; }
+  .contacto p { font-size: 14.4px; color: var(--text-2); }
+  .directo { font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 860px) { .dos { grid-template-columns: 1fr; gap: 30px; } }
+</style>

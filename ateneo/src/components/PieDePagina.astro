@@ -1,0 +1,86 @@
+---
+import { sitio } from '../config';
+const anio = new Date().getFullYear();
+---
+
+<footer class="pie">
+  <div class="contenedor pie-inner">
+    <div class="pie-col pie-marca">
+      <span class="marca-nombre">{sitio.nombre}</span>
+      <p>{sitio.descripcion}</p>
+      <p class="firma">Editado por {sitio.autor}</p>
+    </div>
+
+    <div class="pie-col">
+      <h3>Catálogo</h3>
+      <ul>
+        <li><a href="/catalogo">Todos los temas</a></li>
+        <li><a href="/gratis">Presentación gratis</a></li>
+        <li><a href="/suscripcion">Suscripción</a></li>
+        <li><a href="/licencias">Licencias institucionales</a></li>
+      </ul>
+    </div>
+
+    <div class="pie-col">
+      <h3>Contacto</h3>
+      <ul>
+        <li><a href={`mailto:${sitio.correoContacto}`}>{sitio.correoContacto}</a></li>
+        <li><a href={sitio.tiktok} rel="me noopener" target="_blank">TikTok</a></li>
+        <li><a href={sitio.instagram} rel="me noopener" target="_blank">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="contenedor pie-legal">
+    <p>
+      Material educativo dirigido a profesionales y estudiantes de ciencias de la
+      salud. No sustituye el juicio clínico, los protocolos institucionales ni la
+      lectura de las guías originales. No está dirigido a pacientes.
+    </p>
+    <p>© {anio} {sitio.nombre}. Todas las figuras son de elaboración propia a partir de las fuentes citadas en cada revisión.</p>
+  </div>
+</footer>
+
+<style>
+  .pie {
+    background: var(--rail-bg);
+    color: var(--rail-text);
+    margin-top: 72px;
+    padding-block: 44px 26px;
+  }
+  .pie-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 32px;
+  }
+  .pie-col { display: flex; flex-direction: column; gap: 10px; }
+  .marca-nombre { font-family: var(--serif); font-size: 21px; color: #fff; font-weight: 600; }
+  .pie-marca p { font-size: 14.2px; color: var(--rail-muted); max-width: 46ch; }
+  .firma { font-family: var(--mono); font-size: 12px; }
+
+  .pie-col h3 {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    font-weight: 500;
+  }
+  .pie-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; }
+  .pie-col a { color: var(--rail-text); text-decoration: none; font-size: 14.2px; }
+  .pie-col a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+
+  .pie-legal {
+    margin-top: 34px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rail-line);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pie-legal p { font-size: 12.4px; color: var(--rail-muted); max-width: 82ch; }
+
+  @media (max-width: 720px) {
+    .pie-inner { grid-template-columns: 1fr; gap: 26px; }
+  }
+</style>

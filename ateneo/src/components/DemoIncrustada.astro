@@ -1,0 +1,124 @@
+---
+/**
+ * Demo de una presentación dentro de la página.
+ *
+ * Se carga al pulsar, no al abrir la página: la presentación mueve el foco a su
+ * propio índice al arrancar, y eso desplazaba la página del visitante hasta el
+ * iframe, saltándose todo lo de arriba. Cargarla bajo demanda además evita
+ * traer 100 KB que la mayoría no va a usar.
+ */
+interface Props {
+  src: string;
+  titulo: string;
+  version: string;
+  actualizado: string;
+  /** Alto del marco una vez activa. */
+  alto?: number;
+}
+
+const { src, titulo, version, actualizado, alto = 560 } = Astro.props;
+const id = `demo-${src.replace(/[^a-z0-9]+/gi, '-')}`;
+---
+
+<div class="marco" data-demo data-src={src} data-alto={String(alto)} id={id}>
+  <div class="barra">
+    <span class="puntos" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="url mono">{titulo} · v{version} · {actualizado}</span>
+  </div>
+
+  <div class="lienzo" style={`min-height:${alto}px`}>
+    <div class="invitacion">
+      <span class="eyebrow">Demo en vivo</span>
+      <p class="titular">{titulo}</p>
+      <p class="texto">
+        Se abre aquí mismo: recorre las secciones, mete un valor en las
+        calculadoras y responde la autoevaluación. Es exactamente lo que recibes.
+      </p>
+      <button type="button" class="boton boton--primario" data-activar>
+        Probarla aquí
+      </button>
+      <a href={src} target="_blank" rel="noopener" class="alterna">
+        o ábrela a pantalla completa →
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .marco {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .barra {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 13px;
+    background: var(--panel-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .puntos { display: flex; gap: 6px; flex: none; }
+  .puntos i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+  .url {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .lienzo { display: grid; }
+  .invitacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    text-align: center;
+    padding: 40px 24px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 38px,
+        color-mix(in srgb, var(--crimson) 7%, transparent) 38px 39px
+      ),
+      var(--panel);
+  }
+  .titular { font-family: var(--serif); font-size: clamp(22px, 3.4vw, 30px); font-weight: 600; }
+  .texto { font-size: 15px; color: var(--text-2); max-width: 46ch; }
+  .alterna { font-size: 13.4px; color: var(--muted); text-decoration: none; }
+  .alterna:hover { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+
+  .marco :global(iframe) { width: 100%; border: 0; display: block; background: var(--surface); }
+
+  @media (max-width: 720px) {
+    .lienzo { min-height: 380px !important; }
+    .marco :global(iframe) { height: 430px !important; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-demo]').forEach((marco) => {
+    const boton = marco.querySelector<HTMLButtonElement>('[data-activar]');
+    const lienzo = marco.querySelector<HTMLElement>('.lienzo');
+    if (!boton || !lienzo) return;
+
+    boton.addEventListener('click', () => {
+      const src = marco.dataset.src;
+      const alto = marco.dataset.alto ?? '560';
+      if (!src) return;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.title = `Demostración interactiva: ${marco.id}`;
+      iframe.style.height = `${alto}px`;
+      iframe.setAttribute('loading', 'eager');
+
+      lienzo.replaceChildren(iframe);
+      lienzo.style.minHeight = '0';
+    });
+  });
+</script>

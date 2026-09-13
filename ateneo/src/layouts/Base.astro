@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+import Cabecera from '../components/Cabecera.astro';
+import PieDePagina from '../components/PieDePagina.astro';
+import { sitio } from '../config';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  /** Ruta canónica, p. ej. '/temas/insuficiencia-cardiaca-2026'. */
+  ruta?: string;
+  /** Datos estructurados schema.org ya serializables. */
+  datosEstructurados?: Record<string, unknown>;
+  /** Páginas de destino tras conversión y errores: fuera del índice. */
+  noIndexar?: boolean;
+}
+
+const { titulo, descripcion, ruta = '/', datosEstructurados, noIndexar = false } = Astro.props;
+const canonica = new URL(ruta, Astro.site ?? sitio.url).toString();
+const tituloCompleto = ruta === '/' ? titulo : `${titulo} · ${sitio.nombre}`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonica} />
+    {noIndexar && <meta name="robots" content="noindex, follow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={sitio.nombre} />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:locale" content="es_CO" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230E1A22'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23A31832' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E"
+    />
+
+    {
+      datosEstructurados && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(datosEstructurados)}
+        />
+      )
+    }
+  </head>
+  <body>
+    <a href="#contenido" class="saltar">Saltar al contenido</a>
+    <Cabecera />
+    <main id="contenido">
+      <slot />
+    </main>
+    <PieDePagina />
+
+    <style>
+      .saltar {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        background: var(--crimson);
+        color: var(--on-accent);
+        padding: 10px 16px;
+        z-index: 50;
+        text-decoration: none;
+      }
+      .saltar:focus { left: 8px; top: 8px; }
+    </style>
+  </body>
+</html>

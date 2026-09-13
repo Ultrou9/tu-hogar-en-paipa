@@ -1,0 +1,213 @@
+---
+import Base from '../layouts/Base.astro';
+import CapturaCorreo from '../components/CapturaCorreo.astro';
+import { precios, pagos } from '../config';
+import { presentaciones } from '../data/presentaciones';
+
+const hayCheckout = Boolean(pagos.hotmartBase || pagos.suscripcionMensual);
+const cta = (enlace: string) => enlace || '/gratis';
+const textoCta = hayCheckout ? 'Suscribirme' : 'Entrar en la lista';
+
+const niveles = [
+  {
+    nombre: 'Un tema',
+    precio: `${precios.temaSuelto.cop} COP`,
+    nota: `≈ US$ ${precios.temaSuelto.usd} · pago único`,
+    para: 'Tienes una sesión concreta la semana que viene.',
+    incluye: [
+      'El kit de tres piezas de ese tema',
+      'HTML interactivo, PowerPoint editable y handout',
+      'Aviso por correo si la guía cambia',
+    ],
+    enlace: '/catalogo',
+    etiquetaEnlace: 'Elegir tema',
+    destacado: false,
+  },
+  {
+    nombre: 'Pack de rotación',
+    precio: `${precios.pack.cop} COP`,
+    nota: `≈ US$ ${precios.pack.usd} · pago único`,
+    para: 'Entras a una rotación y sabes que van a caer varias.',
+    incluye: [
+      'De seis a ocho temas de una misma especialidad',
+      'El kit completo de cada uno',
+      'Sale a menos de la mitad por tema',
+    ],
+    enlace: cta(pagos.packCardiologia),
+    etiquetaEnlace: hayCheckout ? 'Comprar el pack' : 'Avisarme',
+    destacado: false,
+  },
+  {
+    nombre: 'Suscripción',
+    precio: `${precios.mensual.cop} COP`,
+    nota: `al mes · o ${precios.anual.cop} COP al año`,
+    para: 'Presentas con frecuencia y quieres dejar de pensar en esto.',
+    incluye: [
+      'El catálogo completo, en línea',
+      'Cuatro temas nuevos cada mes',
+      'Las actualizaciones de guía, sin pagar de más',
+      'Descarga del kit de cualquier tema',
+    ],
+    enlace: cta(pagos.suscripcionMensual),
+    etiquetaEnlace: textoCta,
+    destacado: true,
+  },
+];
+---
+
+<Base
+  titulo="Suscripción y precios"
+  descripcion="Compra un tema suelto, un pack de rotación o suscríbete al catálogo completo con cuatro temas nuevos al mes y las actualizaciones de guía incluidas."
+  ruta="/suscripcion"
+>
+  <section class="cabeza">
+    <div class="contenedor">
+      <span class="eyebrow">Precios</span>
+      <h1>Tres formas de usar el catálogo</h1>
+      <p class="entrada">
+        Todo el material se paga en pesos con PSE, tarjeta, billeteras o en
+        cuotas. No hace falta tarjeta internacional.
+      </p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="niveles">
+        {
+          niveles.map((n) => (
+            <article class={n.destacado ? 'nivel nivel--destacado' : 'nivel'}>
+              {n.destacado && <span class="cinta">Lo que recomendamos</span>}
+              <h2>{n.nombre}</h2>
+              <p class="para">{n.para}</p>
+              <div class="precio-bloque">
+                <span class="precio mono">{n.precio}</span>
+                <span class="precio-nota">{n.nota}</span>
+              </div>
+              <ul>
+                {n.incluye.map((i) => <li>{i}</li>)}
+              </ul>
+              <a
+                href={n.enlace}
+                class={`boton boton--ancho ${n.destacado ? 'boton--primario' : 'boton--secundario'}`}
+              >
+                {n.etiquetaEnlace}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+      {
+        !hayCheckout && (
+          <p class="aviso-checkout">
+            El cobro se abre en cuanto esté configurada la pasarela. Mientras
+            tanto, déjanos tu correo y te avisamos el primer día — con precio de
+            lanzamiento para quien esté en la lista.
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="seccion seccion--panel">
+    <div class="contenedor">
+      <div class="seccion-cabeza">
+        <span class="eyebrow">Por qué suscribirse</span>
+        <h2>Porque la evidencia caduca</h2>
+        <p>
+          Una revisión de insuficiencia cardiaca de 2024 hoy está desactualizada,
+          y quien la presente va a quedar mal delante de alguien que sí leyó la
+          guía nueva. Lo que se paga aquí no es un archivo: es que esté al día.
+        </p>
+      </div>
+      <div class="razones">
+        <article>
+          <h3>Versionado a la vista</h3>
+          <p>
+            Cada revisión lleva número de versión, fecha y la guía en la que se
+            basa. Sabes exactamente qué estás presentando.
+          </p>
+        </article>
+        <article>
+          <h3>Cuatro temas al mes</h3>
+          <p>
+            El catálogo crece por la rotación obligatoria. En un año son cerca de
+            cincuenta temas, más de los que vas a tener que presentar.
+          </p>
+        </article>
+        <article>
+          <h3>Actualización incluida</h3>
+          <p>
+            Cuando sale una guía nueva, la revisión sube de versión y tú la tienes
+            sin pagar otra vez. Actualmente {presentaciones.length} temas en
+            catálogo o en producción.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="contenedor bloque-captura">
+    <CapturaCorreo
+      origen="suscripcion"
+      titulo="Precio de lanzamiento para la lista"
+      texto="Déjanos el correo y te llega la revisión de insuficiencia cardiaca ahora, y el aviso con el precio de lanzamiento cuando abra la suscripción."
+    />
+  </div>
+</Base>
+
+<style>
+  .cabeza { padding-block: 52px 40px; border-bottom: 1px solid var(--line); }
+  .cabeza h1 { font-size: clamp(30px, 5vw, 46px); margin-top: 10px; letter-spacing: -0.015em; }
+  .entrada { font-size: 17.4px; color: var(--text-2); max-width: 56ch; margin-top: 13px; }
+
+  .niveles { display: grid; grid-template-columns: repeat(auto-fit, minmax(272px, 1fr)); gap: 16px; align-items: stretch; }
+  .nivel {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+  }
+  .nivel--destacado { border-color: var(--crimson); box-shadow: var(--shadow-lg); }
+  .cinta {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background: var(--crimson);
+    color: var(--on-accent);
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+  .nivel h2 { font-size: 23px; }
+  .para { font-size: 14.6px; color: var(--muted); }
+  .precio-bloque { display: flex; flex-direction: column; gap: 2px; padding-block: 6px; border-block: 1px solid var(--line-soft); }
+  .precio { font-size: 27px; font-weight: 600; line-height: 1.15; }
+  .precio-nota { font-size: 12.6px; color: var(--muted); }
+  .nivel ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .nivel li { font-size: 14.5px; color: var(--text-2); padding-left: 19px; position: relative; }
+  .nivel li::before { content: "✓"; position: absolute; left: 0; color: var(--teal); font-weight: 600; }
+
+  .aviso-checkout {
+    margin-top: 20px;
+    border: 1px solid var(--amber-line);
+    background: var(--amber-soft);
+    padding: 13px 16px;
+    font-size: 14.4px;
+    color: var(--text-2);
+    max-width: 70ch;
+  }
+
+  .razones { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 26px 36px; }
+  .razones article { display: flex; flex-direction: column; gap: 7px; padding-left: 15px; border-left: 2px solid var(--teal); }
+  .razones h3 { font-size: 18px; }
+  .razones p { font-size: 14.8px; color: var(--text-2); }
+
+  .bloque-captura { margin-block: 56px 0; }
+</style>

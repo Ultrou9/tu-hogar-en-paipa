@@ -1,0 +1,109 @@
+---
+import { sitio } from '../config';
+
+const ruta = Astro.url.pathname;
+const activo = (href: string) =>
+  href === '/' ? ruta === '/' : ruta.startsWith(href);
+
+const enlaces = [
+  { href: '/catalogo', texto: 'Catálogo' },
+  { href: '/suscripcion', texto: 'Suscripción' },
+  { href: '/licencias', texto: 'Para instituciones' },
+];
+---
+
+<header class="cab">
+  <div class="contenedor cab-inner">
+    <a href="/" class="marca">
+      <span class="marca-letra">A</span>
+      <span class="marca-texto">
+        <span class="marca-nombre">{sitio.nombre}</span>
+        <span class="marca-lema">{sitio.lema}</span>
+      </span>
+    </a>
+
+    <nav aria-label="Principal">
+      <ul>
+        {
+          enlaces.map((e) => (
+            <li>
+              <a href={e.href} aria-current={activo(e.href) ? 'page' : undefined}>
+                {e.texto}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a href="/gratis" class="boton boton--primario cab-cta">Presentación gratis</a>
+  </div>
+</header>
+
+<style>
+  .cab {
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  .cab-inner {
+    display: flex;
+    align-items: center;
+    gap: 18px 26px;
+    flex-wrap: wrap;
+    padding-block: 13px;
+  }
+
+  .marca {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    text-decoration: none;
+    color: var(--text);
+    margin-right: auto;
+  }
+  .marca-letra {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    background: var(--rail-bg);
+    color: var(--crimson);
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    flex: none;
+  }
+  .marca-texto { display: flex; flex-direction: column; line-height: 1.2; }
+  .marca-nombre { font-family: var(--serif); font-size: 19px; font-weight: 600; }
+  .marca-lema { font-size: 11.5px; color: var(--muted); }
+
+  nav ul {
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+  }
+  nav a {
+    color: var(--text-2);
+    text-decoration: none;
+    font-size: 14.8px;
+    padding-block: 4px;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover { color: var(--text); }
+  nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--crimson); }
+
+  .cab-cta { padding: 9px 16px; font-size: 14px; }
+
+  @media (max-width: 720px) {
+    .marca-lema { display: none; }
+    .cab-inner { gap: 12px 18px; }
+    nav { order: 3; width: 100%; }
+    nav ul { gap: 18px; }
+  }
+</style>

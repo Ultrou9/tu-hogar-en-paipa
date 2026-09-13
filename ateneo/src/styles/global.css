@@ -1,0 +1,205 @@
+/*
+  Sistema de diseño de Ateneo.
+  Los tokens son los mismos que usan las presentaciones, para que el sitio y el
+  producto se lean como una sola editorial. No introducir colores sueltos:
+  todo color nuevo entra aquí como token.
+*/
+
+:root {
+  --ink: #0e1a22;
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --panel: #f0f4f6;
+  --panel-2: #e7eef1;
+  --line: #d9e2e7;
+  --line-soft: #e8eef1;
+  --text: #15242d;
+  --text-2: #3d5462;
+  --muted: #637986;
+  --crimson: #a31832;
+  --crimson-soft: #fbedf0;
+  --crimson-line: #edd2d9;
+  --teal: #00909f;
+  --teal-soft: #e6f4f5;
+  --teal-line: #c6e4e7;
+  --amber: #b4690e;
+  --amber-soft: #fbf0e2;
+  --amber-line: #eddcc3;
+  --on-accent: #ffffff;
+  --rail-bg: #0e1a22;
+  --rail-text: #d5e1e8;
+  --rail-muted: #7c93a1;
+  --rail-line: #22333e;
+  --focus: #00909f;
+  --shadow: 0 1px 2px rgba(14, 26, 34, 0.05), 0 8px 24px -14px rgba(14, 26, 34, 0.24);
+  --shadow-lg: 0 2px 4px rgba(14, 26, 34, 0.06), 0 18px 44px -24px rgba(14, 26, 34, 0.34);
+
+  --serif: "Spectral", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --ancho: 1080px;
+  --gutter: 22px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d161c;
+    --surface: #131f27;
+    --panel: #182631;
+    --panel-2: #1f2f3b;
+    --line: #263a47;
+    --line-soft: #1e2e39;
+    --text: #e3edf2;
+    --text-2: #b4c6d0;
+    --muted: #8ca2af;
+    --crimson: #e4657c;
+    --crimson-soft: #2a1720;
+    --crimson-line: #43242e;
+    --teal: #19a2ae;
+    --teal-soft: #0f2429;
+    --teal-line: #1c3940;
+    --amber: #c1862b;
+    --amber-soft: #251c10;
+    --amber-line: #3b2d18;
+    --on-accent: #0d161c;
+    --rail-bg: #0a1218;
+    --focus: #19a2ae;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 26px -16px rgba(0, 0, 0, 0.75);
+    --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.5), 0 20px 48px -26px rgba(0, 0, 0, 0.9);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0d161c;
+  --surface: #131f27;
+  --panel: #182631;
+  --panel-2: #1f2f3b;
+  --line: #263a47;
+  --line-soft: #1e2e39;
+  --text: #e3edf2;
+  --text-2: #b4c6d0;
+  --muted: #8ca2af;
+  --crimson: #e4657c;
+  --crimson-soft: #2a1720;
+  --crimson-line: #43242e;
+  --teal: #19a2ae;
+  --teal-soft: #0f2429;
+  --teal-line: #1c3940;
+  --amber: #c1862b;
+  --amber-soft: #251c10;
+  --amber-line: #3b2d18;
+  --on-accent: #0d161c;
+  --rail-bg: #0a1218;
+  --focus: #19a2ae;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 26px -16px rgba(0, 0, 0, 0.75);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.5), 0 20px 48px -26px rgba(0, 0, 0, 0.9);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+p, ul, ol, figure { margin: 0; }
+img { max-width: 100%; display: block; }
+a { color: var(--teal); }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+
+/* ---------- primitivas ---------- */
+
+.contenedor {
+  width: 100%;
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--crimson);
+  font-weight: 500;
+}
+
+.kicker {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.boton--primario { background: var(--crimson); color: var(--on-accent); border-color: var(--crimson); }
+.boton--primario:hover { background: color-mix(in srgb, var(--crimson) 86%, black); }
+.boton--secundario { background: transparent; color: var(--text); border-color: var(--line); }
+.boton--secundario:hover { border-color: var(--teal); color: var(--teal); }
+.boton--ancho { width: 100%; }
+
+.chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.chip--gratis { color: var(--teal); background: var(--teal-soft); border-color: var(--teal-line); }
+.chip--publicado { color: var(--crimson); background: var(--crimson-soft); border-color: var(--crimson-line); }
+.chip--produccion { color: var(--muted); background: var(--panel); border-color: var(--line); }
+
+.seccion { padding-block: 64px; }
+.seccion--panel { background: var(--panel); border-block: 1px solid var(--line); }
+
+.seccion-cabeza {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 28px;
+  max-width: 62ch;
+}
+.seccion-cabeza h2 { font-size: clamp(25px, 3.6vw, 33px); }
+.seccion-cabeza p { color: var(--text-2); font-size: 16.5px; }
+
+.prosa { max-width: 66ch; display: flex; flex-direction: column; gap: 15px; color: var(--text-2); font-size: 16.2px; }
+.prosa strong { color: var(--text); font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import { porSlug } from '../data/presentaciones';
+import { sitio } from '../config';
+
+const tema = porSlug('insuficiencia-cardiaca-2026')!;
+const textoCompartir = encodeURIComponent(
+  `Te dejo esta revisión de insuficiencia cardiaca 2026, interactiva y con la guía nueva: ${sitio.url}/gratis`,
+);
+---
+
+<Base
+  titulo="Ya está en camino"
+  descripcion="Tu revisión de insuficiencia cardiaca está lista para descargar."
+  ruta="/gracias"
+  noIndexar
+>
+  <section class="gracias">
+    <div class="contenedor">
+      <span class="eyebrow">Listo</span>
+      <h1>Ya la tienes</h1>
+      <p class="entrada">
+        Te la envié al correo y también puedes abrirla aquí mismo. Guárdala: es
+        un solo archivo y funciona sin internet, así que el día de la sesión no
+        dependes de la red del hospital.
+      </p>
+
+      <div class="acciones">
+        <a href={tema.descarga} download class="boton boton--primario">Descargar la presentación</a>
+        <a href={tema.demo} target="_blank" rel="noopener" class="boton boton--secundario">Abrirla ahora</a>
+      </div>
+
+      <div class="compartir">
+        <h2>Un favor, si te sirvió</h2>
+        <p>
+          Reenvíasela a tu grupo de residentes. Es como crece esto, y es la razón
+          por la que puedo seguir regalando la primera.
+        </p>
+        <a
+          href={`https://wa.me/?text=${textoCompartir}`}
+          target="_blank"
+          rel="noopener"
+          class="boton boton--secundario"
+        >
+          Compartir por WhatsApp
+        </a>
+      </div>
+
+      <p class="siguiente">
+        Lo siguiente: <a href="/catalogo">mira qué temas vienen</a> y dime cuál
+        necesitas antes — la lista de producción se ordena con lo que más nos piden.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .gracias { padding-block: 64px 40px; }
+  .gracias h1 { font-size: clamp(32px, 5.4vw, 50px); margin-top: 10px; letter-spacing: -0.015em; }
+  .entrada { font-size: 17.6px; color: var(--text-2); max-width: 56ch; margin-top: 14px; }
+  .acciones { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+
+  .compartir {
+    margin-top: 40px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    max-width: 60ch;
+  }
+  .compartir h2 { font-size: 21px; }
+  .compartir p { font-size: 15.2px; color: var(--text-2); }
+
+  .siguiente { margin-top: 32px; font-size: 15.4px; color: var(--text-2); max-width: 60ch; }
+</style>

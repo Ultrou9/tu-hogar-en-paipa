@@ -1,0 +1,97 @@
+---
+import { listaCorreo, sitio } from '../config';
+
+interface Props {
+  titulo?: string;
+  texto?: string;
+  etiquetaBoton?: string;
+  /** Identificador para distinguir de dónde vino el contacto. */
+  origen: string;
+}
+
+const {
+  titulo = 'Llévate la revisión de insuficiencia cardiaca',
+  texto = 'Las 15 secciones completas, con las 7 herramientas interactivas y la autoevaluación. Te la envío ahora mismo y te aviso cuando salga cada tema nuevo.',
+  etiquetaBoton = 'Enviármela',
+  origen,
+} = Astro.props;
+
+// Sin endpoint configurado el formulario cae a un mailto: nunca se pierde un
+// contacto por tener a medias la integración de correo.
+const configurado = Boolean(listaCorreo.endpoint);
+const accion = configurado
+  ? listaCorreo.endpoint
+  : `mailto:${sitio.correoContacto}`;
+const idCampo = `correo-${origen}`;
+---
+
+<section class="captura" aria-labelledby={`titulo-${origen}`}>
+  <div class="captura-texto">
+    <span class="eyebrow">Gratis</span>
+    <h2 id={`titulo-${origen}`}>{titulo}</h2>
+    <p>{texto}</p>
+  </div>
+
+  <form
+    class="captura-form"
+    action={accion}
+    method={configurado ? 'post' : 'get'}
+    enctype={configurado ? undefined : 'text/plain'}
+  >
+    <input type="hidden" name="origen" value={origen} />
+    <label for={idCampo}>Tu correo</label>
+    <div class="fila">
+      <input
+        id={idCampo}
+        type="email"
+        name={listaCorreo.campoCorreo}
+        required
+        autocomplete="email"
+        placeholder="tu@correo.com"
+      />
+      <button type="submit" class="boton boton--primario">{etiquetaBoton}</button>
+    </div>
+    <p class="nota">Un correo cuando sale un tema nuevo. Nada más. Te das de baja en un clic.</p>
+  </form>
+</section>
+
+<style>
+  .captura {
+    background: var(--rail-bg);
+    color: var(--rail-text);
+    padding: 34px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 30px 40px;
+    align-items: center;
+  }
+  .captura-texto { display: flex; flex-direction: column; gap: 9px; }
+  .captura-texto h2 { font-size: clamp(22px, 3vw, 28px); color: #fff; }
+  .captura-texto p { font-size: 15.3px; color: var(--rail-muted); max-width: 46ch; }
+
+  .captura-form { display: flex; flex-direction: column; gap: 8px; }
+  .captura-form label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rail-muted);
+  }
+  .fila { display: flex; gap: 9px; flex-wrap: wrap; }
+  .fila input {
+    flex: 1 1 190px;
+    min-width: 0;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--rail-line);
+    border-radius: 3px;
+    color: #fff;
+  }
+  .fila input::placeholder { color: var(--rail-muted); }
+  .fila input:focus-visible { outline: 2px solid var(--teal); outline-offset: 1px; }
+  .nota { font-size: 12.2px; color: var(--rail-muted); }
+
+  @media (max-width: 780px) {
+    .captura { grid-template-columns: 1fr; padding: 26px 22px; }
+  }
+</style>

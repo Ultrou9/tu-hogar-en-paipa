@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { publicadas } from '../data/presentaciones';
+---
+
+<Base
+  titulo="Esta página no existe"
+  descripcion="La página que buscas no está aquí. Vuelve al catálogo de revisiones de tema."
+  ruta="/404"
+  noIndexar
+>
+  <section class="nada">
+    <div class="contenedor">
+      <span class="eyebrow">Error 404</span>
+      <h1>Aquí no hay nada</h1>
+      <p>
+        El enlace está roto o el tema cambió de dirección. El catálogo completo
+        sigue en su sitio.
+      </p>
+      <div class="acciones">
+        <a href="/catalogo" class="boton boton--primario">Ir al catálogo</a>
+        <a href="/gratis" class="boton boton--secundario">Llevarme una gratis</a>
+      </div>
+      <ul class="atajos">
+        {publicadas.map((t) => (
+          <li><a href={`/temas/${t.slug}`}>{t.titulo}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nada { padding-block: 80px 60px; }
+  .nada h1 { font-size: clamp(32px, 5.4vw, 50px); margin-top: 10px; }
+  .nada > .contenedor > p { font-size: 17.2px; color: var(--text-2); max-width: 50ch; margin-top: 13px; }
+  .acciones { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+  .atajos { list-style: none; padding: 0; margin: 36px 0 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  .atajos a { font-size: 14.6px; }
+</style>

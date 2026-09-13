@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ateneo.med/sitemap-index.xml
