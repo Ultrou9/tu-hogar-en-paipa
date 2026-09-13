@@ -145,25 +145,29 @@ public/demos/                las presentaciones, servidas tal cual
 
 ## Desplegar
 
-Ya está resuelto: el repositorio tiene la integración de Vercel, y el
-`vercel.json` de la raíz le dice que construya este subdirectorio.
+El repositorio ya tiene la integración de Vercel, pero el proyecto
+`tu-hogar-en-paipa` tiene su **Root Directory apuntando a `habitos`**, la app
+anterior. Por eso los despliegues no construyen este sitio.
 
-```json
-{
-  "installCommand": "npm --prefix ateneo install",
-  "buildCommand": "npm --prefix ateneo run build",
-  "outputDirectory": "ateneo/dist"
-}
-```
+**Hay que cambiarlo desde el panel**, y no se puede desde el repositorio: en
+Vercel → proyecto `tu-hogar-en-paipa` → *Settings* → *Build and Deployment* →
+*Root Directory* → poner `ateneo`.
 
-Hace falta porque el proyecto de Vercel apunta a la raíz del repositorio, donde
-no hay nada: sin esto el despliegue sale «Ready» pero vacío. La alternativa es
-poner `ateneo` como *Root Directory* en el panel de Vercel y borrar este
-fichero; con el `vercel.json` no hay que tocar el panel.
+Una vez hecho, Vercel detecta Astro solo y no hace falta ningún `vercel.json`:
+instala, ejecuta `npm run build` y sirve `dist/`.
+
+> Se intentó resolverlo con un `vercel.json` en la raíz del repositorio
+> (commit `de26ca4`, revertido). No funciona: con un Root Directory
+> configurado, los comandos se ejecutan desde ese directorio, así que las rutas
+> a `ateneo/` no existen y el despliegue falla. El ajuste del panel es la única
+> vía.
+
+Si en algún momento interesa desplegar `habitos` y `ateneo` a la vez, son dos
+proyectos de Vercel sobre el mismo repositorio, cada uno con su Root Directory.
 
 Cada rama genera su propia vista previa. La rama por defecto es la que publica
-en producción, así que **al fusionar, Ateneo pasa a ser el sitio principal** del
-proyecto de Vercel.
+en producción, así que **al fusionar, Ateneo pasa a ser el sitio principal** de
+ese proyecto de Vercel.
 
 Falta apuntar el dominio desde el panel de Vercel cuando esté comprado.
 
