@@ -3,8 +3,9 @@ import Base from '../layouts/Base.astro';
 import TarjetaTema from '../components/TarjetaTema.astro';
 import CapturaCorreo from '../components/CapturaCorreo.astro';
 import DemoIncrustada from '../components/DemoIncrustada.astro';
+import Precio from '../components/Precio.astro';
 import { presentaciones } from '../data/presentaciones';
-import { sitio, precios } from '../config';
+import { sitio } from '../config';
 
 const destacado = presentaciones[0];
 const enPortada = presentaciones.slice(0, 6);
@@ -67,8 +68,8 @@ const faq = [
     r: 'La revisión se actualiza y sube de versión. Si la compraste suelta, te avisamos por correo del cambio; si estás suscrito, la versión nueva ya está ahí sin pagar de más.',
   },
   {
-    p: '¿Cómo pago desde Colombia?',
-    r: 'Con PSE, tarjeta, billeteras digitales o en cuotas, a través de Hotmart. No necesitas tarjeta internacional.',
+    p: '¿Cómo pago desde mi país?',
+    r: 'Depende de dónde estés. En España, tarjeta, PayPal o transferencia. En Colombia, PSE, billeteras o en cuotas; en México, OXXO y SPEI. Todo a través de Hotmart, así que no necesitas tarjeta internacional.',
   },
   {
     p: '¿Sirve para mi rotación si no es medicina interna?',
@@ -111,7 +112,7 @@ const datosEstructurados = {
         <div><dt>Formatos por tema</dt><dd class="mono">3</dd></div>
         <div><dt>Secciones por revisión</dt><dd class="mono">12–15</dd></div>
         <div><dt>Temas nuevos al mes</dt><dd class="mono">4</dd></div>
-        <div><dt>Desde</dt><dd class="mono">{precios.temaSuelto.cop} COP</dd></div>
+        <div><dt>Desde</dt><dd class="mono"><Precio nivel="temaSuelto" /></dd></div>
       </dl>
     </div>
   </section>

@@ -1,0 +1,31 @@
+---
+import { regiones } from '../config';
+import type { Nivel } from '../config';
+
+/**
+ * Muestra un precio en la moneda de quien mira.
+ *
+ * Emite las cuatro variantes en el HTML y deja que el CSS (reglas
+ * `[data-precio-region]` en global.css) muestre la que corresponde a la región
+ * estampada en <html>. Así el sitio sigue siendo estático, no hay parpadeo al
+ * cargar, y sin JavaScript se ve el precio en euros en lugar de un hueco.
+ */
+interface Props {
+  nivel: Nivel;
+  /** Texto invariable que se pega detrás, p. ej. '/mes'. */
+  sufijo?: string;
+  /** Clase que se aplica a cada variante. */
+  class?: string;
+}
+
+const { nivel, sufijo = '', class: clase = '' } = Astro.props;
+---
+
+{
+  regiones.map((r) => (
+    <span class={clase} data-precio-region={r.codigo}>
+      {r.precios[nivel]}
+      {sufijo}
+    </span>
+  ))
+}

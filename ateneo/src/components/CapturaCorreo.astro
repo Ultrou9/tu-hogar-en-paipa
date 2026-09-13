@@ -38,7 +38,7 @@ const idCampo = `correo-${origen}`;
     method={configurado ? 'post' : 'get'}
     enctype={configurado ? undefined : 'text/plain'}
   >
-    <input type="hidden" name="origen" value={origen} />
+    <input type="hidden" name={listaCorreo.campoOrigen} value={origen} />
     <label for={idCampo}>Tu correo</label>
     <div class="fila">
       <input

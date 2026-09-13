@@ -1,8 +1,8 @@
 /**
  * Configuración central de Ateneo.
- * Todo lo que cambia de un despliegue a otro vive aquí: dominio, enlaces de
- * pago y endpoint de captura de correo. Ningún componente debe llevar una URL
- * escrita a mano.
+ * Todo lo que cambia de un despliegue a otro vive aquí: dominio, precios por
+ * región, enlaces de pago y endpoint de captación. Ningún componente debe
+ * llevar una URL ni un precio escrito a mano.
  */
 
 export const sitio = {
@@ -18,30 +18,150 @@ export const sitio = {
 };
 
 /**
- * Enlaces de pago. Se generan en Hotmart (LatAm, admite PSE y cuotas) y se
- * pegan aquí. Mientras estén vacíos, los botones llevan a la lista de espera
- * en lugar de a un checkout roto.
- */
-export const pagos = {
-  hotmartBase: '', // p. ej. 'https://pay.hotmart.com'
-  suscripcionMensual: '',
-  suscripcionAnual: '',
-  packCardiologia: '',
-};
-
-/**
- * Captura de correo. Pegar aquí el endpoint del proveedor (MailerLite,
- * ConvertKit, Buttondown…). Si está vacío, el formulario se degrada a un
- * mailto y no se pierde ningún contacto.
+ * Captación de correo (MailerLite). Pegar aquí la acción del formulario. Si
+ * está vacío, el formulario cae a un mailto y no se pierde ningún contacto.
  */
 export const listaCorreo = {
   endpoint: '',
-  campoCorreo: 'email',
+  campoCorreo: 'fields[email]',
+  campoOrigen: 'fields[origen]',
 };
 
-export const precios = {
-  temaSuelto: { cop: '39.000', usd: '9,9', eur: '14,9' },
-  pack: { cop: '129.000', usd: '32', eur: '44' },
-  mensual: { cop: '29.900', usd: '7,9', eur: '9,9' },
-  anual: { cop: '249.000', usd: '66', eur: '79' },
-};
+/* ------------------------------------------------------------------ */
+/*  Precio regional                                                     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * El mismo archivo no vale lo mismo en Madrid que en Tunja. Cada región lleva
+ * su moneda, sus precios y sus propios enlaces de pago, porque Hotmart genera
+ * una oferta distinta por moneda.
+ *
+ * La región se resuelve en el navegador (ver Base.astro): elección guardada →
+ * zona horaria → idioma → `REGION_POR_DEFECTO`. El HTML trae las cuatro
+ * variantes y el CSS muestra la que toca, así que el sitio sigue siendo
+ * estático y funciona sin JavaScript.
+ */
+export type Region = 'es' | 'co' | 'mx' | 'us';
+
+export const REGION_POR_DEFECTO: Region = 'es';
+
+/**
+ * Respaldo para el continente americano. Sin esto, quien está en Buenos Aires,
+ * Lima o Santiago no coincide con ninguna zona concreta y acabaría viendo euros.
+ */
+export const REGION_AMERICAS: Region = 'us';
+
+export type Nivel = 'temaSuelto' | 'pack' | 'mensual' | 'anual';
+
+export interface ConfigRegion {
+  codigo: Region;
+  /** Cómo se nombra en el selector. */
+  nombre: string;
+  moneda: string;
+  precios: Record<Nivel, string>;
+  /** Enlaces de pago de Hotmart para esta moneda. Vacío = cobro apagado. */
+  pagos: Partial<Record<Nivel, string>>;
+  /** Zonas horarias que caen en esta región. */
+  zonas: string[];
+  /** Prefijos de `navigator.language` que caen en esta región. */
+  idiomas: string[];
+  /** Métodos de pago que se anuncian en la ficha. */
+  metodosPago: string;
+}
+
+export const regiones: ConfigRegion[] = [
+  {
+    codigo: 'es',
+    nombre: 'España (EUR)',
+    moneda: 'EUR',
+    precios: {
+      temaSuelto: '14,90 €',
+      pack: '44 €',
+      mensual: '9,90 €',
+      anual: '79 €',
+    },
+    pagos: {},
+    zonas: ['Europe/Madrid', 'Atlantic/Canary', 'Africa/Ceuta'],
+    idiomas: ['es-ES', 'ca', 'gl', 'eu'],
+    metodosPago: 'Tarjeta, PayPal o transferencia.',
+  },
+  {
+    codigo: 'co',
+    nombre: 'Colombia (COP)',
+    moneda: 'COP',
+    precios: {
+      temaSuelto: '39.000 COP',
+      pack: '129.000 COP',
+      mensual: '29.900 COP',
+      anual: '249.000 COP',
+    },
+    pagos: {},
+    zonas: ['America/Bogota'],
+    idiomas: ['es-CO'],
+    metodosPago: 'PSE, tarjeta, billeteras o en cuotas. Sin tarjeta internacional.',
+  },
+  {
+    codigo: 'mx',
+    nombre: 'México (MXN)',
+    moneda: 'MXN',
+    precios: {
+      temaSuelto: '189 MXN',
+      pack: '549 MXN',
+      mensual: '139 MXN',
+      anual: '1.149 MXN',
+    },
+    pagos: {},
+    zonas: [
+      'America/Mexico_City',
+      'America/Monterrey',
+      'America/Tijuana',
+      'America/Cancun',
+      'America/Merida',
+      'America/Chihuahua',
+      'America/Hermosillo',
+      'America/Mazatlan',
+    ],
+    idiomas: ['es-MX'],
+    metodosPago: 'OXXO, SPEI, tarjeta o en mensualidades.',
+  },
+  {
+    codigo: 'us',
+    nombre: 'Resto del mundo (USD)',
+    moneda: 'USD',
+    precios: {
+      temaSuelto: 'US$ 9,90',
+      pack: 'US$ 32',
+      mensual: 'US$ 7,90',
+      anual: 'US$ 66',
+    },
+    pagos: {},
+    // Sin zonas ni idiomas propios: es el cajón de sastre para el resto de
+    // América (Argentina, Perú, Chile, EE. UU.) vía REGION_AMERICAS.
+    zonas: [],
+    idiomas: [],
+    metodosPago: 'Tarjeta, PayPal y métodos locales según el país.',
+  },
+];
+
+export function region(codigo: Region): ConfigRegion {
+  return regiones.find((r) => r.codigo === codigo) ?? regiones[0];
+}
+
+/** Región que se muestra cuando el navegador todavía no ha dicho nada. */
+export const regionPorDefecto = region(REGION_POR_DEFECTO);
+
+/**
+ * ¿Hay algún enlace de pago configurado para este nivel, en cualquier región?
+ * Mientras no lo haya, los botones de compra llevan a la captación de correo
+ * en lugar de a un checkout roto, y el sitio se puede publicar sin vender.
+ */
+export function hayCobro(nivel: Nivel): boolean {
+  return regiones.some((r) => Boolean(r.pagos[nivel]));
+}
+
+/** Tabla que consume el script de detección del navegador. */
+export const mapaDeteccion = regiones.map((r) => ({
+  codigo: r.codigo,
+  zonas: r.zonas,
+  idiomas: r.idiomas,
+}));

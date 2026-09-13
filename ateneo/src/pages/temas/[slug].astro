@@ -3,9 +3,12 @@ import Base from '../../layouts/Base.astro';
 import CapturaCorreo from '../../components/CapturaCorreo.astro';
 import TarjetaTema from '../../components/TarjetaTema.astro';
 import DemoIncrustada from '../../components/DemoIncrustada.astro';
+import Precio from '../../components/Precio.astro';
+import MetodosPago from '../../components/MetodosPago.astro';
+import BotonCompra from '../../components/BotonCompra.astro';
 import { presentaciones, etiquetaEstado } from '../../data/presentaciones';
 import type { Presentacion } from '../../data/presentaciones';
-import { sitio, precios, pagos } from '../../config';
+import { sitio, regionPorDefecto } from '../../config';
 
 export function getStaticPaths() {
   return presentaciones.map((tema) => ({
@@ -24,8 +27,6 @@ const relacionados = presentaciones
 
 const esGratis = tema.estado === 'gratis';
 const enProduccion = tema.estado === 'produccion';
-const hayCheckout = Boolean(tema.enlacePago || pagos.hotmartBase);
-
 const descripcion = `${tema.titulo}: ${tema.subtitulo}. Revisión de tema en ${tema.secciones} secciones basada en ${tema.baseEvidencia.join(' y ')}, con ${tema.herramientas.length} herramientas interactivas. HTML, PowerPoint editable y handout en PDF.`;
 
 const datosEstructurados = {
@@ -40,8 +41,8 @@ const datosEstructurados = {
       inLanguage: 'es',
       offers: {
         '@type': 'Offer',
-        price: esGratis ? '0' : precios.temaSuelto.usd.replace(',', '.'),
-        priceCurrency: 'USD',
+        price: esGratis ? '0' : regionPorDefecto.precios.temaSuelto.replace(/[^0-9,]/g, '').replace(',', '.'),
+        priceCurrency: regionPorDefecto.moneda,
         availability: enProduccion
           ? 'https://schema.org/PreOrder'
           : 'https://schema.org/InStock',
@@ -111,15 +112,14 @@ const datosEstructurados = {
                   </>
                 ) : (
                   <>
-                    <span class="precio mono">{precios.temaSuelto.cop} COP</span>
-                    <span class="precio-nota">≈ US$ {precios.temaSuelto.usd} · pago único</span>
-                    <a
-                      href={tema.enlacePago || pagos.hotmartBase || '/gratis'}
-                      class="boton boton--primario boton--ancho"
-                    >
-                      {hayCheckout ? 'Comprar el kit completo' : 'Avisarme cuando esté a la venta'}
-                    </a>
-                    <p class="pago-nota">PSE, tarjeta, billeteras o en cuotas. Sin tarjeta internacional.</p>
+                    <Precio nivel="temaSuelto" class="precio mono" />
+                    <span class="precio-nota">pago único · las tres piezas</span>
+                    <BotonCompra
+                      nivel="temaSuelto"
+                      etiqueta="Comprar el kit completo"
+                      etiquetaEspera="Avisarme cuando esté a la venta"
+                    />
+                    <MetodosPago class="pago-nota" />
                   </>
                 )
               }
@@ -245,9 +245,9 @@ const datosEstructurados = {
   .base-evidencia li { font-size: 14.2px; color: var(--text); }
 
   .precio-bloque { padding: 16px 18px; display: flex; flex-direction: column; gap: 5px; }
-  .precio { font-size: 26px; font-weight: 600; line-height: 1.1; }
+  .precio-bloque :global(.precio) { font-size: 26px; font-weight: 600; line-height: 1.1; }
   .precio-nota { font-size: 12.6px; color: var(--muted); margin-bottom: 9px; }
-  .pago-nota { font-size: 12.2px; color: var(--muted); margin-top: 3px; }
+  .precio-bloque :global(.pago-nota) { font-size: 12.2px; color: var(--muted); margin-top: 3px; }
 
   .incluye { list-style: none; margin: 0; padding: 0 18px 18px; display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--line-soft); padding-top: 14px; }
   .incluye li { font-size: 13.8px; color: var(--text-2); padding-left: 18px; position: relative; }

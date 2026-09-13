@@ -1,0 +1,50 @@
+---
+import { regiones, REGION_POR_DEFECTO } from '../config';
+
+/**
+ * Cambio manual de región. Hace falta porque la zona horaria se equivoca con
+ * VPN y con el residente colombiano que está estudiando en Madrid.
+ */
+---
+
+<div class="selector">
+  <label for="region">Precios en</label>
+  <select id="region" name="region" data-selector-region>
+    {regiones.map((r) => <option value={r.codigo}>{r.nombre}</option>)}
+  </select>
+</div>
+
+<style>
+  .selector { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+  .selector label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--crimson);
+  }
+  .selector select {
+    background: transparent;
+    color: var(--rail-text);
+    border: 1px solid var(--rail-line);
+    border-radius: 3px;
+    padding: 6px 9px;
+    font-size: 13.6px;
+  }
+  .selector select option { background: var(--rail-bg); color: var(--rail-text); }
+</style>
+
+<script define:vars={{ porDefecto: REGION_POR_DEFECTO }}>
+  document.querySelectorAll('[data-selector-region]').forEach((select) => {
+    select.value = document.documentElement.dataset.region || porDefecto;
+    select.addEventListener('change', () => {
+      document.documentElement.dataset.region = select.value;
+      try {
+        localStorage.setItem('ateneo:region', select.value);
+      } catch {
+        // Navegación privada o almacenamiento bloqueado: el cambio vale para
+        // esta página y se vuelve a detectar en la siguiente.
+      }
+    });
+  });
+</script>

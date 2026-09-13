@@ -1,5 +1,6 @@
 ---
 import { sitio } from '../config';
+import SelectorRegion from './SelectorRegion.astro';
 const anio = new Date().getFullYear();
 ---
 
@@ -29,6 +30,10 @@ const anio = new Date().getFullYear();
         <li><a href={sitio.instagram} rel="me noopener" target="_blank">Instagram</a></li>
       </ul>
     </div>
+  </div>
+
+  <div class="contenedor pie-region">
+    <SelectorRegion />
   </div>
 
   <div class="contenedor pie-legal">
@@ -70,8 +75,14 @@ const anio = new Date().getFullYear();
   .pie-col a { color: var(--rail-text); text-decoration: none; font-size: 14.2px; }
   .pie-col a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 
+  .pie-region {
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rail-line);
+  }
+
   .pie-legal {
-    margin-top: 34px;
+    margin-top: 18px;
     padding-top: 18px;
     border-top: 1px solid var(--rail-line);
     display: flex;

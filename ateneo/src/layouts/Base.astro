@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Cabecera from '../components/Cabecera.astro';
 import PieDePagina from '../components/PieDePagina.astro';
-import { sitio } from '../config';
+import { sitio, mapaDeteccion, REGION_POR_DEFECTO, REGION_AMERICAS } from '../config';
 
 interface Props {
   titulo: string;
@@ -25,6 +25,52 @@ const tituloCompleto = ruta === '/' ? titulo : `${titulo} · ${sitio.nombre}`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {/*
+      Resuelve la región antes de pintar, para que nadie vea el precio en euros
+      cambiar a pesos un instante después. Orden: elección guardada → zona
+      horaria → idioma → continente → por defecto. Si algo falla, se queda la de
+      por defecto, que es la que el CSS muestra de entrada.
+    */}
+    <script is:inline define:vars={{ mapa: mapaDeteccion, porDefecto: REGION_POR_DEFECTO, americas: REGION_AMERICAS }}>
+      (function () {
+        var elegida = null;
+        try {
+          elegida = localStorage.getItem('ateneo:region');
+        } catch (e) {}
+
+        var zona = '';
+        try {
+          zona = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        } catch (e) {}
+
+        if (!elegida) {
+          for (var i = 0; i < mapa.length && !elegida; i++) {
+            if (mapa[i].zonas.indexOf(zona) !== -1) elegida = mapa[i].codigo;
+          }
+        }
+
+        if (!elegida) {
+          var idioma = (navigator.language || '').toLowerCase();
+          for (var j = 0; j < mapa.length && !elegida; j++) {
+            for (var k = 0; k < mapa[j].idiomas.length; k++) {
+              if (idioma.indexOf(mapa[j].idiomas[k].toLowerCase()) === 0) {
+                elegida = mapa[j].codigo;
+                break;
+              }
+            }
+          }
+        }
+
+        // El resto de América (Argentina, Perú, Chile, EE. UU.) no coincide con
+        // ninguna zona concreta: sin esto vería euros.
+        if (!elegida && (zona.indexOf('America/') === 0 || zona.indexOf('Pacific/') === 0)) {
+          elegida = americas;
+        }
+
+        document.documentElement.dataset.region = elegida || porDefecto;
+      })();
+    </script>
     <title>{tituloCompleto}</title>
     <meta name="description" content={descripcion} />
     <link rel="canonical" href={canonica} />

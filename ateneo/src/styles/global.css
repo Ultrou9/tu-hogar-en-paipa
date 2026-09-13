@@ -200,6 +200,30 @@ input, select { font: inherit; color: inherit; }
 .prosa { max-width: 66ch; display: flex; flex-direction: column; gap: 15px; color: var(--text-2); font-size: 16.2px; }
 .prosa strong { color: var(--text); font-weight: 600; }
 
+/* ---------- precio regional ----------
+   El HTML trae las cuatro monedas; aquí se muestra la que toca. Sin JavaScript
+   no hay atributo en <html> y se ve la de por defecto (euros), nunca un hueco.
+*/
+
+[data-precio-region] { display: none; }
+[data-precio-region="es"] { display: inline; }
+
+:root[data-region] [data-precio-region="es"] { display: none; }
+:root[data-region="es"] [data-precio-region="es"] { display: inline; }
+:root[data-region="co"] [data-precio-region="co"] { display: inline; }
+:root[data-region="mx"] [data-precio-region="mx"] { display: inline; }
+:root[data-region="us"] [data-precio-region="us"] { display: inline; }
+
+/* Un botón de compra se maqueta como botón, no como texto en línea. */
+a[data-precio-region] { display: none; }
+a[data-precio-region="es"] { display: inline-flex; }
+
+:root[data-region] a[data-precio-region="es"] { display: none; }
+:root[data-region="es"] a[data-precio-region="es"] { display: inline-flex; }
+:root[data-region="co"] a[data-precio-region="co"] { display: inline-flex; }
+:root[data-region="mx"] a[data-precio-region="mx"] { display: inline-flex; }
+:root[data-region="us"] a[data-precio-region="us"] { display: inline-flex; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

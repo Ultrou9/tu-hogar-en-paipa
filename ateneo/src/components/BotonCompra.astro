@@ -1,0 +1,43 @@
+---
+import { regiones, hayCobro } from '../config';
+import type { Nivel } from '../config';
+
+/**
+ * Botón de compra con el enlace de pago de cada región.
+ *
+ * Mientras no haya ningún enlace configurado (el cobro está apagado hasta que
+ * el negocio facture), emite un único botón que lleva a la captación de correo,
+ * en lugar de cuatro variantes que apuntarían todas al mismo sitio.
+ */
+interface Props {
+  nivel: Nivel;
+  /** Texto cuando el cobro está activo. */
+  etiqueta: string;
+  /** Texto cuando todavía no se vende. */
+  etiquetaEspera?: string;
+  class?: string;
+}
+
+const {
+  nivel,
+  etiqueta,
+  etiquetaEspera = 'Avisarme cuando salga',
+  class: clase = 'boton boton--primario boton--ancho',
+} = Astro.props;
+
+const activo = hayCobro(nivel);
+---
+
+{
+  activo ? (
+    regiones.map((r) => (
+      <a class={clase} href={r.pagos[nivel] || '/gratis'} data-precio-region={r.codigo}>
+        {etiqueta}
+      </a>
+    ))
+  ) : (
+    <a class={clase} href="/gratis">
+      {etiquetaEspera}
+    </a>
+  )
+}

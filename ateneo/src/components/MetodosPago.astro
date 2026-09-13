@@ -1,0 +1,18 @@
+---
+import { regiones } from '../config';
+
+/**
+ * La línea de «cómo se paga», distinta en cada región: al colombiano le importa
+ * que haya PSE y cuotas; al de Madrid, no. Mismo mecanismo que Precio.astro.
+ */
+interface Props { class?: string }
+const { class: clase = '' } = Astro.props;
+---
+
+{
+  regiones.map((r) => (
+    <span class={clase} data-precio-region={r.codigo}>
+      {r.metodosPago}
+    </span>
+  ))
+}

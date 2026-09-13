@@ -24,18 +24,52 @@ ninguna URL escrita a mano dentro de los componentes.
 | Qué | Dónde | Mientras esté vacío |
 | --- | --- | --- |
 | Dominio | `sitio.url` y `site` en `astro.config.mjs` | Las canónicas apuntan a `ateneo.med` |
-| Enlaces de pago | `pagos.*` | Los botones de compra llevan a la captura de correo |
+| Enlaces de pago | `regiones[].pagos` | Los botones de compra llevan a la captación de correo |
 | Alta de correo | `listaCorreo.endpoint` | El formulario cae a `mailto:` y no se pierde ningún contacto |
-| Precios | `precios.*` | — |
+| Precios por región | `regiones[].precios` | — |
 
 Tres cosas hay que hacer antes de publicar:
 
 1. **Comprar el dominio** y ponerlo en `sitio.url` y en `astro.config.mjs`.
    También en `public/robots.txt`, que apunta al sitemap.
-2. **Crear los productos en Hotmart** y pegar los enlaces de pago en `pagos`.
+2. **Crear los productos en Hotmart**, uno por moneda, y pegar cada enlace en
+   `regiones[].pagos`. Hotmart es *merchant of record*: liquida el IVA del país
+   del comprador, que es lo que evita tener que entrar en la Ventanilla Única
+   europea. Mientras `pagos` esté vacío el sitio se publica igual, sin vender.
 3. **Crear la lista de correo** (MailerLite, ConvertKit, Buttondown…) y pegar el
    endpoint del formulario en `listaCorreo.endpoint`. Configurar que la
    confirmación redirija a `/gracias`, que es donde está la descarga.
+
+## Precio regional
+
+Se vende a España y a Latinoamérica, y el mismo archivo no vale lo mismo en
+Madrid que en Tunja. Hay cuatro regiones en `src/config.ts` —`es` (EUR), `co`
+(COP), `mx` (MXN) y `us` (USD, el cajón de sastre del resto del mundo)— cada una
+con sus precios, sus métodos de pago anunciados y sus propios enlaces de
+Hotmart, porque Hotmart genera una oferta distinta por moneda.
+
+Cómo funciona, siendo un sitio estático sin servidor:
+
+1. El HTML trae **las cuatro monedas** de cada precio, cada una marcada con
+   `data-precio-region`.
+2. Un script en línea en `Base.astro` resuelve la región **antes de pintar** —
+   elección guardada → zona horaria → idioma → continente → España por defecto—
+   y la estampa en `<html data-region="…">`.
+3. El CSS de `global.css` muestra la variante que toca y esconde las otras tres.
+
+Consecuencias que conviene no romper:
+
+- **Sin JavaScript se ven los euros**, nunca un hueco.
+- **No hay parpadeo**: la región se decide antes del primer pintado.
+- El selector del pie gana sobre la detección y se guarda en `localStorage`,
+  porque la zona horaria se equivoca con VPN y con el colombiano que estudia en
+  Madrid.
+- El JSON-LD declara el precio en **euros**, que es el de referencia: los datos
+  estructurados no pueden variar por visitante.
+
+Para cambiar un precio o añadir una moneda se toca solo `regiones` en
+`src/config.ts`. Ningún componente lleva un precio escrito a mano: todos usan
+`Precio.astro`, `MetodosPago.astro` y `BotonCompra.astro`.
 
 ## Añadir un tema nuevo
 
@@ -62,7 +96,14 @@ src/
   data/presentaciones.ts     el catálogo — la única fuente de verdad
   styles/global.css          tokens de diseño, los mismos de las presentaciones
   layouts/Base.astro         meta, canónica, Open Graph, JSON-LD, fuentes
-  components/                cabecera, pie, tarjeta de tema, captura de correo
+  components/
+    Precio.astro             precio en la moneda de quien mira
+    MetodosPago.astro        «cómo se paga», distinto por región
+    BotonCompra.astro        enlace de Hotmart por moneda
+    SelectorRegion.astro     cambio manual de región, en el pie
+    CapturaCorreo.astro      formulario de alta en la lista
+    DemoIncrustada.astro     demo que se carga al pulsar
+    Cabecera.astro / PieDePagina.astro / TarjetaTema.astro
   pages/
     index.astro              portada con demo en vivo
     catalogo.astro           disponibles y en producción

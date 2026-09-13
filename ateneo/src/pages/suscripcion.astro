@@ -1,18 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
 import CapturaCorreo from '../components/CapturaCorreo.astro';
-import { precios, pagos } from '../config';
+import Precio from '../components/Precio.astro';
+import MetodosPago from '../components/MetodosPago.astro';
+import BotonCompra from '../components/BotonCompra.astro';
+import { hayCobro } from '../config';
 import { presentaciones } from '../data/presentaciones';
 
-const hayCheckout = Boolean(pagos.hotmartBase || pagos.suscripcionMensual);
-const cta = (enlace: string) => enlace || '/gratis';
-const textoCta = hayCheckout ? 'Suscribirme' : 'Entrar en la lista';
+const hayCheckout = hayCobro('mensual') || hayCobro('temaSuelto');
 
 const niveles = [
   {
     nombre: 'Un tema',
-    precio: `${precios.temaSuelto.cop} COP`,
-    nota: `≈ US$ ${precios.temaSuelto.usd} · pago único`,
+    nivel: 'temaSuelto' as const,
+    nota: 'pago único · las tres piezas',
     para: 'Tienes una sesión concreta la semana que viene.',
     incluye: [
       'El kit de tres piezas de ese tema',
@@ -25,22 +26,22 @@ const niveles = [
   },
   {
     nombre: 'Pack de rotación',
-    precio: `${precios.pack.cop} COP`,
-    nota: `≈ US$ ${precios.pack.usd} · pago único`,
+    nivel: 'pack' as const,
+    nota: 'pago único · de seis a ocho temas',
     para: 'Entras a una rotación y sabes que van a caer varias.',
     incluye: [
       'De seis a ocho temas de una misma especialidad',
       'El kit completo de cada uno',
       'Sale a menos de la mitad por tema',
     ],
-    enlace: cta(pagos.packCardiologia),
-    etiquetaEnlace: hayCheckout ? 'Comprar el pack' : 'Avisarme',
+    enlace: null,
+    etiquetaEnlace: 'Comprar el pack',
     destacado: false,
   },
   {
     nombre: 'Suscripción',
-    precio: `${precios.mensual.cop} COP`,
-    nota: `al mes · o ${precios.anual.cop} COP al año`,
+    nivel: 'mensual' as const,
+    nota: null,
     para: 'Presentas con frecuencia y quieres dejar de pensar en esto.',
     incluye: [
       'El catálogo completo, en línea',
@@ -48,8 +49,8 @@ const niveles = [
       'Las actualizaciones de guía, sin pagar de más',
       'Descarga del kit de cualquier tema',
     ],
-    enlace: cta(pagos.suscripcionMensual),
-    etiquetaEnlace: textoCta,
+    enlace: null,
+    etiquetaEnlace: 'Suscribirme',
     destacado: true,
   },
 ];
@@ -65,8 +66,7 @@ const niveles = [
       <span class="eyebrow">Precios</span>
       <h1>Tres formas de usar el catálogo</h1>
       <p class="entrada">
-        Todo el material se paga en pesos con PSE, tarjeta, billeteras o en
-        cuotas. No hace falta tarjeta internacional.
+        Los precios se muestran en tu moneda. <MetodosPago />
       </p>
     </div>
   </section>
@@ -81,18 +81,33 @@ const niveles = [
               <h2>{n.nombre}</h2>
               <p class="para">{n.para}</p>
               <div class="precio-bloque">
-                <span class="precio mono">{n.precio}</span>
-                <span class="precio-nota">{n.nota}</span>
+                <Precio nivel={n.nivel} class="precio mono" />
+                {n.nota ? (
+                  <span class="precio-nota">{n.nota}</span>
+                ) : (
+                  <span class="precio-nota">
+                    al mes · o <Precio nivel="anual" /> al año
+                  </span>
+                )}
               </div>
               <ul>
                 {n.incluye.map((i) => <li>{i}</li>)}
               </ul>
-              <a
-                href={n.enlace}
-                class={`boton boton--ancho ${n.destacado ? 'boton--primario' : 'boton--secundario'}`}
-              >
-                {n.etiquetaEnlace}
-              </a>
+              {n.enlace ? (
+                <a
+                  href={n.enlace}
+                  class={`boton boton--ancho ${n.destacado ? 'boton--primario' : 'boton--secundario'}`}
+                >
+                  {n.etiquetaEnlace}
+                </a>
+              ) : (
+                <BotonCompra
+                  nivel={n.nivel}
+                  etiqueta={n.etiquetaEnlace}
+                  etiquetaEspera="Entrar en la lista"
+                  class={`boton boton--ancho ${n.destacado ? 'boton--primario' : 'boton--secundario'}`}
+                />
+              )}
             </article>
           ))
         }
@@ -188,7 +203,7 @@ const niveles = [
   .nivel h2 { font-size: 23px; }
   .para { font-size: 14.6px; color: var(--muted); }
   .precio-bloque { display: flex; flex-direction: column; gap: 2px; padding-block: 6px; border-block: 1px solid var(--line-soft); }
-  .precio { font-size: 27px; font-weight: 600; line-height: 1.15; }
+  .precio-bloque :global(.precio) { font-size: 27px; font-weight: 600; line-height: 1.15; }
   .precio-nota { font-size: 12.6px; color: var(--muted); }
   .nivel ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; flex: 1; }
   .nivel li { font-size: 14.5px; color: var(--text-2); padding-left: 19px; position: relative; }
