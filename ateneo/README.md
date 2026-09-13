@@ -117,13 +117,27 @@ public/demos/                las presentaciones, servidas tal cual
 
 ## Desplegar
 
-Cloudflare Pages o Vercel, ambos gratis para esto:
+Ya está resuelto: el repositorio tiene la integración de Vercel, y el
+`vercel.json` de la raíz le dice que construya este subdirectorio.
 
-- Comando de compilación: `npm run build`
-- Directorio de salida: `dist`
-- Directorio raíz del proyecto: `ateneo`
+```json
+{
+  "installCommand": "npm --prefix ateneo install",
+  "buildCommand": "npm --prefix ateneo run build",
+  "outputDirectory": "ateneo/dist"
+}
+```
 
-Luego apuntar el dominio al proyecto desde el panel del proveedor.
+Hace falta porque el proyecto de Vercel apunta a la raíz del repositorio, donde
+no hay nada: sin esto el despliegue sale «Ready» pero vacío. La alternativa es
+poner `ateneo` como *Root Directory* en el panel de Vercel y borrar este
+fichero; con el `vercel.json` no hay que tocar el panel.
+
+Cada rama genera su propia vista previa. La rama por defecto es la que publica
+en producción, así que **al fusionar, Ateneo pasa a ser el sitio principal** del
+proyecto de Vercel.
+
+Falta apuntar el dominio desde el panel de Vercel cuando esté comprado.
 
 ## Criterios de contenido
 

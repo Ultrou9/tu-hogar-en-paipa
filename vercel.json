@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm --prefix ateneo install",
+  "buildCommand": "npm --prefix ateneo run build",
+  "outputDirectory": "ateneo/dist"
+}
