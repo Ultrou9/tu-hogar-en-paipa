@@ -18,13 +18,23 @@ export const sitio = {
 };
 
 /**
- * Captación de correo (MailerLite). Pegar aquí la acción del formulario. Si
- * está vacío, el formulario cae a un mailto y no se pierde ningún contacto.
+ * Captación de correo (MailerLite).
+ *
+ * El formulario «Ateneo · Captación web» alimenta el grupo «Ateneo · Lista
+ * principal». Lleva **doble confirmación**: quien se apunta recibe un correo y
+ * no entra en la lista hasta que pulsa el enlace. Es más fricción, pero es lo
+ * que corresponde con el RGPD y mantiene sana la entregabilidad.
+ *
+ * Si `endpoint` se vacía, el formulario cae a un mailto y no se pierde ningún
+ * contacto.
  */
 export const listaCorreo = {
-  endpoint: '',
+  endpoint:
+    'https://assets.mailerlite.com/jsonp/2632643/forms/198496808546076389/subscribe',
   campoCorreo: 'fields[email]',
   campoOrigen: 'fields[origen]',
+  /** Grupo de destino, por si hace falta apuntar otro formulario al mismo sitio. */
+  grupo: '198496793924732736',
 };
 
 /* ------------------------------------------------------------------ */

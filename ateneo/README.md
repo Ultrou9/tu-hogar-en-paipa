@@ -36,9 +36,37 @@ Tres cosas hay que hacer antes de publicar:
    `regiones[].pagos`. Hotmart es *merchant of record*: liquida el IVA del país
    del comprador, que es lo que evita tener que entrar en la Ventanilla Única
    europea. Mientras `pagos` esté vacío el sitio se publica igual, sin vender.
-3. **Crear la lista de correo** (MailerLite, ConvertKit, Buttondown…) y pegar el
-   endpoint del formulario en `listaCorreo.endpoint`. Configurar que la
-   confirmación redirija a `/gracias`, que es donde está la descarga.
+3. ~~Crear la lista de correo~~ **Hecho.** MailerLite ya está cableado (ver
+   abajo). Queda una cosa que depende del dominio: configurar en MailerLite que
+   la confirmación redirija a `/gracias`, que es donde está la descarga.
+
+## Captación de correo
+
+MailerLite, cuenta `2632643`:
+
+| Qué | Identificador |
+| --- | --- |
+| Grupo | `Ateneo · Lista principal` — `198496793924732736` |
+| Formulario | `Ateneo · Captación web` — `198496808546076389` |
+| Campo personalizado | `origen` (texto) |
+
+El formulario lleva **doble confirmación**: quien se apunta recibe un correo y
+no entra en la lista hasta que pulsa el enlace. Más fricción, pero es lo que
+corresponde con el RGPD viviendo en España, y mantiene sana la entregabilidad.
+
+`CapturaCorreo.astro` envía por `fetch` en lugar de dejar que el navegador siga
+el formulario, porque el endpoint de MailerLite responde JSON y el visitante
+acabaría mirando un volcado de datos. Sin JavaScript el alta se registra igual;
+solo se pierde el mensaje final.
+
+Cada formulario manda un campo `origen` con la página de la que viene
+(`portada`, `gratis`, `catalogo`, `tema-<slug>`…). Sirve para ver qué página
+capta de verdad y cuál solo hace bulto.
+
+Pendiente, y depende del dominio:
+
+- Redirigir la confirmación a `/gracias`, desde los ajustes del formulario.
+- Automatización de bienvenida con el enlace de descarga de la presentación.
 
 ## Precio regional
 

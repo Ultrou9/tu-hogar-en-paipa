@@ -32,27 +32,50 @@ const idCampo = `correo-${origen}`;
     <p>{texto}</p>
   </div>
 
-  <form
-    class="captura-form"
-    action={accion}
-    method={configurado ? 'post' : 'get'}
-    enctype={configurado ? undefined : 'text/plain'}
-  >
-    <input type="hidden" name={listaCorreo.campoOrigen} value={origen} />
-    <label for={idCampo}>Tu correo</label>
-    <div class="fila">
-      <input
-        id={idCampo}
-        type="email"
-        name={listaCorreo.campoCorreo}
-        required
-        autocomplete="email"
-        placeholder="tu@correo.com"
-      />
-      <button type="submit" class="boton boton--primario">{etiquetaBoton}</button>
+  <div class="captura-lado">
+    <form
+      class="captura-form"
+      data-captura
+      action={accion}
+      method={configurado ? 'post' : 'get'}
+      enctype={configurado ? undefined : 'text/plain'}
+    >
+      <input type="hidden" name={listaCorreo.campoOrigen} value={origen} />
+      {
+        configurado && (
+          <>
+            <input type="hidden" name="ml-submit" value="1" />
+            <input type="hidden" name="anticsrf" value="true" />
+          </>
+        )
+      }
+      <label for={idCampo}>Tu correo</label>
+      <div class="fila">
+        <input
+          id={idCampo}
+          type="email"
+          name={listaCorreo.campoCorreo}
+          required
+          autocomplete="email"
+          placeholder="tu@correo.com"
+        />
+        <button type="submit" class="boton boton--primario" data-enviar>{etiquetaBoton}</button>
+      </div>
+      <p class="nota">Un correo cuando sale un tema nuevo. Nada más. Te das de baja en un clic.</p>
+      <p class="error" data-error hidden role="alert">
+        No se ha podido enviar. Revisa la conexión e inténtalo otra vez.
+      </p>
+    </form>
+
+    <div class="hecho" data-hecho hidden>
+      <p class="hecho-titulo">Revisa tu correo</p>
+      <p>
+        Te acabo de mandar un mensaje con un enlace de confirmación. Pulsa ahí y
+        te llega la presentación. Si no aparece en un par de minutos, mira en
+        spam o en «promociones».
+      </p>
     </div>
-    <p class="nota">Un correo cuando sale un tema nuevo. Nada más. Te das de baja en un clic.</p>
-  </form>
+  </div>
 </section>
 
 <style>
@@ -90,8 +113,71 @@ const idCampo = `correo-${origen}`;
   .fila input::placeholder { color: var(--rail-muted); }
   .fila input:focus-visible { outline: 2px solid var(--teal); outline-offset: 1px; }
   .nota { font-size: 12.2px; color: var(--rail-muted); }
+  .error { font-size: 12.8px; color: #ff9b9b; }
+
+  .hecho {
+    border: 1px solid var(--teal);
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 3px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .hecho-titulo { font-family: var(--serif); font-size: 20px; font-weight: 600; color: #fff; }
+  .hecho p { font-size: 14.2px; color: var(--rail-muted); }
+  .hecho p.hecho-titulo { color: #fff; }
+
+  [hidden] { display: none !important; }
 
   @media (max-width: 780px) {
     .captura { grid-template-columns: 1fr; padding: 26px 22px; }
   }
 </style>
+
+<script>
+  /*
+    El endpoint de MailerLite responde JSON: si se enviara el formulario de la
+    forma normal, el visitante acabaría mirando un volcado de datos en lugar de
+    una confirmación. Así que se envía por detrás y se muestra el mensaje aquí.
+
+    Sin JavaScript el formulario se envía igual y el alta se registra; solo se
+    pierde la elegancia del mensaje final.
+  */
+  document.querySelectorAll<HTMLFormElement>('[data-captura]').forEach((form) => {
+    if (!form.action.includes('mailerlite')) return;
+
+    const boton = form.querySelector<HTMLButtonElement>('[data-enviar]');
+    const error = form.querySelector<HTMLElement>('[data-error]');
+    const hecho = form.parentElement?.querySelector<HTMLElement>('[data-hecho]');
+    if (!boton || !error || !hecho) return;
+
+    const textoOriginal = boton.textContent;
+
+    form.addEventListener('submit', async (evento) => {
+      evento.preventDefault();
+      error.hidden = true;
+      boton.disabled = true;
+      boton.textContent = 'Enviando…';
+
+      try {
+        // El endpoint no devuelve cabeceras CORS, así que no se puede leer la
+        // respuesta: 'no-cors' deja pasar la petición y el doble opt-in es
+        // quien confirma de verdad que ha llegado.
+        await fetch(form.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new FormData(form),
+        });
+        form.hidden = true;
+        hecho.hidden = false;
+        hecho.setAttribute('tabindex', '-1');
+        hecho.focus();
+      } catch {
+        error.hidden = false;
+        boton.disabled = false;
+        boton.textContent = textoOriginal;
+      }
+    });
+  });
+</script>
